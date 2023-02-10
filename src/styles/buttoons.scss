@@ -1,0 +1,16 @@
+.top-opacity-btn {
+  float: left;
+  padding: 9px 0;
+  cursor: pointer;
+  border: 0;
+  background: 0 0;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}

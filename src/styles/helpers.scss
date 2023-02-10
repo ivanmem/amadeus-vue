@@ -1,0 +1,19 @@
+.pointer {
+  cursor: pointer;
+}
+
+.overflow-block {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.page-block {
+  background: var(--vkui--background_content);
+  border-radius: var(--vkui--size_border_radius_paper--regular);
+  -webkit-box-shadow: var(--page-block-shadow);
+  box-shadow: var(--page-block-shadow);
+}

@@ -1,0 +1,208 @@
+<script lang="ts" setup>
+import { useCommandInfo } from "./useCommandInfo";
+import { ACommandProps } from "./types";
+import CommandHelper from "../../helpers/CommandHelper";
+import { useRouter } from "vue-router";
+import {
+  PermissionPrivateMessagesTypeEnum,
+  RepeatCommandConversationEnum,
+} from "../../store/commands/types";
+import AButton from "../AButton/AButton.vue";
+import { watch } from "vue";
+
+const props = defineProps<ACommandProps>();
+const router = useRouter();
+const { nameCommand, command, store, relatedCommands } = useCommandInfo(props);
+watch(
+  () => props.id,
+  () => {
+    // сброс скролла при смене команды
+    document.querySelector(".route-view")!.scroll(0, 0);
+  }
+);
+</script>
+
+<template>
+  <div class="a-command">
+    <teleport to="#navigation-header-body">
+      {{ nameCommand }}
+    </teleport>
+
+    <section>
+      <header>📎 Описание</header>
+      <div>
+        {{ command.helpExtended }}
+      </div>
+    </section>
+
+    <section>
+      <header>💬 Названия</header>
+      <div>
+        {{ command.alias.join(", ") }}
+      </div>
+    </section>
+
+    <section v-if="command.argumentsListString.length">
+      <header>🔧 Аргументы</header>
+      <div>
+        <pre>{{ command.argumentsListString }}</pre>
+      </div>
+    </section>
+
+    <section>
+      <header>✏ Полный пример (со всеми аргументами)</header>
+      <div>
+        <pre style="user-select: contain">{{ command.templateString }}</pre>
+      </div>
+    </section>
+
+    <section v-if="command.templateString !== command.minTemplateString">
+      <header>✏ Минимальный пример (только с обязательными аргументами)</header>
+      <div>
+        <pre style="user-select: contain">{{ command.minTemplateString }}</pre>
+      </div>
+    </section>
+
+    <section v-if="command.templateString !== command.minTemplateString">
+      <header>⚠ Требуемая роль</header>
+      <div>
+        {{ CommandHelper.getLevelText(command.accessLevel) }}
+      </div>
+    </section>
+
+    <section v-if="command.modifiers">
+      <header>⚡ Модификаторы</header>
+      <div
+        v-for="commandImplicitId of command.modifiers"
+        :key="commandImplicitId"
+      >
+        <AButton @click="router.push('/command/' + commandImplicitId)">
+          {{ store.getCommandFullName(commandImplicitId) }}
+        </AButton>
+      </div>
+    </section>
+    <section
+      v-for="commandImplicit of command.commandImplicit"
+      v-if="command.commandImplicit"
+      :key="commandImplicit.alias[0]"
+    >
+      <header>⚡ Неявный модификатор</header>
+      <div class="a-command">
+        <div
+          v-for="commandImplicitId of command.modifiers"
+          :key="commandImplicitId"
+        >
+          <section>
+            <header>💬 Названия</header>
+            <div>
+              {{ commandImplicit.alias.join(", ") }}
+            </div>
+          </section>
+
+          <section>
+            <header>📎 Описание</header>
+            <div>
+              {{ commandImplicit.helpExtended }}
+            </div>
+          </section>
+
+          <section>
+            <header>❓ Использование</header>
+            <div>
+              {{ commandImplicit.help }}
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section v-if="relatedCommands">
+      <header>🖇 Связанные команды</header>
+      <div v-for="relatedCommandId of relatedCommands" :key="relatedCommandId">
+        <AButton @click="router.push('/command/' + relatedCommandId)">
+          {{ store.getCommandFullName(relatedCommandId) }}
+        </AButton>
+      </div>
+    </section>
+
+    <section :key="key.alias[0]" v-for="key of command.keys">
+      <header>🔑 {{ key.alias.join(", ") }}</header>
+      <div>
+        {{ key.description }}
+      </div>
+    </section>
+
+    <section>
+      <header>🛠 Тип</header>
+      <div>
+        {{ CommandHelper.getType(command.type) }}
+      </div>
+    </section>
+
+    <section v-if="command.repeat === RepeatCommandConversationEnum.Yes">
+      <div class="command-boolean">
+        🆘 Повторяет ответ в беседе, если была успешно выполнена в личных
+        сообщениях.
+      </div>
+    </section>
+
+    <section v-if="CommandHelper.isAccessLs(command.privateMessages)">
+      <div class="command-boolean">
+        👁 Разрешена всем ролям в личных сообщениях бота
+        {{
+          command.privateMessages ===
+          PermissionPrivateMessagesTypeEnum.YesImportant
+            ? " (принудительно)"
+            : ""
+        }}
+      </div>
+    </section>
+
+    <section v-if="command.notPrivateMessages">
+      <div class="command-boolean">
+        🚦 Можно использовать только в беседе.
+      </div>
+    </section>
+
+    <section v-if="command.onlyPrivateMessages">
+      <div class="command-boolean">
+        🚦 Можно использовать только в личных сообщениях бота.
+      </div>
+    </section>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.a-command {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 10px;
+  gap: 15px;
+  background: var(--vkui--color_background_content);
+  color: var(--vkui--color--text_primary, var(--vkui--color_text_primary));
+  border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    header {
+      color: var(--vkui--color_text_secondary);
+    }
+
+    div {
+      padding: 5px;
+      color: inherit;
+    }
+  }
+
+  .command-boolean {
+    padding: 0;
+    font-size: var(--vkui--font_headline1--font_size--compact, 15px);
+    font-weight: var(--vkui--font_weight_accent3, 400);
+    line-height: var(--vkui--font_headline1--line_height--compact, 20px);
+  }
+}
+</style>

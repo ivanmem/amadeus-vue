@@ -1,0 +1,22 @@
+:root {
+  --light-color: #e1e3e6;
+  --light-color-800: #dee0e1;
+  --light-color-600: #d6d7d9;
+  --light-color-400: #cccdce;
+  --light-color-200: #c3c4c5;
+  --dark-color: #141414;
+  --dark-color-800: #242424;
+  --dark-color-600: #343434;
+  --dark-color-400: #444444;
+  --dark-color-200: #545454;
+
+  --border-color: var(--dark-color-600);
+  --accent-color: var(--light-color-600);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --border-color: var(--light-color-600);
+    --accent-color: var(--dark-color-600);
+  }
+}
