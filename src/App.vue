@@ -21,19 +21,12 @@ onMounted(async () => {
   <div v-if="store.commands" :class="currentClasses" class="root">
     <div class="navigation-header">
       <AButton
-        :disabled="!routerBackExist"
+        v-if="route.path !== '/'"
         class="top-opacity-btn"
-        icon="Icon24Back"
-        @click="routerBack()"
+        icon="Icon24Home"
+        @click="router.replace('/')"
       />
       <div id="navigation-header-body" class="overflow-block"></div>
-      <AButton
-        :disabled="!routerBackExist"
-        class="top-opacity-btn"
-        icon="Icon24Back"
-        icon-style="transform: rotate(180deg);"
-        @click="router.go(1)"
-      />
     </div>
     <div class="route-view">
       <RouterView />
@@ -43,7 +36,7 @@ onMounted(async () => {
         <AButton
           v-if="route.path !== '/'"
           class="a-button__center a-icon pointer"
-          icon="AddSquareOutline16"
+          icon="Icon24Linked"
           @click="copy('vk.com/app51547376#' + route.path)"
         >
           <span>{{ route.path }}</span>
