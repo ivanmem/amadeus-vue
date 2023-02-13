@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Command } from "../../store/commands/types";
 import { useCommands } from "../../store/commands/commands";
-import AButton from "../AButton/AButton.vue";
+import AButton from "../../components/AButton/AButton.vue";
 import { useRouter } from "vue-router";
 
 const props = defineProps<{
