@@ -13,6 +13,6 @@ export function useCommandInfo(props: ACommandProps) {
     store,
     command,
     nameCommand,
-    relatedCommands,
+    relatedCommands
   };
 }

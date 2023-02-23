@@ -38,18 +38,29 @@ export interface CommandImplicit {
 export interface Argument {
   type: number;
   description: null | string;
+  help: string;
   indexNotImportant: boolean;
-  typeString: TypeString;
   required: boolean;
   isHideType: boolean;
   isCheckRequired: boolean;
   newLine: boolean;
-  help: string;
+  typeString: TypeString;
+}
+
+export interface ArgumentKeyParam {
+  description: string;
+  templateString: string;
 }
 
 export interface CommandKey {
   alias: string[];
   description: string;
+  header: string;
+  systemKey?: boolean;
+  isDon?: boolean;
+  key: number;
+  accessLevel?: number;
+  params?: ArgumentKeyParam[];
 }
 
 export enum TypeString {

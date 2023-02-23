@@ -46,13 +46,21 @@ const onClick = computed(() => {
 </template>
 
 <style lang="scss">
+@import "src/styles/helpers";
+@import "src/styles/icons";
+
 .a-button {
+  background: var(--vkui--color_background_secondary_alpha);
   border-radius: var(--vkui--size_border_radius--regular, 8px);
-  border: none;
+  border: 0.5px solid var(--vkui--color_background_contrast_secondary_alpha);
   cursor: pointer;
 
   &:active {
     opacity: 0.8;
+  }
+
+  svg {
+    min-width: min-content;
   }
 }
 
@@ -63,7 +71,20 @@ const onClick = computed(() => {
   width: max-content;
 }
 
+.a-button__mini {
+  font-size: 10px;
+}
+
 .a-button__icon {
   margin-right: 5px;
+}
+
+.a-button__opacity {
+  @extend .a-button__center;
+  @extend .a-icon;
+  @extend .pointer;
+
+  background: transparent;
+  border: none;
 }
 </style>

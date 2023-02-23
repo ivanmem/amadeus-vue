@@ -26,7 +26,6 @@ const router = useRouter();
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  flex-grow: 1;
   padding: 8px var(--vkui--size_base_padding_horizontal--regular);
   font-family: var(--vkui--font_family_base);
   color: var(--vkui--color_text_primary);

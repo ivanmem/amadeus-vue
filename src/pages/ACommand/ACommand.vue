@@ -3,12 +3,11 @@ import { useCommandInfo } from "./useCommandInfo";
 import { ACommandProps } from "./types";
 import CommandHelper from "../../helpers/CommandHelper";
 import { useRouter } from "vue-router";
-import {
-  PermissionPrivateMessagesTypeEnum,
-  RepeatCommandConversationEnum,
-} from "../../store/commands/types";
-import AButton from "../AButton/AButton.vue";
+import { PermissionPrivateMessagesTypeEnum, RepeatCommandConversationEnum } from "../../store/commands/types";
+import AButton from "../../components/AButton/AButton.vue";
 import { watch } from "vue";
+import { isNullOrUndefined } from "../../helpers/isNullOrUndefined";
+import { isNullOrUndefinedOrWhiteSpace } from "../../helpers/isNullOrUndefinedOrWhiteSpace";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
@@ -23,7 +22,7 @@ watch(
 </script>
 
 <template>
-  <div class="a-command">
+  <div class="a-command" v-if="command">
     <teleport to="#navigation-header-body">
       {{ nameCommand }}
     </teleport>
@@ -125,10 +124,42 @@ watch(
       </div>
     </section>
 
-    <section :key="key.alias[0]" v-for="key of command.keys">
-      <header>🔑 {{ key.alias.join(", ") }}</header>
+    <section v-for="(key, keyIndex) of command.keys" :key="key.key">
+      <header>
+        <span>
+          {{ key.header }}
+          <template v-if="!isNullOrUndefined(key.accessLevel)">
+            &nbsp;| ⚠ Требуемая роль:
+            {{ CommandHelper.getLevelText(key.accessLevel) }}
+          </template>
+        </span>
+        <AButton
+          v-if="keyIndex === 0"
+          class="a-button__opacity zoom75"
+          icon="Icon24InfoCircleOutline"
+          target="_blank"
+          to="https://vk.com/@animecm-man?anchor=klyuchi"
+        >
+          Подробнее про ключи
+        </AButton>
+      </header>
       <div>
         {{ key.description }}
+      </div>
+
+      <div style="font-size: 13px" v-if="key.params">
+        <b class="">Аргументы:</b>
+        <ol style="margin: 0">
+          <li v-for="arg of key.params">
+            <div v-if="!isNullOrUndefinedOrWhiteSpace(arg.description)">
+              <ul style="padding: 0">
+                {{
+                  arg.description
+                }}
+              </ul>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -159,9 +190,7 @@ watch(
     </section>
 
     <section v-if="command.notPrivateMessages">
-      <div class="command-boolean">
-        🚦 Можно использовать только в беседе.
-      </div>
+      <div class="command-boolean">🚦 Можно использовать только в беседе.</div>
     </section>
 
     <section v-if="command.onlyPrivateMessages">
@@ -180,21 +209,31 @@ watch(
   padding: 10px;
   gap: 15px;
   background: var(--vkui--color_background_content);
-  color: var(--vkui--color--text_primary, var(--vkui--color_text_primary));
+  color: var(--vkui--color--text_primary);
   border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
 
   section {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 
     header {
-      color: var(--vkui--color_text_secondary);
+      display: flex;
+      justify-content: space-between;
+      border-block: 0.5px solid var(--vkui--color_text_tertiary);
+      border-radius: 5px;
+      font-weight: bold;
+      font-style: italic;
     }
 
     div {
       padding: 5px;
       color: inherit;
+    }
+
+    pre {
+      padding: 5px;
+      font-family: inherit;
     }
   }
 

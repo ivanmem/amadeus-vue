@@ -91,9 +91,11 @@ onMounted(async () => {
 
 #navigation-header-body {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-items: center;
   justify-content: center;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .navigation-bottom-buttons {
