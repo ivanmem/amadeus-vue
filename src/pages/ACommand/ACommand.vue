@@ -42,7 +42,17 @@ watch(
     </section>
 
     <section v-if="command.argumentsListString.length">
-      <header>🔧 Аргументы</header>
+      <header>
+        <span>🔧 Аргументы</span>
+         <AButton
+           class="a-button__opacity zoom75"
+           icon="Icon24InfoCircleOutline"
+           target="_blank"
+           to="https://vk.com/@animecm-arguments"
+         >
+        Подробнее
+        </AButton>
+      </header>
       <div>
         <pre>{{ command.argumentsListString }}</pre>
       </div>
@@ -140,7 +150,7 @@ watch(
           target="_blank"
           to="https://vk.com/@animecm-man?anchor=klyuchi"
         >
-          Подробнее про ключи
+          Подробнее
         </AButton>
       </header>
       <div>
