@@ -34,6 +34,8 @@ body {
   @extend .overflow-block;
   font-family: var(--vkui--font_text--font_family--regular);
   background: var(--vkui--color_background_content);
+  width: 100vw;
+  height: 100vh;
 }
 
 #app {

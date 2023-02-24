@@ -24,17 +24,13 @@
   align-items: center;
   justify-content: center;
   width: max-content;
-
+  color: inherit;
   background: var(--vkui--color_background_secondary_alpha);
   border-radius: var(--vkui--size_border_radius--regular, 8px);
   border: 0.5px solid var(--vkui--color_background_contrast_secondary_alpha);
   cursor: pointer;
 
   @include button-pseudo-classes;
-
-  svg {
-    min-width: min-content;
-  }
 
   &[data-type="accent"] {
     color: var(--vkui--color_background_content);
@@ -56,7 +52,8 @@
 }
 
 .a-button__icon {
-  margin-right: 5px;
+  margin: 0 5px 0 0;
+  color: currentColor;
 }
 
 .a-button__inline {

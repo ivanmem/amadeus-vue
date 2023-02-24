@@ -5,7 +5,6 @@ import { useRoute } from "vue-router";
 import copy from "copy-to-clipboard";
 import { useCommands } from "./store/commands/commands";
 import AButton from "./components/AButton/AButton.vue";
-import { router } from "./router";
 import { useColorScheme } from "./useColorScheme";
 
 const route = useRoute();
@@ -34,19 +33,16 @@ onMounted(async () => {
     </div>
     <div class="navigation">
       <div class="navigation-bottom-buttons">
-        <AButton icon="Icon24ArticleBoxOutline" @click="router.push('/')">
+        <AButton icon="Icon24ArticleBoxOutline" to="/">
           <span> Команды </span>
         </AButton>
-        <AButton icon="Icon24CrownOutline" @click="router.push('/roles')">
+        <AButton icon="Icon24CrownOutline" to="/roles">
           <span> О ролях </span>
         </AButton>
-        <AButton icon="Icon24DollarCircleOutline" @click="router.push('/don')">
+        <AButton icon="Icon24DollarCircleOutline" to="/don">
           <span>Дон статус</span>
         </AButton>
-        <AButton
-          icon="Icon24LightbulbStarOutline"
-          @click="router.push('/about')"
-        >
+        <AButton icon="Icon24LightbulbStarOutline" to="/about">
           <span> О приложении </span>
         </AButton>
       </div>

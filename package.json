@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev-host": "vite --host",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "deploy": "npm run build && vk-miniapps-deploy"
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vkontakte/vk-miniapps-deploy": "^0.0.26",
     "prettier": "^2.8.4",
