@@ -10,6 +10,7 @@ import {
   VKBridgeConfigData,
 } from "@vkontakte/vkui/dist/helpers/appearance";
 import { generateVKUITokensClassName } from "@vkontakte/vkui/dist/helpers/generateVKUITokensClassName";
+import { darkColorScheme } from "./common/consts";
 
 export function useColorScheme() {
   const currentClasses = ref("");
@@ -21,6 +22,7 @@ export function useColorScheme() {
   if (mediaQuery.matches) {
     document!.documentElement.style.setProperty("color-scheme", "dark");
     currentClasses.value = generateVKUITokensClassName(currentPlatform, "dark");
+    darkColorScheme.value = true;
   }
 
   let initialAppearance: AppearanceType | null = null;
@@ -49,7 +51,7 @@ export function useColorScheme() {
         "color-scheme",
         initialAppearance
       );
-      console.log({ initialAppearance });
+      darkColorScheme.value = initialAppearance === "dark";
     }
   }
 

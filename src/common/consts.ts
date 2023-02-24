@@ -10,6 +10,7 @@ import Icon24LightbulbStarOutline from "@vkontakte/icons/src/svg/24/lightbulb_st
 import AddSquareOutline16 from "@vkontakte/icons/src/svg/16/add_square_outline_16.svg?component";
 import Icon16Link from "@vkontakte/icons/src/svg/16/link_16.svg?component";
 import Icon12ErrorCircle from "@vkontakte/icons/src/svg/12/error_circle_12.svg?component";
+import { ref } from "vue";
 
 export const icons = {
   Icon24Back,
@@ -25,3 +26,5 @@ export const icons = {
   Icon16Link,
   Icon12ErrorCircle,
 };
+
+export const darkColorScheme = ref(false);

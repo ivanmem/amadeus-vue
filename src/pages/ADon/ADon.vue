@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import AButton from "../../components/AButton/AButton.vue";
+import { darkColorScheme } from "../../common/consts";
 
 const products = [
   {
@@ -64,7 +65,7 @@ const products = [
     >
       <picture>
         <source
-          media="(prefers-color-scheme: dark)"
+          v-if="darkColorScheme"
           srcset="https://yoomoney.ru/i/html-letters/safe-kassa-logo-white.svg"
         />
         <img
