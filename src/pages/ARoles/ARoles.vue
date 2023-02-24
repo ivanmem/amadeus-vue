@@ -41,6 +41,7 @@ const roles: {
 
 <template>
   <APageContainer class="a-roles">
+    <teleport to="#navigation-header-body"> О ролях </teleport>
     <h4>В Амадеусе используется 11ти уровневая ролевая система.</h4>
     <div v-for="role of roles" :key="role.level" class="a-roles__level">
       <img
@@ -52,9 +53,11 @@ const roles: {
     <p>
       Смайлы или названия ролей в вашем чате могут быть другие. Посмотреть
       текущие смайлы можно через команду
-      <AButton to="/command/106">Смайлы</AButton>
+      <AButton class="a-button__inline" to="/command/106"> Смайлы</AButton>
       . А названия через:
-      <AButton to="/command/144">НазванияРолей</AButton>
+      <AButton class="a-button__inline" to="/command/144">
+        НазванияРолей
+      </AButton>
       .
     </p>
   </APageContainer>

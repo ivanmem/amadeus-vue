@@ -1,16 +1,71 @@
-.top-opacity-btn {
-  float: left;
-  padding: 9px 0;
-  cursor: pointer;
-  border: 0;
-  background: 0 0;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-  margin-top: 0;
-  margin-bottom: 0;
+@import "src/styles/helpers";
+@import "src/styles/icons";
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: default;
+@mixin button-pseudo-classes {
+  &:hover,
+  &[data-pseudo-hover] {
+    opacity: 0.8;
   }
+
+  &:active,
+  &[data-pseudo-active] {
+    opacity: 0.6;
+  }
+
+  &:disabled,
+  &[data-pseudo-disabled] {
+    cursor: auto;
+    opacity: 0.3;
+  }
+}
+
+.a-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+
+  background: var(--vkui--color_background_secondary_alpha);
+  border-radius: var(--vkui--size_border_radius--regular, 8px);
+  border: 0.5px solid var(--vkui--color_background_contrast_secondary_alpha);
+  cursor: pointer;
+
+  @include button-pseudo-classes;
+
+  svg {
+    min-width: min-content;
+  }
+
+  &[data-type="accent"] {
+    background: var(--vkui--color_background_accent);
+  }
+
+  &[data-size="middle"] {
+    min-height: 26px;
+  }
+}
+
+.a-button__block {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.a-button__mini {
+  font-size: 10px;
+}
+
+.a-button__icon {
+  margin-right: 5px;
+}
+
+.a-button__inline {
+  display: inline-block;
+}
+
+.a-button__opacity {
+  @extend .a-icon;
+  @extend .pointer;
+
+  background: transparent;
+  border: none;
 }

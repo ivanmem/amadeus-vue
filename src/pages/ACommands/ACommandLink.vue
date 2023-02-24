@@ -13,7 +13,7 @@ const router = useRouter();
 
 <template>
   <AButton
-    class="a-command-link"
+    class="a-command-link a-button__block"
     @click="router.push('/command/' + props.command.id)"
   >
     <b>{{ store.getCommandFullName(props.command.id) }}</b>
@@ -21,7 +21,7 @@ const router = useRouter();
   </AButton>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .a-command-link {
   display: flex;
   flex-direction: column;
@@ -30,6 +30,7 @@ const router = useRouter();
   font-family: var(--vkui--font_family_base);
   color: var(--vkui--color_text_primary);
   background: none;
+  border: none;
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;

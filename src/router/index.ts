@@ -4,6 +4,7 @@ import ACommand from "../pages/ACommand/ACommand.vue";
 import { computed } from "vue";
 import AAbout from "../pages/AAbout/AAbout.vue";
 import ARoles from "../pages/ARoles/ARoles.vue";
+import ADon from "../pages/ADon/ADon.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/", component: ACommands },
@@ -12,15 +13,16 @@ const routes: RouteRecordRaw[] = [
     component: ACommand,
     props: ({ params: { id } }) => {
       return { id };
-    }
+    },
   },
   { path: "/about", component: AAbout },
-  { path: "/roles", component: ARoles }
+  { path: "/roles", component: ARoles },
+  { path: "/don", component: ADon },
 ];
 
 export const router = createRouter({
   history: createWebHashHistory("https://vk.com/app51547376"),
-  routes
+  routes,
 });
 
 export const routerBackExist = computed(() => true);

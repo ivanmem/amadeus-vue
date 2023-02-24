@@ -23,7 +23,6 @@ onMounted(async () => {
       <div id="navigation-header-body" class="overflow-block"></div>
       <AButton
         v-if="route.path !== '/'"
-        class="a-button__center a-icon pointer"
         icon="Icon24Linked"
         @click="copy('vk.com/app51547376#' + route.path)"
       >
@@ -35,23 +34,17 @@ onMounted(async () => {
     </div>
     <div class="navigation">
       <div class="navigation-bottom-buttons">
-        <AButton
-          class="a-button__center a-icon pointer"
-          icon="Icon24Home"
-          @click="router.push('/')"
-        >
+        <AButton icon="Icon24ArticleBoxOutline" @click="router.push('/')">
           <span> Команды </span>
         </AButton>
-        <AButton
-          class="a-button__center a-icon pointer"
-          icon="Icon24InfoCircleOutline"
-          @click="router.push('/roles')"
-        >
+        <AButton icon="Icon24CrownOutline" @click="router.push('/roles')">
           <span> О ролях </span>
         </AButton>
+        <AButton icon="Icon24DollarCircleOutline" @click="router.push('/don')">
+          <span>Дон статус</span>
+        </AButton>
         <AButton
-          class="a-button__center a-icon pointer"
-          icon="Icon24InfoCircleOutline"
+          icon="Icon24LightbulbStarOutline"
           @click="router.push('/about')"
         >
           <span> О приложении </span>
@@ -103,6 +96,10 @@ onMounted(async () => {
   gap: 5px;
   align-items: center;
   overflow: auto;
+  padding: 10px;
+  background: var(--vkui--color_background_content--active);
+  min-width: 100%;
+  border-radius: 5px;
 
   .a-button {
     min-height: 26px;

@@ -3,7 +3,10 @@ import { useCommandInfo } from "./useCommandInfo";
 import { ACommandProps } from "./types";
 import CommandHelper from "../../helpers/CommandHelper";
 import { useRouter } from "vue-router";
-import { PermissionPrivateMessagesTypeEnum, RepeatCommandConversationEnum } from "../../store/commands/types";
+import {
+  PermissionPrivateMessagesTypeEnum,
+  RepeatCommandConversationEnum,
+} from "../../store/commands/types";
 import AButton from "../../components/AButton/AButton.vue";
 import { watch } from "vue";
 import { isNullOrUndefined } from "../../helpers/isNullOrUndefined";
@@ -22,7 +25,7 @@ watch(
 </script>
 
 <template>
-  <div class="a-command" v-if="command">
+  <div v-if="command" class="a-command">
     <teleport to="#navigation-header-body">
       {{ nameCommand }}
     </teleport>
@@ -44,13 +47,13 @@ watch(
     <section v-if="command.argumentsListString.length">
       <header>
         <span>🔧 Аргументы</span>
-         <AButton
-           class="a-button__opacity zoom75"
-           icon="Icon24InfoCircleOutline"
-           target="_blank"
-           to="https://vk.com/@animecm-arguments"
-         >
-        Подробнее
+        <AButton
+          class="a-button__opacity zoom75"
+          icon="Icon24InfoCircleOutline"
+          target="_blank"
+          to="https://vk.com/@animecm-arguments"
+        >
+          Подробнее
         </AButton>
       </header>
       <div>
@@ -81,11 +84,14 @@ watch(
 
     <section v-if="command.modifiers">
       <header>⚡ Модификаторы</header>
-      <div
-        v-for="commandImplicitId of command.modifiers"
-        :key="commandImplicitId"
-      >
-        <AButton @click="router.push('/command/' + commandImplicitId)">
+      <div class="a-command__buttons">
+        <AButton
+          v-for="commandImplicitId of command.modifiers"
+          :key="commandImplicitId"
+          data-size="middle"
+          data-type="accent"
+          @click="router.push('/command/' + commandImplicitId)"
+        >
           {{ store.getCommandFullName(commandImplicitId) }}
         </AButton>
       </div>
@@ -96,39 +102,44 @@ watch(
       :key="commandImplicit.alias[0]"
     >
       <header>⚡ Неявный модификатор</header>
-      <div class="a-command">
-        <div
-          v-for="commandImplicitId of command.modifiers"
-          :key="commandImplicitId"
-        >
-          <section>
-            <header>💬 Названия</header>
-            <div>
-              {{ commandImplicit.alias.join(", ") }}
-            </div>
-          </section>
+      <div
+        v-for="commandImplicitId of command.modifiers"
+        :key="commandImplicitId"
+        class="a-command"
+      >
+        <section>
+          <header>💬 Названия</header>
+          <div>
+            {{ commandImplicit.alias.join(", ") }}
+          </div>
+        </section>
 
-          <section>
-            <header>📎 Описание</header>
-            <div>
-              {{ commandImplicit.helpExtended }}
-            </div>
-          </section>
+        <section>
+          <header>📎 Описание</header>
+          <div>
+            {{ commandImplicit.helpExtended }}
+          </div>
+        </section>
 
-          <section>
-            <header>❓ Использование</header>
-            <div>
-              {{ commandImplicit.help }}
-            </div>
-          </section>
-        </div>
+        <section>
+          <header>❓ Использование</header>
+          <div>
+            {{ commandImplicit.help }}
+          </div>
+        </section>
       </div>
     </section>
 
     <section v-if="relatedCommands">
       <header>🖇 Связанные команды</header>
-      <div v-for="relatedCommandId of relatedCommands" :key="relatedCommandId">
-        <AButton @click="router.push('/command/' + relatedCommandId)">
+      <div class="a-command__buttons">
+        <AButton
+          v-for="relatedCommandId of relatedCommands"
+          :key="relatedCommandId"
+          data-size="middle"
+          data-type="accent"
+          @click="router.push('/command/' + relatedCommandId)"
+        >
           {{ store.getCommandFullName(relatedCommandId) }}
         </AButton>
       </div>
@@ -153,11 +164,16 @@ watch(
           Подробнее
         </AButton>
       </header>
+      <div v-if="key.isDon">
+        <AButton icon="Icon24DollarCircleOutline" to="/don"
+          >Требуется статус дона
+        </AButton>
+      </div>
       <div>
         {{ key.description }}
       </div>
 
-      <div style="font-size: 13px" v-if="key.params">
+      <div v-if="key.params" style="font-size: 13px">
         <b class="">Аргументы:</b>
         <ol style="margin: 0">
           <li v-for="arg of key.params">
@@ -253,5 +269,11 @@ watch(
     font-weight: var(--vkui--font_weight_accent3, 400);
     line-height: var(--vkui--font_headline1--line_height--compact, 20px);
   }
+}
+
+.a-command__buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 </style>
