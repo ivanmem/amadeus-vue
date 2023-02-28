@@ -3,10 +3,7 @@ import { useCommandInfo } from "./useCommandInfo";
 import { ACommandProps } from "./types";
 import CommandHelper from "../../helpers/CommandHelper";
 import { useRouter } from "vue-router";
-import {
-  PermissionPrivateMessagesTypeEnum,
-  RepeatCommandConversationEnum,
-} from "../../store/commands/types";
+import { PermissionPrivateMessagesTypeEnum, RepeatCommandConversationEnum } from "../../store/commands/types";
 import AButton from "../../components/AButton/AButton.vue";
 import { watch } from "vue";
 import { isNullOrUndefined } from "../../helpers/isNullOrUndefined";
@@ -166,7 +163,7 @@ watch(
       </header>
       <div v-if="key.isDon">
         <AButton icon="Icon24DollarCircleOutline" to="/don"
-          >Требуется статус дона
+        >Требуется статус дона
         </AButton>
       </div>
       <div>
