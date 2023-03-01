@@ -24,10 +24,15 @@ export const useCommands = defineStore("commands", {
         return;
       }
 
-      this.commands = (await (await fetch("/commands.json")).json()) as Record<
-        string,
-        Command
-      >;
+      try {
+        this.commands = (await (
+          await fetch("https://amadeus.ddns.net/api/Commands")
+        ).json()) as Record<string, Command>;
+      } catch {
+        this.commands = (await (
+          await fetch("/commands.json")
+        ).json()) as Record<string, Command>;
+      }
     },
     getCommandById(id: string | number): Command {
       return this.commands[id];
