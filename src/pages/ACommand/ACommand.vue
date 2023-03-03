@@ -3,11 +3,15 @@ import { useCommandInfo } from "./useCommandInfo";
 import { ACommandProps } from "./types";
 import CommandHelper from "../../helpers/CommandHelper";
 import { useRouter } from "vue-router";
-import { PermissionPrivateMessagesTypeEnum, RepeatCommandConversationEnum } from "../../store/commands/types";
+import {
+  PermissionPrivateMessagesTypeEnum,
+  RepeatCommandConversationEnum,
+} from "../../store/commands/types";
 import AButton from "../../components/AButton/AButton.vue";
 import { watch } from "vue";
 import { isNullOrUndefined } from "../../helpers/isNullOrUndefined";
 import { isNullOrUndefinedOrWhiteSpace } from "../../helpers/isNullOrUndefinedOrWhiteSpace";
+import { icons } from "../../common/consts";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
@@ -19,6 +23,19 @@ watch(
     document.querySelector(".route-view")!.scroll(0, 0);
   }
 );
+const {
+  Icon12Tag,
+  Icon12Articles,
+  Icon16Attach,
+  Icon16Pen,
+  Icon16WarningTriangle,
+  Icon12Flash,
+  Icon12Question,
+  Icon12View,
+  Icon12Cards,
+  Icon16WrenchOutline,
+  Icon16KeyOutline,
+} = icons;
 </script>
 
 <template>
@@ -28,14 +45,20 @@ watch(
     </teleport>
 
     <section>
-      <header>📎 Описание</header>
+      <header>
+        <span
+          ><Icon16Attach style="color: #6382ff; zoom: 0.75" /> Описание</span
+        >
+      </header>
       <div>
         {{ command.helpExtended }}
       </div>
     </section>
 
     <section>
-      <header>💬 Названия</header>
+      <header>
+        <span><Icon12Tag style="color: #259693" /> Названия</span>
+      </header>
       <div>
         {{ command.alias.join(", ") }}
       </div>
@@ -43,7 +66,7 @@ watch(
 
     <section v-if="command.argumentsListString.length">
       <header>
-        <span>🔧 Аргументы</span>
+        <span><Icon12Articles style="color: #63c23e" /> Аргументы</span>
         <AButton
           class="a-button__opacity zoom75"
           icon="Icon24InfoCircleOutline"
@@ -59,21 +82,36 @@ watch(
     </section>
 
     <section>
-      <header>✏ Полный пример (со всеми аргументами)</header>
+      <header>
+        <span>
+          <Icon16Pen style="color: #966525; zoom: 0.75" /> Полный пример (со
+          всеми аргументами)
+        </span>
+      </header>
       <div>
         <pre style="user-select: contain">{{ command.templateString }}</pre>
       </div>
     </section>
 
     <section v-if="command.templateString !== command.minTemplateString">
-      <header>✏ Минимальный пример (только с обязательными аргументами)</header>
+      <header>
+        <span>
+          <Icon16Pen style="color: #966525; zoom: 0.75" /> Минимальный
+          пример(только с обязательными аргументами)
+        </span>
+      </header>
       <div>
         <pre style="user-select: contain">{{ command.minTemplateString }}</pre>
       </div>
     </section>
 
     <section v-if="command.templateString !== command.minTemplateString">
-      <header>⚠ Требуемая роль</header>
+      <header>
+        <span>
+          <Icon16WarningTriangle style="color: #ff7100; zoom: 0.75" />
+          Требуемая роль
+        </span>
+      </header>
       <div>
         {{ CommandHelper.getLevelText(command.accessLevel) }}
       </div>
@@ -93,33 +131,41 @@ watch(
         </AButton>
       </div>
     </section>
+
     <section
       v-for="commandImplicit of command.commandImplicit"
       v-if="command.commandImplicit"
       :key="commandImplicit.alias[0]"
     >
-      <header>⚡ Неявный модификатор</header>
-      <div
-        v-for="commandImplicitId of command.modifiers"
-        :key="commandImplicitId"
-        class="a-command"
-      >
+      <header>
+        <span><Icon12Flash style="color: #962525" /> Неявный модификатор</span>
+      </header>
+      <div class="a-command">
         <section>
-          <header>💬 Названия</header>
+          <header>
+            <span><Icon12Tag style="color: #259693" /> Названия</span>
+          </header>
           <div>
             {{ commandImplicit.alias.join(", ") }}
           </div>
         </section>
 
         <section>
-          <header>📎 Описание</header>
+          <header>
+            <span>
+              <Icon16Attach style="color: #6382ff; zoom: 0.75" />
+              Описание
+            </span>
+          </header>
           <div>
             {{ commandImplicit.helpExtended }}
           </div>
         </section>
 
         <section>
-          <header>❓ Использование</header>
+          <header>
+            <span><Icon12Question style="color: #969425" /> Использование</span>
+          </header>
           <div>
             {{ commandImplicit.help }}
           </div>
@@ -128,7 +174,9 @@ watch(
     </section>
 
     <section v-if="relatedCommands">
-      <header>🖇 Связанные команды</header>
+      <header>
+        <span><Icon12Cards style="color: #226451" /> Связанные команды</span>
+      </header>
       <div class="a-command__buttons">
         <AButton
           v-for="relatedCommandId of relatedCommands"
@@ -145,9 +193,12 @@ watch(
     <section v-for="(key, keyIndex) of command.keys" :key="key.key">
       <header>
         <span>
-          {{ key.header }}
+          <Icon16KeyOutline style="color: #f9c23c; zoom: 0.75" />
+          {{ key.header.replace("🔑", "") }}
           <template v-if="!isNullOrUndefined(key.accessLevel)">
-            &nbsp;| ⚠ Требуемая роль:
+            &nbsp;|
+            <Icon16WarningTriangle style="color: #962590; zoom: 0.75" />
+            Требуемая роль:
             {{ CommandHelper.getLevelText(key.accessLevel) }}
           </template>
         </span>
@@ -163,7 +214,7 @@ watch(
       </header>
       <div v-if="key.isDon">
         <AButton icon="Icon24DollarCircleOutline" to="/don"
-        >Требуется статус дона
+          >Требуется статус дона
         </AButton>
       </div>
       <div>
@@ -187,7 +238,11 @@ watch(
     </section>
 
     <section>
-      <header>🛠 Тип</header>
+      <header>
+        <span>
+          <Icon16WrenchOutline style="color: #83668c; zoom: 0.75" /> Тип
+        </span>
+      </header>
       <div>
         {{ CommandHelper.getType(command.type) }}
       </div>
@@ -202,7 +257,8 @@ watch(
 
     <section v-if="CommandHelper.isAccessLs(command.privateMessages)">
       <div class="command-boolean">
-        👁 Разрешена всем ролям в личных сообщениях бота
+        <Icon12View style="color: #c0c1ff" />
+        Разрешена всем ролям в личных сообщениях бота
         {{
           command.privateMessages ===
           PermissionPrivateMessagesTypeEnum.YesImportant
@@ -235,6 +291,10 @@ watch(
   color: var(--vkui--color--text_primary);
   border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
 
+  .a-command {
+    background: var(--vkui--color_background);
+  }
+
   section {
     display: flex;
     flex-direction: column;
@@ -245,8 +305,18 @@ watch(
       justify-content: space-between;
       border-block: 0.5px solid var(--vkui--color_text_tertiary);
       border-radius: 5px;
-      font-weight: bold;
-      font-style: italic;
+      font-weight: 500;
+      font-style: oblique;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        svg {
+          margin-left: 5px;
+        }
+      }
     }
 
     div {
@@ -263,7 +333,7 @@ watch(
   .command-boolean {
     padding: 0;
     font-size: var(--vkui--font_headline1--font_size--compact, 15px);
-    font-weight: var(--vkui--font_weight_accent3, 400);
+    font-weight: 500;
     line-height: var(--vkui--font_headline1--line_height--compact, 20px);
   }
 }
