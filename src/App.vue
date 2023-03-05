@@ -7,6 +7,7 @@ import { useCommands } from "./store/commands/commands";
 import AButton from "./components/AButton/AButton.vue";
 import { useColorScheme } from "./useColorScheme";
 import { useApp } from "./store/app/app";
+import { icons } from "./common/consts";
 
 const route = useRoute();
 const store = useCommands();
@@ -16,6 +17,8 @@ const { currentClasses } = useColorScheme();
 onMounted(async () => {
   await bridge.send("VKWebAppInit", {});
 });
+
+const { Icon24Linked } = icons;
 </script>
 
 <template>
@@ -26,10 +29,10 @@ onMounted(async () => {
       </div>
       <AButton
         v-if="route.path !== '/'"
-        icon="Icon24Linked"
+        style="height: 30px;"
         @click="copy('vk.com/app51547376#' + route.path)"
       >
-        <span>{{ route.path }}</span>
+        <Icon24Linked />
       </AButton>
     </div>
     <div class="route-view">
@@ -63,6 +66,7 @@ onMounted(async () => {
 @import "styles/variables";
 
 .root {
+  margin-top: 2px;
   padding-block: 10px;
   gap: 10px;
   background: var(--vkui--color_background_content);
@@ -78,6 +82,7 @@ onMounted(async () => {
   align-items: center;
   padding-inline: 10px;
   padding-right: var(--navigation-header-padding-right, 10px);
+  min-height: 30px;
 }
 
 .navigation {
