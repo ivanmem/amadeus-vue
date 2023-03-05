@@ -24,7 +24,7 @@ watch(
   () => {
     // сброс скролла при смене команды
     document.querySelector(".route-view")!.scroll(0, 0);
-  }
+  }, {flush: 'post', immediate: true}
 );
 const {
   Icon12Tag,
