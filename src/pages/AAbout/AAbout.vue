@@ -2,6 +2,9 @@
 import AButton from "../../components/AButton/AButton.vue";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import amadeus1Path from "../../assets/amadeus1.webp";
+import { useAppCaption } from "../../hooks/useAppCaption";
+
+useAppCaption("О приложении");
 
 const backgroundImageStyle = `
 background-image: linear-gradient(
@@ -14,7 +17,6 @@ background-image: linear-gradient(
 
 <template>
   <APageContainer :style="backgroundImageStyle" class="a-about">
-    <teleport to="#navigation-header-body"> О приложении</teleport>
     <span>
       Это приложение с открытым исходным кодом.
       <br />Вы можете внести свой вклад. <br />Для этого вам необходимо изучить:

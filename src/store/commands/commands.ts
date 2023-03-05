@@ -40,6 +40,10 @@ export const useCommands = defineStore("commands", {
     getCommandFullName(id: number | string): string {
       const command = this.getCommandById(id);
       if (!command) {
+        if (!this.commandsLoaded) {
+          return '';
+        }
+
         return `Неизвестная команда ${id}`;
       }
 
@@ -51,7 +55,6 @@ export const useCommands = defineStore("commands", {
 
       return `${commandOriginal.alias[0]} ${command.alias[0]}`;
     },
-
     searchCommand(_search: string): Command[] {
       const search = _search.trim().toLowerCase();
       if (search.length === 0) {
@@ -76,6 +79,9 @@ export const useCommands = defineStore("commands", {
     },
   },
   getters: {
+    commandsLoaded(): boolean {
+      return Object.keys(this.commands).length > 0;
+    },
     // возвращает все команды и их модификаторы
     commandsOrder(): Command[] {
       const store = useCommands();

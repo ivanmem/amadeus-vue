@@ -2,6 +2,9 @@
 import ACommandLink from "./ACommandLink.vue";
 import { useCommandSearch } from "./useCommandSearch";
 import { icons } from "../../common/consts";
+import { useAppCaption } from "../../hooks/useAppCaption";
+
+useAppCaption("Команды");
 
 const { search, searchDescriptions, searchCommands, store, searchDebounce } =
   useCommandSearch();
@@ -22,9 +25,6 @@ const { Icon12ErrorCircle } = icons;
       </div>
     </div>
     <div class="a-commands__commands">
-      <teleport to="#navigation-header-body">
-        <span>Команды</span>
-      </teleport>
       <template v-if="searchDebounce.length === 0">
         <ACommandLink
           v-for="command in store.commandsOrder"

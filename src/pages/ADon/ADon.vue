@@ -2,6 +2,9 @@
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import AButton from "../../components/AButton/AButton.vue";
 import { darkColorScheme } from "../../common/consts";
+import { useAppCaption } from "../../hooks/useAppCaption";
+
+useAppCaption("Дон Статус");
 
 const products = [
   {
@@ -20,8 +23,6 @@ const products = [
 </script>
 <template>
   <APageContainer class="a-don">
-    <teleport to="#navigation-header-body"> Дон статус</teleport>
-
     <AButton
       data-size="middle"
       data-type="accent"

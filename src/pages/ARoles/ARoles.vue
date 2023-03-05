@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import AButton from "../../components/AButton/AButton.vue";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
+import { useAppCaption } from "../../hooks/useAppCaption";
+
+useAppCaption("О ролях");
 
 const roles: {
   smile: string;
@@ -41,7 +44,6 @@ const roles: {
 
 <template>
   <APageContainer class="a-roles">
-    <teleport to="#navigation-header-body"> О ролях </teleport>
     <h4>В Амадеусе используется 11ти уровневая ролевая система.</h4>
     <div v-for="role of roles" :key="role.level" class="a-roles__level">
       <img

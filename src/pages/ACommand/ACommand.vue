@@ -12,10 +12,13 @@ import { watch } from "vue";
 import { isNullOrUndefined } from "../../helpers/isNullOrUndefined";
 import { isNullOrUndefinedOrWhiteSpace } from "../../helpers/isNullOrUndefinedOrWhiteSpace";
 import { icons } from "../../common/consts";
+import { useAppCaption } from "../../hooks/useAppCaption";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
 const { nameCommand, command, store, relatedCommands } = useCommandInfo(props);
+useAppCaption(nameCommand);
+
 watch(
   () => props.id,
   () => {
@@ -40,10 +43,6 @@ const {
 
 <template>
   <div v-if="command" class="a-command">
-    <teleport to="#navigation-header-body">
-      {{ nameCommand }}
-    </teleport>
-
     <section>
       <header>
         <span

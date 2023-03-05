@@ -6,9 +6,11 @@ import copy from "copy-to-clipboard";
 import { useCommands } from "./store/commands/commands";
 import AButton from "./components/AButton/AButton.vue";
 import { useColorScheme } from "./useColorScheme";
+import { useApp } from "./store/app/app";
 
 const route = useRoute();
 const store = useCommands();
+const appStore = useApp();
 const { currentClasses } = useColorScheme();
 
 onMounted(async () => {
@@ -19,7 +21,9 @@ onMounted(async () => {
 <template>
   <div v-if="store.commands" :class="currentClasses" class="root">
     <div class="navigation-header">
-      <div id="navigation-header-body" class="overflow-block"></div>
+      <div class="overflow-block navigation-caption">
+        {{ appStore.caption }}
+      </div>
       <AButton
         v-if="route.path !== '/'"
         icon="Icon24Linked"
@@ -29,7 +33,11 @@ onMounted(async () => {
       </AButton>
     </div>
     <div class="route-view">
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <Transition mode="out-in" name="fade">
+          <component :is="Component" :key="route.fullPath" />
+        </Transition>
+      </router-view>
     </div>
     <div class="navigation">
       <div class="navigation-bottom-buttons">
@@ -78,7 +86,7 @@ onMounted(async () => {
   padding-inline: 10px;
 }
 
-#navigation-header-body {
+.navigation-caption {
   display: flex;
   align-items: flex-start;
   justify-items: center;
@@ -101,5 +109,15 @@ onMounted(async () => {
     min-height: 26px;
     white-space: nowrap;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s linear;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
