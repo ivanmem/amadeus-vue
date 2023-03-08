@@ -24,7 +24,8 @@ watch(
   () => {
     // сброс скролла при смене команды
     document.querySelector(".route-view")!.scroll(0, 0);
-  }, {flush: 'post', immediate: true}
+  },
+  { flush: "post", immediate: true }
 );
 const {
   Icon12Tag,
@@ -291,13 +292,19 @@ const {
   border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
 
   .a-command {
-    background: var(--vkui--color_background);
+    background: inherit;
+
+    section {
+      background: var(--vkui--color_background_content);
+    }
   }
 
   section {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background: var(--vkui--color_background);
+    border-radius: 5px;
 
     header {
       display: flex;
@@ -330,7 +337,7 @@ const {
   }
 
   .command-boolean {
-    padding: 0;
+    padding: 5px;
     font-size: var(--vkui--font_headline1--font_size--compact, 15px);
     font-weight: 500;
     line-height: var(--vkui--font_headline1--line_height--compact, 20px);

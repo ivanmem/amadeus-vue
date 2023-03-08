@@ -1,7 +1,12 @@
 import { defineStore } from "pinia";
-import { Command } from "./types";
+import { Command, TypeCommandEnum } from "./types";
 import orderBy from "lodash/orderBy";
 import CommandsService from "../../services/CommandsService";
+import CommandHelper from "../../helpers/CommandHelper";
+
+export interface FiltersType {
+  type: TypeCommandEnum;
+}
 
 interface CommandAllVariantsNames {
   id: number;
@@ -10,12 +15,14 @@ interface CommandAllVariantsNames {
 
 interface CommandsState {
   commands: Record<string, Command>;
+  filters: FiltersType;
 }
 
 export const useCommands = defineStore("commands", {
   state: (): CommandsState => {
     return {
       commands: {},
+      filters: { type: TypeCommandEnum.Unselected },
     };
   },
   actions: {
@@ -41,7 +48,7 @@ export const useCommands = defineStore("commands", {
       const command = this.getCommandById(id);
       if (!command) {
         if (!this.commandsLoaded) {
-          return '';
+          return "";
         }
 
         return `Неизвестная команда ${id}`;
@@ -55,26 +62,32 @@ export const useCommands = defineStore("commands", {
 
       return `${commandOriginal.alias[0]} ${command.alias[0]}`;
     },
-    searchCommand(_search: string): Command[] {
+    searchCommand(_search: string, filters?: FiltersType): Command[] {
       const search = _search.trim().toLowerCase();
       if (search.length === 0) {
         return [];
       }
 
-      return (
-        this.commandsAllVariantsNames.filter((x) =>
-          x.names.find((name) => name.includes(search))
-        ) || []
-      ).map((x) => this.getCommandById(x.id));
+      return CommandHelper.getFiltered(
+        (
+          this.commandsAllVariantsNames.filter((x) =>
+            x.names.find((name) => name.includes(search))
+          ) || []
+        ).map((x) => this.getCommandById(x.id)),
+        filters
+      );
     },
-    searchDescription(_search: string): Command[] {
+    searchDescription(_search: string, filters?: FiltersType): Command[] {
       const search = _search.trim().toLowerCase();
       if (search.length === 0) {
         return [];
       }
 
-      return this.commandsOrder.filter((x) =>
-        x.helpExtended.toLowerCase().includes(search)
+      return CommandHelper.getFiltered(
+        this.commandsOrder.filter((x) =>
+          x.helpExtended.toLowerCase().includes(search)
+        ),
+        filters
       );
     },
   },

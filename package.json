@@ -11,6 +11,7 @@
     "deploy": "npm run build && vk-miniapps-deploy"
   },
   "dependencies": {
+    "@floating-ui/vue": "^0.2.1",
     "@vkontakte/icons": "^2.15.0",
     "@vkontakte/vk-bridge": "^2.7.2",
     "@vkontakte/vkui": "^5.1.2",

@@ -29,7 +29,7 @@ const { Icon24Linked } = icons;
       </div>
       <AButton
         v-if="route.path !== '/'"
-        style="height: 30px;"
+        style="height: 30px"
         @click="copy('vk.com/app51547376#' + route.path)"
       >
         <Icon24Linked />
@@ -66,7 +66,7 @@ const { Icon24Linked } = icons;
 @import "styles/variables";
 
 .root {
-  margin-top: 2px;
+  padding-top: 2px;
   padding-block: 10px;
   gap: 10px;
   background: var(--vkui--color_background_content);
@@ -106,7 +106,7 @@ const { Icon24Linked } = icons;
   align-items: center;
   overflow: auto;
   padding: 10px;
-  background: var(--vkui--color_background_content--active);
+  background: var(--vkui--color_background);
   min-width: 100%;
   border-radius: 5px;
 

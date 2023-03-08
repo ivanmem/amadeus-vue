@@ -1,10 +1,12 @@
 import {
+  Command,
   PermissionPrivateMessagesTypeEnum,
   TypeCommandEnum,
 } from "../store/commands/types";
+import { FiltersType } from "../store/commands/commands";
 
-const TYPES_COMMAND = {
-  [TypeCommandEnum.Unselected]: "Неизвестный тип",
+export const TYPES_COMMAND = {
+  [TypeCommandEnum.Unselected]: "-- Не выбрано --",
   [TypeCommandEnum.Service]: "Сервисные",
   [TypeCommandEnum.Settings]: "Конфигурационные",
   [TypeCommandEnum.Information]: "Информационные",
@@ -13,6 +15,23 @@ const TYPES_COMMAND = {
 };
 
 class CommandHelper {
+  static getFiltered(commands: Command[], filters?: FiltersType) {
+    if (!filters) {
+      return commands;
+    }
+
+    return commands.filter((command) => {
+      if (
+        filters.type != TypeCommandEnum.Unselected &&
+        command.type != filters.type
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+  }
+
   static getSmileNumber(number: number): string {
     return number?.toString() || "";
   }

@@ -48,8 +48,6 @@ div[contenteditable="true"] {
 
 .TopSearch__input {
   border: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
   line-height: 28px;
   width: 100%;
   -webkit-transition: background-color 0.05s, color 0.05s;
@@ -66,5 +64,27 @@ div[contenteditable="true"] {
 
   &:focus-visible {
     outline: none;
+  }
+}
+
+.a-select {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  font-family: var(--vkui--font_family_base);
+  min-height: var(--vkui--size_field_height--compact);
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--vkui--color_field_background);
+  border: var(--vkui_internal--thin_border) solid
+    var(--vkui--color_field_border_alpha);
+  border-radius: var(--vkui--size_border_radius--regular);
+  color: var(--vkui--color_text_primary);
+  appearance: none;
+
+  &:focus-visible {
+    border-color: var(--vkui--color_stroke_accent);
+    outline: 0;
   }
 }

@@ -3,31 +3,37 @@ import ACommandLink from "./ACommandLink.vue";
 import { useCommandSearch } from "./useCommandSearch";
 import { icons } from "../../common/consts";
 import { useAppCaption } from "../../hooks/useAppCaption";
+import ACommandsSearch from "./ACommandsSearch.vue";
+import { ref } from "vue";
 
 useAppCaption("Команды");
 
-const { search, searchDescriptions, searchCommands, store, searchDebounce } =
-  useCommandSearch();
+const commandSearch = useCommandSearch();
+const {
+  searchDescriptions,
+  searchCommands,
+  store,
+  searchDebounce,
+  commandsOrder,
+  showFilters,
+} = commandSearch;
+const aCommandSearchRef = ref<any>();
 
 const { Icon12ErrorCircle } = icons;
 </script>
 
 <template>
-  <div class="a-commands vkuiGroup__inner Group__inner">
-    <div class="TopSearch">
-      <input v-model="search" class="TopSearch__input" placeholder="Поиск" />
-      <div
-        aria-hidden="true"
-        class="vkuiSearch__separator Search__separator vkuiSeparator Separator vkuiSeparator--wide Separator--wide"
-        role="separator"
-      >
-        <div class="vkuiSeparator__in Separator__in"></div>
-      </div>
-    </div>
+  <div
+    class="a-commands vkuiGroup__inner Group__inner"
+    @mousedown="showFilters = false"
+    @wheel="showFilters = false"
+    @touchstart="showFilters = false"
+  >
+    <ACommandsSearch ref="aCommandSearchRef" :command-search="commandSearch" />
     <div class="a-commands__commands">
       <template v-if="searchDebounce.length === 0">
         <ACommandLink
-          v-for="command in store.commandsOrder"
+          v-for="command in commandsOrder"
           :key="command.id"
           :command="command"
         />
