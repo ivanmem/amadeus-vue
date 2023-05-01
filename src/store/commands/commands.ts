@@ -33,7 +33,7 @@ export const useCommands = defineStore("commands", {
 
       try {
         this.commands = (await (
-          await fetch("https://amadeus.ddns.net/api/Commands")
+          await fetch("https://xeleos.ddns.net/api/commands")
         ).json()) as Record<string, Command>;
       } catch {
         this.commands = (await (

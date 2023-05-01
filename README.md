@@ -1,5 +1,5 @@
 ## Зависимости
-Положите описание команд в директорию `/public/commands.json` (возьмите его из сервиса в ВК с помощью devtools или получите по [ссылке](https://amadeus.ddns.net/api/Commands)).
+Положите описание команд в директорию `/public/commands.json` (возьмите его из сервиса в ВК с помощью devtools или получите по [ссылке](https://xeleos.ddns.net/api/commands)).
 А так же установите npm пакеты:
 ```shell
 npm install --force
