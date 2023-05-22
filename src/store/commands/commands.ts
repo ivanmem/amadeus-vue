@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Command, TypeCommandEnum } from "./types";
+import { Command, Docs, TypeCommandEnum } from "./types";
 import orderBy from "lodash/orderBy";
 import CommandsService from "../../services/CommandsService";
 import CommandHelper from "../../helpers/CommandHelper";
@@ -14,14 +14,22 @@ interface CommandAllVariantsNames {
 }
 
 interface CommandsState {
-  commands: Record<string, Command>;
+  docs: Docs;
   filters: FiltersType;
 }
 
 export const useCommands = defineStore("commands", {
   state: (): CommandsState => {
     return {
-      commands: {},
+      docs: {
+        commands: {},
+        events: {
+          keys: {},
+          options: {},
+          templateArguments: {},
+          templateArgumentsDescription: {},
+        },
+      },
       filters: { type: TypeCommandEnum.Unselected },
     };
   },
@@ -32,13 +40,11 @@ export const useCommands = defineStore("commands", {
       }
 
       try {
-        this.commands = (await (
-          await fetch("https://xeleos.ddns.net/api/commands")
-        ).json()) as Record<string, Command>;
+        this.docs = (await (
+          await fetch("https://xeleos.ddns.net/api/commands/doc")
+        ).json()) as Docs;
       } catch {
-        this.commands = (await (
-          await fetch("/commands.json")
-        ).json()) as Record<string, Command>;
+        this.docs = (await (await fetch("/doc.json")).json()) as Docs;
       }
     },
     getCommandById(id: string | number): Command {
@@ -92,6 +98,9 @@ export const useCommands = defineStore("commands", {
     },
   },
   getters: {
+    commands(): Record<string | number, Command> {
+      return this.docs.commands;
+    },
     commandsLoaded(): boolean {
       return Object.keys(this.commands).length > 0;
     },

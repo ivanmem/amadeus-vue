@@ -1,3 +1,8 @@
+export interface Docs {
+  commands: Record<string | number, Command>;
+  events: EventsDoc;
+}
+
 export interface Command {
   id: number;
   idOriginal?: number;
@@ -96,4 +101,20 @@ export enum PermissionPrivateMessagesTypeEnum {
   No,
   Yes,
   YesImportant,
+}
+
+export interface EventsDoc {
+  templateArguments: Record<string, string>;
+  templateArgumentsDescription: Record<string, string>;
+  options: Record<string, EventOption>;
+  keys: Record<string, number>;
+}
+
+export interface EventOption {
+  type: number;
+  alias: string[];
+  requiredValue: boolean;
+  description: string;
+  example: string;
+  max: number;
 }

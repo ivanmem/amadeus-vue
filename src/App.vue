@@ -53,6 +53,9 @@ const { Icon24Linked } = icons;
         <AButton icon="Icon24DollarCircleOutline" to="/don">
           <span>Дон статус</span>
         </AButton>
+        <AButton icon="Icon24DollarCircleOutline" to="/events">
+          <span>События чата</span>
+        </AButton>
         <AButton icon="Icon24LightbulbStarOutline" to="/about">
           <span> О приложении </span>
         </AButton>
