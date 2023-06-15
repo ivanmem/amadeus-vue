@@ -14,8 +14,8 @@ const props = defineProps<{
   dataType?: "accent";
 }>();
 
-const emits = defineEmits<{
-  click?: (e: MouseEvent) => any;
+const emit = defineEmits<{
+  click: [e: MouseEvent];
 }>();
 
 const isExternalLink = computed(
@@ -26,10 +26,7 @@ const route = useRoute();
 
 const onClick = computed(() => {
   return (e: MouseEvent) => {
-    if (emits.click) {
-      emits.click(e);
-    }
-
+    emit("click", e);
     if (props.to !== undefined) {
       if (isString(props.to) && isExternalLink.value) {
         window.open(props.to, props.target);
