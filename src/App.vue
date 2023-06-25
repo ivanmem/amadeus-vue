@@ -25,6 +25,7 @@ const { Icon24Linked } = icons;
   <div
     v-if="store.commands"
     :class="currentClasses"
+    :data-platform="appStore.platform"
     class="root"
     :data-dark="darkColorScheme"
   >
@@ -51,22 +52,46 @@ const { Icon24Linked } = icons;
     </div>
     <div class="navigation">
       <div class="navigation-bottom-buttons">
-        <AButton icon="Icon24ArticleBoxOutline" to="/">
+        <AButton
+          icon="Icon24ArticleBoxOutline"
+          to="/"
+          :hide-content="!appStore.isVkCom"
+        >
           <span> Команды </span>
         </AButton>
-        <AButton icon="Icon24CrownOutline" to="/roles">
+        <AButton
+          icon="Icon24CrownOutline"
+          to="/roles"
+          :hide-content="!appStore.isVkCom"
+        >
           <span> О ролях </span>
         </AButton>
-        <AButton icon="Icon24DollarCircleOutline" to="/don">
+        <AButton
+          icon="Icon24DollarCircleOutline"
+          to="/don"
+          :hide-content="!appStore.isVkCom"
+        >
           <span>Дон статус</span>
         </AButton>
-        <AButton icon="Icon24DollarCircleOutline" to="/events">
+        <AButton
+          icon="Icon24FlashOutline"
+          to="/events"
+          :hide-content="!appStore.isVkCom"
+        >
           <span>События чата</span>
         </AButton>
-        <AButton icon="Icon24DollarCircleOutline" to="/top">
+        <AButton
+          icon="Icon24CupOutline"
+          to="/top"
+          :hide-content="!appStore.isVkCom"
+        >
           <span>Топы</span>
         </AButton>
-        <AButton icon="Icon24LightbulbStarOutline" to="/about">
+        <AButton
+          icon="Icon24LightbulbStarOutline"
+          to="/about"
+          :hide-content="!appStore.isVkCom"
+        >
           <span> О приложении </span>
         </AButton>
       </div>
@@ -122,6 +147,15 @@ const { Icon24Linked } = icons;
   background: var(--vkui--color_background);
   min-width: 100%;
   border-radius: 5px;
+
+  & > * {
+    flex-grow: 1;
+  }
+
+  @at-root .root:not([data-platform="vkcom"]) & {
+    justify-content: space-around;
+    align-content: space-around;
+  }
 
   .a-button {
     min-height: 26px;
