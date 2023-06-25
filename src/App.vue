@@ -12,7 +12,7 @@ import { icons } from "./common/consts";
 const route = useRoute();
 const store = useCommands();
 const appStore = useApp();
-const { currentClasses } = useColorScheme();
+const { currentClasses, darkColorScheme } = useColorScheme();
 
 onMounted(async () => {
   await bridge.send("VKWebAppInit", {});
@@ -22,7 +22,12 @@ const { Icon24Linked } = icons;
 </script>
 
 <template>
-  <div v-if="store.commands" :class="currentClasses" class="root">
+  <div
+    v-if="store.commands"
+    :class="currentClasses"
+    class="root"
+    :data-dark="darkColorScheme"
+  >
     <div class="navigation-header">
       <div class="overflow-block navigation-caption">
         {{ appStore.caption }}
@@ -36,11 +41,13 @@ const { Icon24Linked } = icons;
       </AButton>
     </div>
     <div class="route-view">
-      <router-view v-slot="{ Component }">
-        <Transition mode="out-in" name="fade">
-          <component :is="Component" :key="route.fullPath" />
-        </Transition>
-      </router-view>
+      <Suspense>
+        <router-view v-slot="{ Component }">
+          <keep-alive max="3">
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
+      </Suspense>
     </div>
     <div class="navigation">
       <div class="navigation-bottom-buttons">
@@ -55,6 +62,9 @@ const { Icon24Linked } = icons;
         </AButton>
         <AButton icon="Icon24DollarCircleOutline" to="/events">
           <span>События чата</span>
+        </AButton>
+        <AButton icon="Icon24DollarCircleOutline" to="/top">
+          <span>Топы</span>
         </AButton>
         <AButton icon="Icon24LightbulbStarOutline" to="/about">
           <span> О приложении </span>

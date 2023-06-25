@@ -172,3 +172,16 @@
     --separator_common: var(--steel_gray_100);
   }
 }
+
+.root[data-dark="true"] {
+  --easy-table-header-background-color: #1c1c1c;
+  --easy-table-border: black;
+  --easy-table-row-border: #a4a4a4;
+  --easy-table-header-font-color: white;
+  --easy-table-body-row-background-color: #0a0a0a;
+  --easy-table-body-row-hover-font-color: #ffffff;
+  --easy-table-body-even-row-font-color: #ffffff;
+  --easy-table-body-even-row-background-color: #101010;
+  --easy-table-body-row-font-color: #ffffff;
+  --easy-table-body-row-hover-background-color: rgba(255, 255, 255, 0.09);
+}

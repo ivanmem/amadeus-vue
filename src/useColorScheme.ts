@@ -60,5 +60,6 @@ export function useColorScheme() {
   return {
     currentClasses,
     currentPlatform,
+    darkColorScheme,
   };
 }

@@ -1,0 +1,19 @@
+<script setup lang="ts">
+import ATable from "../../components/ATable/ATable.vue";
+import { conversationHeaders } from "./consts";
+
+const props = defineProps<{ items: object[] }>();
+</script>
+<template>
+  <ATable :items="items" :headers="conversationHeaders">
+    <template #item-percentBot="{ percentBot }">
+      {{ percentBot ?? 0 }}%
+    </template>
+    <template #item-peerId="{ peerId }">
+      {{ peerId - 2000000000 }}
+    </template>
+    <template #item-name="{ name, link }">
+      <a :href="link" target="_blank">{{ name }}</a>
+    </template>
+  </ATable>
+</template>

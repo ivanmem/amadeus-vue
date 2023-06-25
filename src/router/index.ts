@@ -1,25 +1,47 @@
-import ACommands from "../pages/ACommands/ACommands.vue";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import ACommand from "../pages/ACommand/ACommand.vue";
-import AAbout from "../pages/AAbout/AAbout.vue";
-import ARoles from "../pages/ARoles/ARoles.vue";
-import ADon from "../pages/ADon/ADon.vue";
-import AEvents from "../pages/AEvents/AEvents.vue";
 import bridge from "@vkontakte/vk-bridge";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/", component: ACommands },
+  { path: "/", component: () => import("../pages/ACommands/ACommands.vue") },
   {
     path: "/command/:id",
-    component: ACommand,
+    component: () => import("../pages/ACommand/ACommand.vue"),
     props: ({ params: { id } }) => {
       return { id };
     },
   },
-  { path: "/about", component: AAbout },
-  { path: "/roles", component: ARoles },
-  { path: "/don", component: ADon },
-  { path: "/events", component: AEvents },
+  { path: "/about", component: () => import("../pages/AAbout/AAbout.vue") },
+  { path: "/roles", component: () => import("../pages/ARoles/ARoles.vue") },
+  { path: "/don", component: () => import("../pages/ADon/ADon.vue") },
+  { path: "/events", component: () => import("../pages/AEvents/AEvents.vue") },
+  {
+    path: "/top",
+    component: () => import("../pages/ATops/ATop.vue"),
+  },
+  {
+    path: "/top/conversations/today",
+    component: () => import("../pages/ATops/ATopConversationsToday.vue"),
+  },
+  {
+    path: "/top/conversations",
+    component: () => import("../pages/ATops/ATopConversations.vue"),
+  },
+  {
+    path: "/top/conversations/catalog",
+    component: () => import("../pages/ATops/ATopConversationsCatalog.vue"),
+  },
+  {
+    path: "/top/users",
+    component: () => import("../pages/ATops/ATopUsers.vue"),
+  },
+  {
+    path: "/top/users/today",
+    component: () => import("../pages/ATops/ATopUsersToday.vue"),
+  },
+  {
+    path: "/top/commands",
+    component: () => import("../pages/ATops/ATopCommands.vue"),
+  },
 ];
 
 export const router = createRouter({

@@ -27,10 +27,13 @@
   color: inherit;
   background: var(--vkui--color_background_secondary_alpha);
   border-radius: var(--vkui--size_border_radius--regular, 8px);
-  border: 0.5px solid var(--vkui--color_background_contrast_secondary_alpha);
+  border: none;
   cursor: pointer;
-
-  @include button-pseudo-classes;
+  padding: 4px;
+  line-height: var(--vkui--font_headline1--line_height--compact);
+  font-size: var(--vkui--font_headline1--font_size--compact);
+  font-weight: var(--vkui--font_weight_accent2);
+  min-height: var(--vkui--size_button_large_height--compact);
 
   &[data-type="accent"] {
     color: var(--vkui--color_background_content);
@@ -66,4 +69,21 @@
 
   background: transparent;
   border: none;
+}
+
+.a-button__left-content-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: max-content;
+  max-width: 100%;
+}
+
+.a-button__left-content {
+  width: 100%;
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: fill-available;
+  max-width: 100%;
+  justify-content: left;
 }

@@ -9,10 +9,7 @@ const events = computed(() => useCommands().docs.events);
 </script>
 
 <template>
-  <APageContainer
-    class="a-events"
-    style="display: flex; flex-direction: column; gap: 10px"
-  >
+  <APageContainer class="a-events">
     <h1>Шаблонные аргументы для команд</h1>
     <div class="a-event-block">
       <div v-for="(value, key) of events.templateArgumentsDescription">
@@ -45,6 +42,12 @@ const events = computed(() => useCommands().docs.events);
   </APageContainer>
 </template>
 <style lang="scss">
+.a-events {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .a-event-block {
   background: var(--vkui--color_background);
   color: var(--vkui--color--text_primary);

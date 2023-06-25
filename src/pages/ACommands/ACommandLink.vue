@@ -35,6 +35,10 @@ const router = useRouter();
   align-items: flex-start;
   text-align: left;
   align-content: flex-start;
+
+  &:nth-child(2n) {
+    background-color: rgba(0, 0, 0, 0.13);
+  }
 }
 
 .a-command-link__help {
