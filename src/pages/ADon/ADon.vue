@@ -32,7 +32,7 @@ const products = [
     </AButton>
 
     <div>
-      <h3>Каталог товаров</h3>
+      <h3 style="padding: 10px 0;">Каталог товаров</h3>
       <div class="a-button__left-content-block">
         <AButton
           v-for="product of products"
@@ -44,7 +44,7 @@ const products = [
           {{ product.caption }}
         </AButton>
       </div>
-      <div>
+      <div style="padding: 10px 0;">
         Цена минимальная, с такой мы ничего не зарабатываем. Всё уходит на
         поддержку сервера. Даже в минус уходим.
       </div>

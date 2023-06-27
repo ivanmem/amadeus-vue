@@ -60,6 +60,20 @@ const { Icon24Linked } = icons;
           <span> Команды </span>
         </AButton>
         <AButton
+          icon="Icon24CupOutline"
+          to="/top"
+          :hide-content="!appStore.isVkCom"
+        >
+          <span>Топы</span>
+        </AButton>
+        <AButton
+          icon="Icon24FlashOutline"
+          to="/events"
+          :hide-content="!appStore.isVkCom"
+        >
+          <span>События чата</span>
+        </AButton>
+        <AButton
           icon="Icon24CrownOutline"
           to="/roles"
           :hide-content="!appStore.isVkCom"
@@ -72,20 +86,6 @@ const { Icon24Linked } = icons;
           :hide-content="!appStore.isVkCom"
         >
           <span>Дон статус</span>
-        </AButton>
-        <AButton
-          icon="Icon24FlashOutline"
-          to="/events"
-          :hide-content="!appStore.isVkCom"
-        >
-          <span>События чата</span>
-        </AButton>
-        <AButton
-          icon="Icon24CupOutline"
-          to="/top"
-          :hide-content="!appStore.isVkCom"
-        >
-          <span>Топы</span>
         </AButton>
         <AButton
           icon="Icon24LightbulbStarOutline"
