@@ -11,6 +11,7 @@ const props = defineProps<Props>();
 </script>
 <template>
   <EasyDataTable
+    style="padding: 0 10px"
     alternating
     show-index
     :headers="headers"
