@@ -43,11 +43,10 @@ const { Icon24Filter } = icons;
       >
         <AButton
           class="a-button__opacity"
+          icon="Icon24Filter"
           @mousedown.stop
           @click.stop="showFilters = !showFilters"
-        >
-          <Icon24Filter />
-        </AButton>
+        />
       </div>
       <div
         v-if="showFilters"
@@ -65,15 +64,18 @@ const { Icon24Filter } = icons;
         <h5 class="vkuiFormItem__top vkuiSubhead vkuiSubhead--sizeY-none">
           Тип
         </h5>
-        <select
-          v-model="store.filters.type"
-          class="a-select"
-          style="min-width: 100%"
-        >
-          <option v-for="(type, index) of TYPES_COMMAND" :value="index">
+        <fieldset id="fieldsetCommandType" class="a-fieldset">
+          <label v-for="(type, index) of TYPES_COMMAND">
+            <input
+              :key="type"
+              type="radio"
+              :value="index"
+              name="fieldsetCommandType"
+              v-model.number="store.filters.type"
+            />
             {{ type }}
-          </option>
-        </select>
+          </label>
+        </fieldset>
       </div>
     </div>
     <div

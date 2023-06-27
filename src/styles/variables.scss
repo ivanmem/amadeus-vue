@@ -1,4 +1,4 @@
-:root {
+.root[data-dark="false"] {
   --light-color: #e1e3e6;
   --light-color-800: #dee0e1;
   --light-color-600: #d6d7d9;
@@ -160,20 +160,20 @@
   --lavender_800: #404980;
   --lavender_900: #262b4d;
 
-  --border-color: var(--dark-color-600);
-  --accent-color: var(--light-color-600);
-  --separator_common: var(--gray_750);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --border-color: var(--light-color-600);
-    --accent-color: var(--dark-color-600);
-    --separator_common: var(--steel_gray_100);
-  }
+  --border-color: var(--light-color-600);
+  --accent-color: var(--dark-color-600);
+  --separator_common: var(--steel_gray_100);
+  --nth-child-1-color: rgb(215, 201, 59);
+  --nth-child-2-color: rgb(88, 145, 96);
 }
 
 .root[data-dark="true"] {
+  --border-color: var(--dark-color-600);
+  --accent-color: var(--light-color-600);
+  --separator_common: var(--gray_750);
+  --nth-child-1-color: rgba(215, 201, 59, 0.4);
+  --nth-child-2-color: rgba(88, 145, 96, 0.56);
+
   --easy-table-header-background-color: #505050;
   --easy-table-border: black;
   --easy-table-row-border: #a4a4a4;

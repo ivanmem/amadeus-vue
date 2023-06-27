@@ -72,7 +72,6 @@ const { Icon12ErrorCircle } = icons;
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
-  gap: 5px;
   background: var(--vkui--color_background_content);
   color: var(--vkui--color_text_primary);
 }
@@ -82,7 +81,6 @@ const { Icon12ErrorCircle } = icons;
   flex-grow: 1;
   overflow: auto;
   flex-direction: column;
-  gap: 5px;
 }
 
 .a-commands__header {

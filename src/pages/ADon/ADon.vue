@@ -24,8 +24,8 @@ const products = [
 <template>
   <APageContainer class="a-don">
     <AButton
-      data-size="middle"
       data-type="accent"
+      icon="Icon16Link"
       to="https://vk.com/@animecm-don"
     >
       Подробно про статус дона
@@ -33,25 +33,26 @@ const products = [
 
     <div>
       <h3>Каталог товаров</h3>
-      <div class="a-don__products__list">
+      <div class="a-button__left-content-block">
         <AButton
           v-for="product of products"
           :key="product.caption"
           :to="product.to"
-          class="a-button__block"
-          data-size="middle"
+          class="a-button__left-content"
+          data-type="accent"
         >
           {{ product.caption }}
         </AButton>
       </div>
       <div>
-        Цена минимальная, с такой мы ничего не зарабатываем. Всё уходит на поддержку сервера. Даже в минус уходим.
+        Цена минимальная, с такой мы ничего не зарабатываем. Всё уходит на
+        поддержку сервера. Даже в минус уходим.
       </div>
     </div>
 
     <AButton
-      data-size="middle"
       data-type="accent"
+      icon="Icon16Link"
       to="https://vk.com/@animecm-terms-of-use"
     >
       Пользовательское соглашение

@@ -14,35 +14,61 @@ const router = useRouter();
 <template>
   <AButton
     class="a-command-link a-button__block"
+    icon="Icon16Dash"
     @click="router.push('/command/' + props.command.id)"
   >
-    <b>{{ store.getCommandFullName(props.command.id) }}</b>
-    <span class="a-command-link__help">{{ props.command.helpExtended }}</span>
+    <div class="a-command-link__content">
+      <div class="a-command-link__name">
+        {{ store.getCommandFullName(props.command.id) }}
+      </div>
+      <div class="a-command-link__help">{{ props.command.helpExtended }}</div>
+    </div>
   </AButton>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .a-command-link {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-decoration: none;
-  padding: 8px var(--vkui--size_base_padding_horizontal--regular);
+  padding: 8px 12px;
   font-family: var(--vkui--font_family_base);
-  color: var(--vkui--color_text_primary);
   background: none;
   border: none;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   text-align: left;
-  align-content: flex-start;
+  border-radius: 0;
+  min-height: min-content;
+
+  &:nth-child(2n + 1) {
+    color: var(--nth-child-1-color);
+  }
 
   &:nth-child(2n) {
-    background-color: rgba(0, 0, 0, 0.13);
+    color: var(--nth-child-2-color);
+  }
+
+  svg {
+    min-width: 16px;
+    min-height: 16px;
   }
 }
 
+.a-command-link__content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--vkui--color_text_primary);
+}
+
+.a-command-link__name {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
 .a-command-link__help {
-  font-size: var(--vkui--font_subhead--font_size--compact, 13px);
+  font-size: 12px;
   flex-grow: 1;
   max-width: 100%;
   overflow: hidden;
@@ -51,5 +77,6 @@ const router = useRouter();
   line-height: var(--vkui--font_subhead--line_height--compact, 16px);
   font-weight: var(--vkui--font_subhead--font_weight--regular, 400);
   font-family: var(--vkui--font_title1--font_family--regular);
+  opacity: 0.8;
 }
 </style>
