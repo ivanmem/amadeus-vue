@@ -13,6 +13,7 @@ import { isNullOrUndefined } from "../../helpers/isNullOrUndefined";
 import { isNullOrUndefinedOrWhiteSpace } from "../../helpers/isNullOrUndefinedOrWhiteSpace";
 import { icons } from "../../common/consts";
 import { useAppCaption } from "../../hooks/useAppCaption";
+import ALinkify from "../../components/ALinkify/ALinkify.vue";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
@@ -50,9 +51,7 @@ const {
           ><Icon16Attach style="color: #6382ff; zoom: 0.75" /> Описание</span
         >
       </header>
-      <div>
-        {{ command.helpExtended }}
-      </div>
+      <ALinkify tag="div" :value="command.helpExtended" />
     </section>
 
     <section>

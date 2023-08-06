@@ -3,6 +3,7 @@ import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import { useCommands } from "../../store/commands/commands";
 import { computed } from "vue";
+import ALinkify from "../../components/ALinkify/ALinkify.vue";
 
 useAppCaption("События чата");
 const events = computed(() => useCommands().docs.events);
@@ -24,7 +25,10 @@ const events = computed(() => useCommands().docs.events);
       <div v-for="option of events.options">
         <h3>➤ {{ option.alias.join(", ") }}</h3>
         <div class="a-event-block">
-          <div><b>Описание:</b> {{ option.description }}</div>
+          <div>
+            <b>Описание:</b>&nbsp;
+            <ALinkify :value="option.description" />
+          </div>
           <div>
             <b>Пример:</b>
             <pre>{{ option.example }}</pre>
@@ -34,7 +38,7 @@ const events = computed(() => useCommands().docs.events);
           </div>
           <div v-if="option.max != 0">
             <b>Максимальное количество событий с этим типом:</b>
-            {{ option.max }}
+            {{ option.max ?? "♾️" }}
           </div>
         </div>
       </div>
