@@ -1,6 +1,7 @@
 export interface Docs {
   commands: Record<string | number, Command>;
   events: EventsDoc;
+  commandsSchema: CommandsSchema;
 }
 
 export interface Command {
@@ -41,7 +42,7 @@ export interface CommandImplicit {
 }
 
 export interface Argument {
-  type: number;
+  type?: ArgumentType;
   description: null | string;
   help: string;
   indexNotImportant: boolean;
@@ -49,7 +50,7 @@ export interface Argument {
   isHideType: boolean;
   isCheckRequired: boolean;
   newLine: boolean;
-  typeString: TypeString;
+  accessValues?: string[];
 }
 
 export interface ArgumentKeyParam {
@@ -68,46 +69,32 @@ export interface CommandKey {
   params?: ArgumentKeyParam[];
 }
 
-export enum TypeString {
-  Date = "date",
-  Message = "message",
-  Number = "number",
-  Penality = "penality",
-  Period = "period",
-  PurpleNumber = "number[]",
-  String = "string",
-  TypeStringNumber = "number[-]",
-  TypeStringString = "string*",
-  User = "user",
-}
-
 export enum RepeatCommandConversationEnum {
-  None,
-  Yes,
-  No,
+  None = "None",
+  Yes = "Yes",
+  No = "No",
 }
 
 export enum TypeCommandEnum {
-  Unselected,
-  ActionsUsers,
-  Settings,
-  Gaming,
-  Information,
-  Service,
+  Unselected = "",
+  ActionsUsers = "ДействиеСПользователями",
+  Settings = "Настройка",
+  Gaming = "Игровая",
+  Information = "Информация",
+  Service = "Сервисная",
 }
 
 export enum PermissionPrivateMessagesTypeEnum {
-  None,
-  No,
-  Yes,
-  YesImportant,
+  None = "None",
+  No = "No",
+  Yes = "Yes",
+  YesImportant = "YesImportant",
 }
 
 export interface EventsDoc {
   templateArguments: Record<string, string>;
   templateArgumentsDescription: Record<string, string>;
   options: Record<string, EventOption>;
-  keys: Record<string, number>;
 }
 
 export interface EventOption {
@@ -118,3 +105,30 @@ export interface EventOption {
   example: string;
   max: number;
 }
+
+export interface CommandsSchema {
+  penalityValues: Record<PenalityValues, string[]>;
+  typeStringDictionary: Record<ArgumentType, string>;
+  typeDescriptionDictionary: Record<ArgumentType, string>;
+}
+
+export type PenalityValues =
+  | "Disabled"
+  | "None"
+  | "Warned"
+  | "Kicked"
+  | "Banned"
+  | "Delete";
+
+export type ArgumentType =
+  | "String"
+  | "StringArray"
+  | "Number"
+  | "NumberRange"
+  | "NumberOrRange"
+  | "ForwardMessage"
+  | "User"
+  | "Date"
+  | "Period"
+  | "Penality"
+  | "Attachment";

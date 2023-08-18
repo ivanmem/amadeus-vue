@@ -71,7 +71,7 @@ const { Icon24Filter } = icons;
               type="radio"
               :value="index"
               name="fieldsetCommandType"
-              v-model.number="store.filters.type"
+              v-model="store.filters.type"
             />
             {{ type }}
           </label>

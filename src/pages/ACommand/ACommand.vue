@@ -14,6 +14,7 @@ import { isNullOrUndefinedOrWhiteSpace } from "../../helpers/isNullOrUndefinedOr
 import { icons } from "../../common/consts";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import ALinkify from "../../components/ALinkify/ALinkify.vue";
+import ACommandArgument from "./ACommandArgument.vue";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
@@ -65,7 +66,9 @@ const {
 
     <section v-if="command.argumentsListString.length">
       <header>
-        <span><Icon12Articles style="color: #63c23e" /> Аргументы</span>
+        <span :title="command.argumentsListString"
+          ><Icon12Articles style="color: #63c23e" /> Аргументы</span
+        >
         <AButton
           class="a-button__opacity zoom75"
           icon="Icon24InfoCircleOutline"
@@ -76,7 +79,12 @@ const {
         </AButton>
       </header>
       <div>
-        <pre>{{ command.argumentsListString }}</pre>
+        <ACommandArgument
+          v-for="(argument, index) of command.arguments"
+          :key="index"
+          :index="index"
+          :argument="argument"
+        />
       </div>
     </section>
 
@@ -212,8 +220,8 @@ const {
         </AButton>
       </header>
       <div v-if="key.isDon">
-        <AButton icon="Icon24DollarCircleOutline" to="/don"
-          >Требуется статус дона
+        <AButton icon="Icon24DollarCircleOutline" to="/don">
+          Требуется статус дона
         </AButton>
       </div>
       <div>

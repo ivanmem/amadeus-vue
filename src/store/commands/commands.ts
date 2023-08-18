@@ -14,22 +14,14 @@ interface CommandAllVariantsNames {
 }
 
 interface CommandsState {
-  docs: Docs;
+  docs?: Docs;
   filters: FiltersType;
 }
 
 export const useCommands = defineStore("commands", {
   state: (): CommandsState => {
     return {
-      docs: {
-        commands: {},
-        events: {
-          keys: {},
-          options: {},
-          templateArguments: {},
-          templateArgumentsDescription: {},
-        },
-      },
+      docs: undefined,
       filters: { type: TypeCommandEnum.Unselected },
     };
   },
@@ -99,7 +91,7 @@ export const useCommands = defineStore("commands", {
   },
   getters: {
     commands(): Record<string | number, Command> {
-      return this.docs.commands;
+      return this.docs?.commands ?? {};
     },
     commandsLoaded(): boolean {
       return Object.keys(this.commands).length > 0;

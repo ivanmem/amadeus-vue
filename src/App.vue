@@ -23,7 +23,7 @@ const { Icon24Linked } = icons;
 
 <template>
   <div
-    v-if="store.commands"
+    v-if="store.docs"
     :class="currentClasses"
     :data-platform="appStore.platform"
     class="root"

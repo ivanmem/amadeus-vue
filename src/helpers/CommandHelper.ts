@@ -1,9 +1,10 @@
 import {
+  ArgumentType,
   Command,
   PermissionPrivateMessagesTypeEnum,
   TypeCommandEnum,
 } from "../store/commands/types";
-import { FiltersType } from "../store/commands/commands";
+import { FiltersType, useCommands } from "../store/commands/commands";
 
 export const TYPES_COMMAND = {
   [TypeCommandEnum.Unselected]: "-- Не выбрано --",
@@ -75,6 +76,20 @@ class CommandHelper {
 
   static getType(type = TypeCommandEnum.Unselected): string {
     return TYPES_COMMAND[type];
+  }
+
+  static getArgumentType(type: ArgumentType | undefined): string {
+    if (!type) {
+      return "";
+    }
+
+    return useCommands().docs?.commandsSchema.typeStringDictionary[type] ?? "";
+  }
+
+  static getArgumentTypeDescription(type: ArgumentType): string {
+    return (
+      useCommands().docs?.commandsSchema.typeDescriptionDictionary[type] ?? ""
+    );
   }
 
   // Разрешена ли команда в личных сообщениях

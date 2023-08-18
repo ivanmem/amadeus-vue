@@ -6,11 +6,11 @@ import { computed } from "vue";
 import ALinkify from "../../components/ALinkify/ALinkify.vue";
 
 useAppCaption("События чата");
-const events = computed(() => useCommands().docs.events);
+const events = computed(() => useCommands().docs?.events);
 </script>
 
 <template>
-  <APageContainer class="a-events">
+  <APageContainer class="a-events" v-if="events">
     <h1>Шаблонные аргументы для команд</h1>
     <div class="a-event-block">
       <div v-for="(value, key) of events.templateArgumentsDescription">

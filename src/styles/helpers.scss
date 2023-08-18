@@ -39,3 +39,12 @@
   border: 1px solid var(--separator_common);
   border-radius: var(--vkui--size_border_radius_paper--regular);
 }
+
+.a-border-separator:not(:last-child)::after {
+  margin-top: 10px;
+  height: 1px;
+  min-width: 100%;
+  content: "";
+  display: flex;
+  border-bottom: 1px solid var(--border-separator-color);
+}

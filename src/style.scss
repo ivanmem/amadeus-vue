@@ -12,10 +12,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
 
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
 }
 
 html,
@@ -32,10 +32,11 @@ pre {
 html,
 body {
   @extend .overflow-block;
-  font-family: var(--vkui--font_text--font_family--regular);
-  background: var(--vkui--color_background_content);
   width: 100vw;
   height: 100vh;
+  background: var(--vkui--color_background_content);
+  font-family: var(--vkui--font_text--font_family--regular);
+  letter-spacing: 0.2px;
 }
 
 #app {
