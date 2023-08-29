@@ -13,6 +13,7 @@ const props = defineProps<{
   exactActiveDataType?: "accent";
   dataType?: "accent";
   hideContent?: boolean;
+  tag?: string;
 }>();
 
 const emit = defineEmits<{
@@ -20,7 +21,7 @@ const emit = defineEmits<{
 }>();
 
 const isExternalLink = computed(
-  () => typeof props.to === "string" && props.to.startsWith("http")
+  () => typeof props.to === "string" && props.to.startsWith("http"),
 );
 
 const route = useRoute();
@@ -59,10 +60,22 @@ const slots = useSlots();
 const hasContent = computed(() => {
   return !!slots.default && !props.hideContent;
 });
+
+const iconProps = computed(() => ({
+  style: props.iconStyle,
+  class: "a-button__icon",
+  "data-has-content": hasContent.value,
+}));
 </script>
 
 <template>
-  <button :data-type="dataType" class="a-button" @click="onClick">
+  <component
+    :is="tag ?? 'button'"
+    v-ripple
+    :data-type="dataType"
+    class="a-button"
+    @click="onClick"
+  >
     <template v-if="props.icon">
       <component
         :is="
@@ -70,13 +83,12 @@ const hasContent = computed(() => {
             ? icons[props.icon] ?? props.icon
             : props.icon
         "
-        :style="props.iconStyle"
-        :data-has-content="hasContent"
-        class="a-button__icon"
+        v-bind="iconProps"
       />
     </template>
+    <slot name="icon" v-bind="iconProps" />
     <slot v-if="!hideContent" />
-  </button>
+  </component>
 </template>
 
 <style lang="scss"></style>
