@@ -57,7 +57,7 @@ const props = defineProps<{
         <div>Обязательный аргумент</div>
       </div>
       <div
-        v-if="argument.accessValues?.length > 0"
+        v-if="argument.accessValues?.length ?? 0 > 0"
         class="a-command-argument__access-values"
       >
         <div>Разрешённые значения:</div>

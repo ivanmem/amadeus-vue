@@ -81,6 +81,8 @@ const { Icon12ErrorCircle } = icons;
   flex-grow: 1;
   overflow: auto;
   flex-direction: column;
+  gap: 8px;
+  padding-block: 12px;
 }
 
 .a-commands__header {

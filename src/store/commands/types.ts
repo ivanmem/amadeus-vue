@@ -102,8 +102,8 @@ export interface EventOption {
   alias: string[];
   requiredValue: boolean;
   description: string;
-  example: string;
-  max: number;
+  example?: string;
+  max?: number;
 }
 
 export interface CommandsSchema {

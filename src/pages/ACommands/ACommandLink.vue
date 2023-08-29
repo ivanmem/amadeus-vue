@@ -31,7 +31,7 @@ const router = useRouter();
   display: flex;
   flex-direction: row;
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 0 12px;
   font-family: var(--vkui--font_family_base);
   background: none;
   border: none;
@@ -39,7 +39,6 @@ const router = useRouter();
   align-items: center;
   text-align: left;
   border-radius: 0;
-  min-height: min-content;
 
   &:nth-child(2n + 1) {
     color: var(--nth-child-1-color);

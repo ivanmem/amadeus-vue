@@ -15,6 +15,7 @@ import Icon24FlashOutline from "@vkontakte/icons/src/svg/24/flash_outline_24.svg
 import Icon24Chats from "@vkontakte/icons/src/svg/24/chats_24.svg?component";
 import Icon24Users3Outline from "@vkontakte/icons/src/svg/24/users_outline_24.svg?component";
 import Icon24View from "@vkontakte/icons/src/svg/24/view_24.svg?component";
+import Icon24CopyOutline from "@vkontakte/icons/src/svg/24/copy_outline_24.svg?component";
 
 import Icon20FunnelOutline from "@vkontakte/icons/src/svg/20/funnel_outline_20.svg?component";
 
@@ -26,6 +27,7 @@ import Icon16WarningTriangle from "@vkontakte/icons/src/svg/16/warning_triangle_
 import Icon16WrenchOutline from "@vkontakte/icons/src/svg/16/wrench_outline_16.svg?component";
 import Icon16KeyOutline from "@vkontakte/icons/src/svg/16/key_outline_16.svg?component";
 import Icon16Dash from "@vkontakte/icons/src/svg/16/dash_16.svg?component";
+import Icon16CopyOutline from "@vkontakte/icons/src/svg/16/copy_outline_16.svg?component";
 
 import Icon12ErrorCircle from "@vkontakte/icons/src/svg/12/error_circle_12.svg?component";
 import Icon12Tag from "@vkontakte/icons/src/svg/12/tag_12.svg?component";
@@ -54,6 +56,7 @@ export const icons = {
   Icon24Chats,
   Icon24Users3Outline,
   Icon24View,
+  Icon24CopyOutline,
 
   Icon20FunnelOutline,
 
@@ -65,6 +68,7 @@ export const icons = {
   Icon16WrenchOutline,
   Icon16KeyOutline,
   Icon16Dash,
+  Icon16CopyOutline,
 
   Icon12ErrorCircle,
   Icon12Tag,

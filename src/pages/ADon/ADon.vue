@@ -32,19 +32,20 @@ const products = [
     </AButton>
 
     <div>
-      <h3 style="padding: 10px 0;">Каталог товаров</h3>
+      <h3 style="padding: 10px 0">Каталог товаров</h3>
       <div class="a-button__left-content-block">
         <AButton
           v-for="product of products"
           :key="product.caption"
           :to="product.to"
           class="a-button__left-content"
+          icon="Icon16Link"
           data-type="accent"
         >
           {{ product.caption }}
         </AButton>
       </div>
-      <div style="padding: 10px 0;">
+      <div style="padding: 10px 0">
         Цена минимальная, с такой мы ничего не зарабатываем. Всё уходит на
         поддержку сервера. Даже в минус уходим.
       </div>
