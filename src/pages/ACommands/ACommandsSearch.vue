@@ -1,26 +1,12 @@
 <script lang="ts" setup>
-import { ref } from "vue";
-import { autoUpdate, useFloating } from "@floating-ui/vue";
-import { icons } from "../../common/consts.js";
 import { UseCommandSearch } from "./useCommandSearch";
-import AButton from "../../components/AButton/AButton.vue";
-import { TYPES_COMMAND } from "../../helpers/CommandHelper";
+import ACommandsFilters from "./ACommandsFilters.vue";
 
 const props = defineProps<{
   commandSearch: UseCommandSearch;
 }>();
 
-const { search, showFilters, store } = props.commandSearch;
-const reference = ref(null);
-const floating = ref(null);
-const { x, y, strategy } = useFloating(reference, floating, {
-  placement: "bottom-end",
-  middleware: [],
-  whileElementsMounted: autoUpdate,
-  open: showFilters,
-});
-
-const { Icon24Filter } = icons;
+const { search } = props.commandSearch;
 </script>
 
 <template>
@@ -41,41 +27,7 @@ const { Icon24Filter } = icons;
           margin-right: 10px;
         "
       >
-        <AButton
-          class="a-button__opacity"
-          icon="Icon24Filter"
-          @mousedown.stop
-          @click.stop="showFilters = !showFilters"
-        />
-      </div>
-      <div
-        v-if="showFilters"
-        ref="floating"
-        class="a-popup"
-        :style="{
-          position: strategy,
-          top: `${y ?? 0}px`,
-          left: `${x ?? 0}px`,
-        }"
-        @mousedown.stop
-        @touchstart.stop
-        @click.stop
-      >
-        <h5 class="vkuiFormItem__top vkuiSubhead vkuiSubhead--sizeY-none">
-          Тип
-        </h5>
-        <fieldset id="fieldsetCommandType" class="a-fieldset">
-          <label v-for="(type, index) of TYPES_COMMAND">
-            <input
-              :key="type"
-              type="radio"
-              :value="index"
-              name="fieldsetCommandType"
-              v-model="store.filters.type"
-            />
-            {{ type }}
-          </label>
-        </fieldset>
+        <ACommandsFilters />
       </div>
     </div>
     <div

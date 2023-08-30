@@ -10,15 +10,14 @@ export function useCommandSearch() {
   const search = ref("");
   const searchDebounce: Readonly<Ref<string>> = refDebounced(search, 200);
   const searchCommands = computed(() =>
-    store.searchCommand(searchDebounce.value, store.filters)
+    store.searchCommand(searchDebounce.value, store.filters),
   );
   const searchDescriptions = computed(() =>
-    store.searchDescription(searchDebounce.value, store.filters)
+    store.searchDescription(searchDebounce.value, store.filters),
   );
   const commandsOrder = computed(() =>
-    CommandHelper.getFiltered(store.commandsOrder, store.filters)
+    CommandHelper.getFiltered(store.commandsOrder, store.filters),
   );
-  const showFilters = ref(false);
   return {
     store,
     search,
@@ -26,6 +25,5 @@ export function useCommandSearch() {
     searchCommands,
     searchDescriptions,
     commandsOrder,
-    showFilters,
   };
 }

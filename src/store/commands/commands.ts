@@ -6,6 +6,8 @@ import CommandHelper from "../../helpers/CommandHelper";
 
 export interface FiltersType {
   type: TypeCommandEnum;
+  /** @description '' - не фильтровать, hide - показывать только false, only - показывать только true */
+  isOnlyBotCreator: "" | "hide" | "only";
 }
 
 interface CommandAllVariantsNames {
@@ -22,7 +24,7 @@ export const useCommands = defineStore("commands", {
   state: (): CommandsState => {
     return {
       docs: undefined,
-      filters: { type: TypeCommandEnum.Unselected },
+      filters: { type: TypeCommandEnum.Unselected, isOnlyBotCreator: "hide" },
     };
   },
   actions: {
@@ -69,10 +71,10 @@ export const useCommands = defineStore("commands", {
       return CommandHelper.getFiltered(
         (
           this.commandsAllVariantsNames.filter((x) =>
-            x.names.find((name) => name.includes(search))
+            x.names.find((name) => name.includes(search)),
           ) || []
         ).map((x) => this.getCommandById(x.id)),
-        filters
+        filters,
       );
     },
     searchDescription(_search: string, filters?: FiltersType): Command[] {
@@ -83,9 +85,9 @@ export const useCommands = defineStore("commands", {
 
       return CommandHelper.getFiltered(
         this.commandsOrder.filter((x) =>
-          x.helpExtended.toLowerCase().includes(search)
+          x.helpExtended.toLowerCase().includes(search),
         ),
-        filters
+        filters,
       );
     },
   },
@@ -100,7 +102,7 @@ export const useCommands = defineStore("commands", {
     commandsOrder(): Command[] {
       const store = useCommands();
       const commands = Object.keys(store.commands).map(
-        (key) => store.commands[key]
+        (key) => store.commands[key],
       );
       return CommandsService.orderBy(commands);
     },
@@ -110,7 +112,7 @@ export const useCommands = defineStore("commands", {
       return orderBy(
         store.commands,
         [(x) => useCommands().getCommandFullName(x.id)],
-        "asc"
+        "asc",
       );
     },
     // возвращает только основные команды (без их модификаторов)

@@ -16,6 +16,8 @@ import Icon24Chats from "@vkontakte/icons/src/svg/24/chats_24.svg?component";
 import Icon24Users3Outline from "@vkontakte/icons/src/svg/24/users_outline_24.svg?component";
 import Icon24View from "@vkontakte/icons/src/svg/24/view_24.svg?component";
 import Icon24CopyOutline from "@vkontakte/icons/src/svg/24/copy_outline_24.svg?component";
+import Icon24ChevronDown from "@vkontakte/icons/src/svg/24/chevron_down_24.svg?component";
+import Icon24ChevronUp from "@vkontakte/icons/src/svg/24/chevron_up_24.svg?component";
 
 import Icon20FunnelOutline from "@vkontakte/icons/src/svg/20/funnel_outline_20.svg?component";
 
@@ -57,6 +59,8 @@ export const icons = {
   Icon24Users3Outline,
   Icon24View,
   Icon24CopyOutline,
+  Icon24ChevronDown,
+  Icon24ChevronUp,
 
   Icon20FunnelOutline,
 

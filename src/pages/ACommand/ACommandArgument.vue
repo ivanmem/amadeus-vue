@@ -106,7 +106,7 @@ const props = defineProps<{
   &:before {
     display: flex;
     padding-inline: 10px;
-    min-width: 80px;
+    min-width: 70px;
     font-weight: bold;
     font-size: 15px;
     content: attr(data-type) ":";

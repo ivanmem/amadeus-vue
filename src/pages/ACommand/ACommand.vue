@@ -14,6 +14,7 @@ import { isNullOrUndefinedOrWhiteSpace } from "../../helpers/isNullOrUndefinedOr
 import { icons } from "../../common/consts";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import ALinkify from "../../components/ALinkify/ALinkify.vue";
+import ACommandSection from "../ACommands/ACommandSection.vue";
 import ACommandArgument from "./ACommandArgument.vue";
 
 const props = defineProps<ACommandProps>();
@@ -27,7 +28,7 @@ watch(
     // сброс скролла при смене команды
     document.querySelector(".route-view")!.scroll(0, 0);
   },
-  { flush: "post", immediate: true }
+  { flush: "post", immediate: true },
 );
 const {
   Icon12Tag,
@@ -46,14 +47,15 @@ const {
 
 <template>
   <div v-if="command" class="a-command">
-    <section>
-      <header>
+    <ACommandSection default-open>
+      <template #label>
         <span
           ><Icon16Attach style="color: #6382ff; zoom: 0.75" /> Описание</span
         >
-      </header>
+      </template>
+
       <ALinkify tag="div" :value="command.helpExtended" />
-    </section>
+    </ACommandSection>
 
     <section>
       <header>
@@ -64,20 +66,24 @@ const {
       </div>
     </section>
 
-    <section v-if="command.argumentsListString.length">
-      <header>
-        <span :title="command.argumentsListString"
-          ><Icon12Articles style="color: #63c23e" /> Аргументы</span
-        >
+    <ACommandSection v-if="command.argumentsListString.length" disclosure>
+      <template #label>
+        <span :title="command.argumentsListString">
+          <Icon12Articles style="color: #63c23e" /> Аргументы
+        </span>
+      </template>
+      <template #label-right>
         <AButton
           class="a-button__opacity zoom75"
           icon="Icon24InfoCircleOutline"
           target="_blank"
           to="https://vk.com/@animecm-arguments"
+          @click.stop
         >
           Подробнее
         </AButton>
-      </header>
+      </template>
+
       <div>
         <ACommandArgument
           v-for="(argument, index) of command.arguments"
@@ -86,7 +92,43 @@ const {
           :argument="argument"
         />
       </div>
-    </section>
+    </ACommandSection>
+    <!--    <section v-if="command.argumentsListString.length">-->
+    <!--      <Disclosure v-slot="{ open }">-->
+    <!--        <DisclosureButton>-->
+    <!--          <header>-->
+    <!--            <span :title="command.argumentsListString">-->
+    <!--              <Icon12Articles style="color: #63c23e" /> Аргументы-->
+    <!--            </span>-->
+    <!--            <div class="flex items-center">-->
+    <!--              <AButton-->
+    <!--                class="a-button__opacity zoom75"-->
+    <!--                icon="Icon24InfoCircleOutline"-->
+    <!--                target="_blank"-->
+    <!--                to="https://vk.com/@animecm-arguments"-->
+    <!--                @click.stop-->
+    <!--              >-->
+    <!--                Подробнее-->
+    <!--              </AButton>-->
+    <!--              <component-->
+    <!--                :is="open ? Icon24ChevronUp : Icon24ChevronDown"-->
+    <!--                :style="{ width: '20px', height: '20px' }"-->
+    <!--              />-->
+    <!--            </div>-->
+    <!--          </header>-->
+    <!--        </DisclosureButton>-->
+    <!--        <DisclosurePanel>-->
+    <!--          <div>-->
+    <!--            <ACommandArgument-->
+    <!--              v-for="(argument, index) of command.arguments"-->
+    <!--              :key="index"-->
+    <!--              :index="index"-->
+    <!--              :argument="argument"-->
+    <!--            />-->
+    <!--          </div>-->
+    <!--        </DisclosurePanel>-->
+    <!--      </Disclosure>-->
+    <!--    </section>-->
 
     <section>
       <header>
@@ -139,14 +181,15 @@ const {
       </div>
     </section>
 
-    <section
+    <ACommandSection
       v-for="commandImplicit of command.commandImplicit"
       v-if="command.commandImplicit"
       :key="commandImplicit.alias[0]"
     >
-      <header>
+      <template #label>
         <span><Icon12Flash style="color: #962525" /> Неявный модификатор</span>
-      </header>
+      </template>
+
       <div class="a-command">
         <section>
           <header>
@@ -178,7 +221,7 @@ const {
           </div>
         </section>
       </div>
-    </section>
+    </ACommandSection>
 
     <section v-if="relatedCommands">
       <header>
@@ -287,7 +330,7 @@ const {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .a-command {
   display: flex;
   flex-direction: column;
@@ -297,9 +340,11 @@ const {
   background: var(--vkui--color_background_content);
   color: var(--vkui--color--text_primary);
   border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
+  overflow-y: scroll;
 
   .a-command {
     background: inherit;
+    overflow-y: auto;
 
     section {
       background: var(--vkui--color_background_content);
@@ -309,7 +354,7 @@ const {
   section {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     background: var(--vkui--color_background);
     border-radius: 5px;
 
@@ -344,6 +389,9 @@ const {
   }
 
   .command-boolean {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     padding: 5px;
     font-size: var(--vkui--font_headline1--font_size--compact, 15px);
     font-weight: 500;

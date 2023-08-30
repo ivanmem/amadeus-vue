@@ -15,7 +15,6 @@ const {
   store,
   searchDebounce,
   commandsOrder,
-  showFilters,
 } = commandSearch;
 const aCommandSearchRef = ref<any>();
 
@@ -23,12 +22,7 @@ const { Icon12ErrorCircle } = icons;
 </script>
 
 <template>
-  <div
-    class="a-commands vkuiGroup__inner Group__inner"
-    @mousedown="showFilters = false"
-    @wheel="showFilters = false"
-    @touchstart="showFilters = false"
-  >
+  <div class="a-commands vkuiGroup__inner Group__inner">
     <ACommandsSearch ref="aCommandSearchRef" :command-search="commandSearch" />
     <div class="a-commands__commands">
       <template v-if="searchDebounce.length === 0">

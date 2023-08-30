@@ -5,6 +5,7 @@ import {
   TypeCommandEnum,
 } from "../store/commands/types";
 import { FiltersType, useCommands } from "../store/commands/commands";
+import { ASelectOption } from "../components/ASelect/types";
 
 export const TYPES_COMMAND = {
   [TypeCommandEnum.Unselected]: "-- Не выбрано --",
@@ -15,6 +16,24 @@ export const TYPES_COMMAND = {
   [TypeCommandEnum.ActionsUsers]: "Манипулирующие пользователями",
 };
 
+export const TYPES_COMMAND_OPTIONS: ASelectOption[] = Object.keys(
+  TYPES_COMMAND,
+).map((x) => ({
+  value: x,
+  label: TYPES_COMMAND[x as keyof typeof TYPES_COMMAND],
+}));
+export const CREATOR_COMMANDS_OPTIONS: ASelectOption[] = [
+  {
+    value: "" satisfies FiltersType["isOnlyBotCreator"],
+    label: "-- Не Выбрано --",
+  },
+  { value: "hide" satisfies FiltersType["isOnlyBotCreator"], label: "Нет" },
+  {
+    value: "only" satisfies FiltersType["isOnlyBotCreator"],
+    label: "Да",
+  },
+];
+
 class CommandHelper {
   static getFiltered(commands: Command[], filters?: FiltersType) {
     if (!filters) {
@@ -22,6 +41,14 @@ class CommandHelper {
     }
 
     return commands.filter((command) => {
+      if (filters.isOnlyBotCreator === "hide" && command.isOnlyBotCreator) {
+        return false;
+      }
+
+      if (filters.isOnlyBotCreator === "only" && !command.isOnlyBotCreator) {
+        return false;
+      }
+
       if (
         filters.type != TypeCommandEnum.Unselected &&
         command.type != filters.type
@@ -39,7 +66,7 @@ class CommandHelper {
 
   static getLevelText(accessLevel = 0): string {
     return `${this.getNameLevel(accessLevel)} (${this.getSmileNumber(
-      accessLevel
+      accessLevel,
     )} лвл)`;
   }
 
@@ -94,7 +121,7 @@ class CommandHelper {
 
   // Разрешена ли команда в личных сообщениях
   static isAccessLs(
-    privateMessages: PermissionPrivateMessagesTypeEnum = PermissionPrivateMessagesTypeEnum.No
+    privateMessages: PermissionPrivateMessagesTypeEnum = PermissionPrivateMessagesTypeEnum.No,
   ): boolean {
     return (
       privateMessages !== PermissionPrivateMessagesTypeEnum.No &&
