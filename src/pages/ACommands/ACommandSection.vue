@@ -14,7 +14,7 @@ const { Icon24ChevronDown, Icon24ChevronUp } = icons;
       <DisclosureButton>
         <header>
           <slot name="label" />
-          <div class="flex items-center">
+          <div class="flex items-center gap-5">
             <slot name="label-right" />
             <component
               :is="open ? Icon24ChevronUp : Icon24ChevronDown"

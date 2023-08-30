@@ -13,8 +13,9 @@ const router = useRouter();
 
 <template>
   <AButton
-    class="a-command-link a-button__block"
+    class="a-command-link a-button__block group"
     icon="Icon16Dash"
+    icon-class="group-hover:animate-spin"
     @click="router.push('/command/' + props.command.id)"
   >
     <div class="a-command-link__content">

@@ -8,6 +8,7 @@ import { isString } from "lodash";
 const props = defineProps<{
   icon?: VueElement | keyof typeof icons;
   iconStyle?: StyleValue;
+  iconClass?: any;
   to?: RouteLocationRaw;
   target?: string | undefined;
   exactActiveDataType?: "accent";
@@ -63,7 +64,7 @@ const hasContent = computed(() => {
 
 const iconProps = computed(() => ({
   style: props.iconStyle,
-  class: "a-button__icon",
+  class: ["a-button__icon", props.iconClass],
   "data-has-content": hasContent.value,
 }));
 </script>
@@ -73,7 +74,7 @@ const iconProps = computed(() => ({
     :is="tag ?? 'button'"
     v-ripple
     :data-type="dataType"
-    class="a-button"
+    class="a-button hover:animate-pulse"
     @click="onClick"
   >
     <template v-if="props.icon">
