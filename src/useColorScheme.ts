@@ -12,6 +12,14 @@ import {
 import { generateVKUITokensClassName } from "@vkontakte/vkui/dist/helpers/generateVKUITokensClassName";
 import { darkColorScheme } from "./common/consts";
 
+// добавляем dark для поддержки tailwind
+function generateVKUITokensClass(platform: string, appearance: string) {
+  return generateVKUITokensClassName(platform, appearance) + appearance ===
+    "dark"
+    ? " dark"
+    : "";
+}
+
 export function useColorScheme() {
   const currentClasses = ref("");
   const currentPlatform = platform();
@@ -21,7 +29,7 @@ export function useColorScheme() {
     window.matchMedia("(prefers-color-scheme: dark)");
   if (mediaQuery.matches) {
     document!.documentElement.style.setProperty("color-scheme", "dark");
-    currentClasses.value = generateVKUITokensClassName(currentPlatform, "dark");
+    currentClasses.value = generateVKUITokensClass(currentPlatform, "dark");
     darkColorScheme.value = true;
   }
 
@@ -29,7 +37,7 @@ export function useColorScheme() {
   if (currentPlatform !== Platform.VKCOM) {
     document.documentElement.style.setProperty(
       "--navigation-header-padding-right",
-      "100px"
+      "100px",
     );
   }
 
@@ -43,13 +51,13 @@ export function useColorScheme() {
     initialAppearance = resolveAppearance(data as VKBridgeConfigData);
 
     if (initialAppearance) {
-      currentClasses.value = generateVKUITokensClassName(
+      currentClasses.value = generateVKUITokensClass(
         currentPlatform,
-        initialAppearance
+        initialAppearance,
       );
       document!.documentElement.style.setProperty(
         "color-scheme",
-        initialAppearance
+        initialAppearance,
       );
       darkColorScheme.value = initialAppearance === "dark";
     }
