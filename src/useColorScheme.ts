@@ -14,10 +14,8 @@ import { darkColorScheme } from "./common/consts";
 
 // добавляем dark для поддержки tailwind
 function generateVKUITokensClass(platform: string, appearance: string) {
-  return generateVKUITokensClassName(platform, appearance) + appearance ===
-    "dark"
-    ? " dark"
-    : "";
+  const VKUITokens = generateVKUITokensClassName(platform, appearance);
+  return VKUITokens + (appearance == "dark" ? " dark" : "");
 }
 
 export function useColorScheme() {
