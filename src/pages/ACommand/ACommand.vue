@@ -47,26 +47,24 @@ const {
 
 <template>
   <div v-if="command" class="a-command">
-    <ACommandSection default-open>
+    <ACommandSection>
       <template #label>
         <span
           ><Icon16Attach style="color: #6382ff; zoom: 0.75" /> Описание</span
         >
       </template>
 
-      <ALinkify tag="div" :value="command.helpExtended" />
+      <ALinkify :value="command.helpExtended" tag="div" />
     </ACommandSection>
 
-    <section>
-      <header>
+    <ACommandSection>
+      <template #label>
         <span><Icon12Tag style="color: #259693" /> Названия</span>
-      </header>
-      <div>
-        {{ command.alias.join(", ") }}
-      </div>
-    </section>
+      </template>
+      {{ command.alias.join(", ") }}
+    </ACommandSection>
 
-    <ACommandSection v-if="command.argumentsListString.length" disclosure>
+    <ACommandSection v-if="command.argumentsListString.length">
       <template #label>
         <span :title="command.argumentsListString">
           <Icon12Articles style="color: #63c23e" /> Аргументы
@@ -88,86 +86,48 @@ const {
         <ACommandArgument
           v-for="(argument, index) of command.arguments"
           :key="index"
-          :index="index"
           :argument="argument"
+          :index="index"
         />
       </div>
     </ACommandSection>
-    <!--    <section v-if="command.argumentsListString.length">-->
-    <!--      <Disclosure v-slot="{ open }">-->
-    <!--        <DisclosureButton>-->
-    <!--          <header>-->
-    <!--            <span :title="command.argumentsListString">-->
-    <!--              <Icon12Articles style="color: #63c23e" /> Аргументы-->
-    <!--            </span>-->
-    <!--            <div class="flex items-center">-->
-    <!--              <AButton-->
-    <!--                class="a-button__opacity zoom75"-->
-    <!--                icon="Icon24InfoCircleOutline"-->
-    <!--                target="_blank"-->
-    <!--                to="https://vk.com/@animecm-arguments"-->
-    <!--                @click.stop-->
-    <!--              >-->
-    <!--                Подробнее-->
-    <!--              </AButton>-->
-    <!--              <component-->
-    <!--                :is="open ? Icon24ChevronUp : Icon24ChevronDown"-->
-    <!--                :style="{ width: '20px', height: '20px' }"-->
-    <!--              />-->
-    <!--            </div>-->
-    <!--          </header>-->
-    <!--        </DisclosureButton>-->
-    <!--        <DisclosurePanel>-->
-    <!--          <div>-->
-    <!--            <ACommandArgument-->
-    <!--              v-for="(argument, index) of command.arguments"-->
-    <!--              :key="index"-->
-    <!--              :index="index"-->
-    <!--              :argument="argument"-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--        </DisclosurePanel>-->
-    <!--      </Disclosure>-->
-    <!--    </section>-->
 
-    <section>
-      <header>
+    <ACommandSection>
+      <template #label>
         <span>
           <Icon16Pen style="color: #966525; zoom: 0.75" /> Полный пример (со
           всеми аргументами)
         </span>
-      </header>
-      <div>
-        <pre style="user-select: contain">{{ command.templateString }}</pre>
-      </div>
-    </section>
+      </template>
+      <pre style="user-select: contain">{{ command.templateString }}</pre>
+    </ACommandSection>
 
-    <section v-if="command.templateString !== command.minTemplateString">
-      <header>
+    <ACommandSection
+      v-if="command.templateString !== command.minTemplateString"
+    >
+      <template #label>
         <span>
           <Icon16Pen style="color: #966525; zoom: 0.75" /> Минимальный
           пример(только с обязательными аргументами)
         </span>
-      </header>
-      <div>
-        <pre style="user-select: contain">{{ command.minTemplateString }}</pre>
-      </div>
-    </section>
+      </template>
+      <pre style="user-select: contain">{{ command.minTemplateString }}</pre>
+    </ACommandSection>
 
-    <section v-if="command.templateString !== command.minTemplateString">
-      <header>
+    <ACommandSection>
+      <template #label>
         <span>
           <Icon16WarningTriangle style="color: #ff7100; zoom: 0.75" />
           Требуемая роль
         </span>
-      </header>
-      <div>
-        {{ CommandHelper.getLevelText(command.accessLevel) }}
-      </div>
-    </section>
+      </template>
+      {{ CommandHelper.getLevelText(command.accessLevel) }}
+    </ACommandSection>
 
-    <section v-if="command.modifiers">
-      <header>⚡ Модификаторы</header>
+    <ACommandSection v-if="command.modifiers">
+      <template #label>
+        <span> ⚡ Модификаторы </span>
+      </template>
       <div class="a-command__buttons">
         <AButton
           v-for="commandImplicitId of command.modifiers"
@@ -179,7 +139,7 @@ const {
           {{ store.getCommandFullName(commandImplicitId) }}
         </AButton>
       </div>
-    </section>
+    </ACommandSection>
 
     <ACommandSection
       v-for="commandImplicit of command.commandImplicit"
@@ -191,42 +151,36 @@ const {
       </template>
 
       <div class="a-command">
-        <section>
-          <header>
+        <ACommandSection>
+          <template #label>
             <span><Icon12Tag style="color: #259693" /> Названия</span>
-          </header>
-          <div>
-            {{ commandImplicit.alias.join(", ") }}
-          </div>
-        </section>
+          </template>
+          {{ commandImplicit.alias.join(", ") }}
+        </ACommandSection>
 
-        <section>
-          <header>
+        <ACommandSection>
+          <template #label>
             <span>
               <Icon16Attach style="color: #6382ff; zoom: 0.75" />
               Описание
             </span>
-          </header>
-          <div>
-            {{ commandImplicit.helpExtended }}
-          </div>
-        </section>
+          </template>
+          {{ commandImplicit.helpExtended }}
+        </ACommandSection>
 
-        <section>
-          <header>
+        <ACommandSection>
+          <template #label>
             <span><Icon12Question style="color: #969425" /> Использование</span>
-          </header>
-          <div>
-            {{ commandImplicit.help }}
-          </div>
-        </section>
+          </template>
+          {{ commandImplicit.help }}
+        </ACommandSection>
       </div>
     </ACommandSection>
 
-    <section v-if="relatedCommands">
-      <header>
+    <ACommandSection v-if="relatedCommands">
+      <template #label>
         <span><Icon12Cards style="color: #226451" /> Связанные команды</span>
-      </header>
+      </template>
       <div class="a-command__buttons">
         <AButton
           v-for="relatedCommandId of relatedCommands"
@@ -238,10 +192,10 @@ const {
           {{ store.getCommandFullName(relatedCommandId) }}
         </AButton>
       </div>
-    </section>
+    </ACommandSection>
 
-    <section v-for="(key, keyIndex) of command.keys" :key="key.key">
-      <header>
+    <ACommandSection v-for="(key, keyIndex) of command.keys" :key="key.key">
+      <template #label>
         <span>
           <Icon16KeyOutline style="color: #f9c23c; zoom: 0.75" />
           {{ key.header.replace("🔑", "") }}
@@ -252,6 +206,8 @@ const {
             {{ CommandHelper.getLevelText(key.accessLevel) }}
           </template>
         </span>
+      </template>
+      <template #label-right>
         <AButton
           v-if="keyIndex === 0"
           class="a-button__opacity zoom75"
@@ -261,7 +217,7 @@ const {
         >
           Подробнее
         </AButton>
-      </header>
+      </template>
       <div v-if="key.isDon">
         <AButton icon="Icon24DollarCircleOutline" to="/don">
           Требуется статус дона
@@ -285,27 +241,27 @@ const {
           </li>
         </ol>
       </div>
-    </section>
+    </ACommandSection>
 
-    <section>
-      <header>
+    <ACommandSection>
+      <template #label>
         <span>
           <Icon16WrenchOutline style="color: #83668c; zoom: 0.75" /> Тип
         </span>
-      </header>
-      <div>
-        {{ CommandHelper.getType(command.type) }}
-      </div>
-    </section>
+      </template>
+      {{ CommandHelper.getType(command.type) }}
+    </ACommandSection>
 
-    <section v-if="command.repeat === RepeatCommandConversationEnum.Yes">
+    <ACommandSection
+      v-if="command.repeat === RepeatCommandConversationEnum.Yes"
+    >
       <div class="command-boolean">
         🆘 Повторяет ответ в беседе, если была успешно выполнена в личных
         сообщениях.
       </div>
-    </section>
+    </ACommandSection>
 
-    <section v-if="CommandHelper.isAccessLs(command.privateMessages)">
+    <ACommandSection v-if="CommandHelper.isAccessLs(command.privateMessages)">
       <div class="command-boolean">
         <Icon12View style="color: #c0c1ff" />
         Разрешена всем ролям в личных сообщениях бота
@@ -316,17 +272,17 @@ const {
             : ""
         }}
       </div>
-    </section>
+    </ACommandSection>
 
-    <section v-if="command.notPrivateMessages">
+    <ACommandSection v-if="command.notPrivateMessages">
       <div class="command-boolean">🚦 Можно использовать только в беседе.</div>
-    </section>
+    </ACommandSection>
 
-    <section v-if="command.onlyPrivateMessages">
+    <ACommandSection v-if="command.onlyPrivateMessages">
       <div class="command-boolean">
         🚦 Можно использовать только в личных сообщениях бота.
       </div>
-    </section>
+    </ACommandSection>
   </div>
 </template>
 
@@ -377,22 +333,19 @@ const {
       }
     }
 
-    div {
-      padding: 5px;
-      color: inherit;
-    }
-
     pre {
-      padding: 5px;
       font-family: inherit;
     }
+  }
+
+  .a-command__section-content {
+    padding: 5px;
   }
 
   .command-boolean {
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 5px;
     font-size: var(--vkui--font_headline1--font_size--compact, 15px);
     font-weight: 500;
     line-height: var(--vkui--font_headline1--line_height--compact, 20px);

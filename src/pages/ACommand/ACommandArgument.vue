@@ -33,9 +33,9 @@ const props = defineProps<{
       </div>
       <div
         v-if="argument.type"
-        title="Тип аргумента"
-        class="a-command-argument__type"
         :data-type="CommandHelper.getArgumentType(argument.type)"
+        class="a-command-argument__type"
+        title="Тип аргумента"
       >
         <!--        <span><b>{{ CommandHelper.getArgumentType(argument.type) }}: </b></span>-->
         <span style="opacity: 0.8">{{
@@ -76,7 +76,7 @@ const props = defineProps<{
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .a-command-argument__access-values {
