@@ -2,6 +2,7 @@
 import { useMounted } from "@vueuse/core";
 import FixedTeleport from "../../components/FixedTeleport.vue";
 import { Command } from "../../store/commands/types";
+import { icons } from "../../common/consts";
 
 const props = defineProps<{
   command?: Command;
@@ -10,32 +11,22 @@ const props = defineProps<{
 }>();
 
 const isMounted = useMounted();
+const { Icon24ArticleBoxOutline } = icons;
 </script>
 <template>
   <FixedTeleport v-if="isMounted" to="#navigation-caption">
     <nav
       aria-label="Breadcrumb"
-      class="flex px-1 text-gray-700 border border-gray-200 rounded-lg bg-gray-100 dark:bg-gray-950 dark:border-gray-700 dark:text-gray-100"
+      class="flex px-1 mr-1 mb-1 text-gray-700 border border-gray-200 rounded-lg bg-gray-100 dark:bg-gray-950 dark:border-gray-700 dark:text-gray-100"
       style="height: 36px"
     >
-      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+      <ol class="inline-flex items-center space-x-1">
         <li class="inline-flex items-center">
           <a
             class="inline-flex items-center text-sm font-medium hover:text-blue-600 dark:hover:text-amber-200"
             href="#"
           >
-            <svg
-              aria-hidden="true"
-              class="w-3 h-3 mr-2.5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"
-              />
-            </svg>
-            Команды
+           <Icon24ArticleBoxOutline width="20" height="20"/>
           </a>
         </li>
         <li>
