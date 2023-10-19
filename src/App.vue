@@ -25,13 +25,15 @@ const { Icon24Linked } = icons;
   <div
     v-if="store.docs"
     :class="currentClasses"
+    :data-dark="darkColorScheme"
     :data-platform="appStore.platform"
     class="root"
-    :data-dark="darkColorScheme"
   >
     <div class="navigation-header">
-      <div class="overflow-block navigation-caption">
-        {{ appStore.caption }}
+      <div id="navigation-caption" class="overflow-block navigation-caption">
+        <template v-if="appStore.caption.length">
+          {{ appStore.caption }}
+        </template>
       </div>
       <AButton
         v-if="route.path !== '/'"
@@ -53,44 +55,44 @@ const { Icon24Linked } = icons;
     <div class="navigation">
       <div class="navigation-bottom-buttons">
         <AButton
+          :hide-content="!appStore.isVkCom"
           icon="Icon24ArticleBoxOutline"
           to="/"
-          :hide-content="!appStore.isVkCom"
         >
           <span> Команды </span>
         </AButton>
         <AButton
+          :hide-content="!appStore.isVkCom"
           icon="Icon24CupOutline"
           to="/top"
-          :hide-content="!appStore.isVkCom"
         >
           <span>Топы</span>
         </AButton>
         <AButton
+          :hide-content="!appStore.isVkCom"
           icon="Icon24FlashOutline"
           to="/events"
-          :hide-content="!appStore.isVkCom"
         >
           <span>События чата</span>
         </AButton>
         <AButton
+          :hide-content="!appStore.isVkCom"
           icon="Icon24CrownOutline"
           to="/roles"
-          :hide-content="!appStore.isVkCom"
         >
           <span> О ролях </span>
         </AButton>
         <AButton
+          :hide-content="!appStore.isVkCom"
           icon="Icon24DollarCircleOutline"
           to="/don"
-          :hide-content="!appStore.isVkCom"
         >
           <span>Дон статус</span>
         </AButton>
         <AButton
+          :hide-content="!appStore.isVkCom"
           icon="Icon24LightbulbStarOutline"
           to="/about"
-          :hide-content="!appStore.isVkCom"
         >
           <span> О приложении </span>
         </AButton>

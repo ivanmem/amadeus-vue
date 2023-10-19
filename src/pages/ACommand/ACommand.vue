@@ -16,12 +16,13 @@ import { useAppCaption } from "../../hooks/useAppCaption";
 import ALinkify from "../../components/ALinkify/ALinkify.vue";
 import ACommandSection from "../ACommands/ACommandSection.vue";
 import ACommandArgument from "./ACommandArgument.vue";
+import ACommandBreadcrumbs from "./ACommandBreadcrumbs.vue";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
-const { nameCommand, command, aliases, store, relatedCommands } =
+const { nameCommand, command, parentCommand, aliases, store, relatedCommands } =
   useCommandInfo(props);
-useAppCaption(nameCommand);
+useAppCaption("");
 
 watch(
   () => props.id,
@@ -47,245 +48,258 @@ const {
 </script>
 
 <template>
-  <div v-if="command" class="a-command">
-    <ACommandSection>
-      <template #label>
-        <span>
-          <Icon16Attach style="color: #6382ff; zoom: 0.75" /> Описание
-        </span>
-      </template>
+  <div class="a-command">
+    <ACommandBreadcrumbs
+      :command="command"
+      :name-command="nameCommand"
+      :parent-command="parentCommand"
+    />
+    <template v-if="command">
+      <ACommandSection>
+        <template #label>
+          <span>
+            <Icon16Attach style="color: #6382ff; zoom: 0.75" /> Описание
+          </span>
+        </template>
 
-      <ALinkify :value="command.helpExtended" tag="div" />
-    </ACommandSection>
+        <ALinkify :value="command.helpExtended" tag="div" />
+      </ACommandSection>
 
-    <ACommandSection>
-      <template #label>
-        <span><Icon12Tag style="color: #259693" /> Названия </span>
-      </template>
-      <ol v-for="(alias, index) of aliases" :key="alias">
-        <li>{{ index + 1 }}. {{ alias }}</li>
-      </ol>
-    </ACommandSection>
-
-    <ACommandSection v-if="command.argumentsListString.length">
-      <template #label>
-        <span :title="command.argumentsListString">
-          <Icon12Articles style="color: #63c23e" /> Аргументы
-        </span>
-      </template>
-      <template #label-right>
-        <AButton
-          class="a-button__opacity zoom75"
-          icon="Icon24InfoCircleOutline"
-          target="_blank"
-          to="https://vk.com/@animecm-arguments"
-          @click.stop
-        >
-          Подробнее
-        </AButton>
-      </template>
-
-      <div>
-        <ACommandArgument
-          v-for="(argument, index) of command.arguments"
-          :key="index"
-          :argument="argument"
-          :index="index"
-        />
-      </div>
-    </ACommandSection>
-
-    <ACommandSection>
-      <template #label>
-        <span>
-          <Icon16Pen style="color: #966525; zoom: 0.75" /> Полный пример (со
-          всеми аргументами)
-        </span>
-      </template>
-      <pre style="user-select: contain">{{ command.templateString }}</pre>
-    </ACommandSection>
-
-    <ACommandSection
-      v-if="command.templateString !== command.minTemplateString"
-    >
-      <template #label>
-        <span>
-          <Icon16Pen style="color: #966525; zoom: 0.75" /> Минимальный
-          пример(только с обязательными аргументами)
-        </span>
-      </template>
-      <pre style="user-select: contain">{{ command.minTemplateString }}</pre>
-    </ACommandSection>
-
-    <ACommandSection>
-      <template #label>
-        <span>
-          <Icon16WarningTriangle style="color: #ff7100; zoom: 0.75" />
-          Требуемая роль
-        </span>
-      </template>
-      {{ CommandHelper.getLevelText(command.accessLevel) }}
-    </ACommandSection>
-
-    <ACommandSection v-if="command.modifiers">
-      <template #label>
-        <span> ⚡ Модификаторы </span>
-      </template>
-      <div class="a-command__buttons">
-        <AButton
-          v-for="commandImplicitId of command.modifiers"
-          :key="commandImplicitId"
-          data-size="middle"
-          data-type="accent"
-          @click="router.push('/command/' + commandImplicitId)"
-        >
-          {{ store.getCommandFullName(commandImplicitId) }}
-        </AButton>
-      </div>
-    </ACommandSection>
-
-    <ACommandSection
-      v-for="commandImplicit of command.commandImplicit"
-      v-if="command.commandImplicit"
-      :key="commandImplicit.alias[0]"
-    >
-      <template #label>
-        <span><Icon12Flash style="color: #962525" /> Неявный модификатор</span>
-      </template>
-
-      <div class="a-command">
-        <ACommandSection>
-          <template #label>
-            <span><Icon12Tag style="color: #259693" /> Названия</span>
-          </template>
-          {{ commandImplicit.alias.join(", ") }}
-        </ACommandSection>
-
-        <ACommandSection>
-          <template #label>
-            <span>
-              <Icon16Attach style="color: #6382ff; zoom: 0.75" />
-              Описание
-            </span>
-          </template>
-          {{ commandImplicit.helpExtended }}
-        </ACommandSection>
-
-        <ACommandSection>
-          <template #label>
-            <span><Icon12Question style="color: #969425" /> Использование</span>
-          </template>
-          {{ commandImplicit.help }}
-        </ACommandSection>
-      </div>
-    </ACommandSection>
-
-    <ACommandSection v-if="relatedCommands">
-      <template #label>
-        <span><Icon12Cards style="color: #226451" /> Связанные команды</span>
-      </template>
-      <div class="a-command__buttons">
-        <AButton
-          v-for="relatedCommandId of relatedCommands"
-          :key="relatedCommandId"
-          data-size="middle"
-          data-type="accent"
-          @click="router.push('/command/' + relatedCommandId)"
-        >
-          {{ store.getCommandFullName(relatedCommandId) }}
-        </AButton>
-      </div>
-    </ACommandSection>
-
-    <ACommandSection v-for="(key, keyIndex) of command.keys" :key="key.key">
-      <template #label>
-        <span>
-          <Icon16KeyOutline style="color: #f9c23c; zoom: 0.75" />
-          {{ key.header.replace("🔑", "") }}
-          <template v-if="!isNullOrUndefined(key.accessLevel)">
-            &nbsp;|
-            <Icon16WarningTriangle style="color: #962590; zoom: 0.75" />
-            Требуемая роль:
-            {{ CommandHelper.getLevelText(key.accessLevel) }}
-          </template>
-        </span>
-      </template>
-      <template #label-right>
-        <AButton
-          v-if="keyIndex === 0"
-          class="a-button__opacity zoom75"
-          icon="Icon24InfoCircleOutline"
-          target="_blank"
-          to="https://vk.com/@animecm-man?anchor=klyuchi"
-        >
-          Подробнее
-        </AButton>
-      </template>
-      <div v-if="key.isDon">
-        <AButton icon="Icon24DollarCircleOutline" to="/don">
-          Требуется статус дона
-        </AButton>
-      </div>
-      <div>
-        {{ key.description }}
-      </div>
-
-      <div v-if="key.params" style="font-size: 13px">
-        <b class="">Аргументы:</b>
-        <ol style="margin: 0">
-          <li v-for="arg of key.params">
-            <div v-if="!isNullOrUndefinedOrWhiteSpace(arg.description)">
-              <ul style="padding: 0">
-                {{
-                  arg.description
-                }}
-              </ul>
-            </div>
-          </li>
+      <ACommandSection>
+        <template #label>
+          <span><Icon12Tag style="color: #259693" /> Названия </span>
+        </template>
+        <ol v-for="(alias, index) of aliases" :key="alias">
+          <li>{{ index + 1 }}. {{ alias }}</li>
         </ol>
-      </div>
-    </ACommandSection>
+      </ACommandSection>
 
-    <ACommandSection>
-      <template #label>
-        <span>
-          <Icon16WrenchOutline style="color: #83668c; zoom: 0.75" /> Тип
-        </span>
-      </template>
-      {{ CommandHelper.getType(command.type) }}
-    </ACommandSection>
+      <ACommandSection v-if="command.argumentsListString.length">
+        <template #label>
+          <span :title="command.argumentsListString">
+            <Icon12Articles style="color: #63c23e" /> Аргументы
+          </span>
+        </template>
+        <template #label-right>
+          <AButton
+            class="a-button__opacity zoom75"
+            icon="Icon24InfoCircleOutline"
+            target="_blank"
+            to="https://vk.com/@animecm-arguments"
+            @click.stop
+          >
+            Подробнее
+          </AButton>
+        </template>
 
-    <ACommandSection
-      v-if="command.repeat === RepeatCommandConversationEnum.Yes"
-    >
-      <div class="command-boolean">
-        🆘 Повторяет ответ в беседе, если была успешно выполнена в личных
-        сообщениях.
-      </div>
-    </ACommandSection>
+        <div>
+          <ACommandArgument
+            v-for="(argument, index) of command.arguments"
+            :key="index"
+            :argument="argument"
+            :index="index"
+          />
+        </div>
+      </ACommandSection>
 
-    <ACommandSection v-if="CommandHelper.isAccessLs(command.privateMessages)">
-      <div class="command-boolean">
-        <Icon12View style="color: #c0c1ff" />
-        Разрешена всем ролям в личных сообщениях бота
-        {{
-          command.privateMessages ===
-          PermissionPrivateMessagesTypeEnum.YesImportant
-            ? " (принудительно)"
-            : ""
-        }}
-      </div>
-    </ACommandSection>
+      <ACommandSection>
+        <template #label>
+          <span>
+            <Icon16Pen style="color: #966525; zoom: 0.75" /> Полный пример (со
+            всеми аргументами)
+          </span>
+        </template>
+        <pre style="user-select: contain">{{ command.templateString }}</pre>
+      </ACommandSection>
 
-    <ACommandSection v-if="command.notPrivateMessages">
-      <div class="command-boolean">🚦 Можно использовать только в беседе.</div>
-    </ACommandSection>
+      <ACommandSection
+        v-if="command.templateString !== command.minTemplateString"
+      >
+        <template #label>
+          <span>
+            <Icon16Pen style="color: #966525; zoom: 0.75" /> Минимальный
+            пример(только с обязательными аргументами)
+          </span>
+        </template>
+        <pre style="user-select: contain">{{ command.minTemplateString }}</pre>
+      </ACommandSection>
 
-    <ACommandSection v-if="command.onlyPrivateMessages">
-      <div class="command-boolean">
-        🚦 Можно использовать только в личных сообщениях бота.
-      </div>
-    </ACommandSection>
+      <ACommandSection>
+        <template #label>
+          <span>
+            <Icon16WarningTriangle style="color: #ff7100; zoom: 0.75" />
+            Требуемая роль
+          </span>
+        </template>
+        {{ CommandHelper.getLevelText(command.accessLevel) }}
+      </ACommandSection>
+
+      <ACommandSection v-if="command.modifiers">
+        <template #label>
+          <span> ⚡ Модификаторы </span>
+        </template>
+        <div class="a-command__buttons">
+          <AButton
+            v-for="commandImplicitId of command.modifiers"
+            :key="commandImplicitId"
+            data-size="middle"
+            data-type="accent"
+            @click="router.push('/command/' + commandImplicitId)"
+          >
+            {{ store.getCommandFullName(commandImplicitId) }}
+          </AButton>
+        </div>
+      </ACommandSection>
+
+      <ACommandSection
+        v-for="commandImplicit of command.commandImplicit"
+        v-if="command.commandImplicit"
+        :key="commandImplicit.alias[0]"
+      >
+        <template #label>
+          <span
+            ><Icon12Flash style="color: #962525" /> Неявный модификатор</span
+          >
+        </template>
+
+        <div class="a-command">
+          <ACommandSection>
+            <template #label>
+              <span><Icon12Tag style="color: #259693" /> Названия</span>
+            </template>
+            {{ commandImplicit.alias.join(", ") }}
+          </ACommandSection>
+
+          <ACommandSection>
+            <template #label>
+              <span>
+                <Icon16Attach style="color: #6382ff; zoom: 0.75" />
+                Описание
+              </span>
+            </template>
+            {{ commandImplicit.helpExtended }}
+          </ACommandSection>
+
+          <ACommandSection>
+            <template #label>
+              <span
+                ><Icon12Question style="color: #969425" /> Использование</span
+              >
+            </template>
+            {{ commandImplicit.help }}
+          </ACommandSection>
+        </div>
+      </ACommandSection>
+
+      <ACommandSection v-if="relatedCommands">
+        <template #label>
+          <span><Icon12Cards style="color: #226451" /> Связанные команды</span>
+        </template>
+        <div class="a-command__buttons">
+          <AButton
+            v-for="relatedCommandId of relatedCommands"
+            :key="relatedCommandId"
+            data-size="middle"
+            data-type="accent"
+            @click="router.push('/command/' + relatedCommandId)"
+          >
+            {{ store.getCommandFullName(relatedCommandId) }}
+          </AButton>
+        </div>
+      </ACommandSection>
+
+      <ACommandSection v-for="(key, keyIndex) of command.keys" :key="key.key">
+        <template #label>
+          <span>
+            <Icon16KeyOutline style="color: #f9c23c; zoom: 0.75" />
+            {{ key.header.replace("🔑", "") }}
+            <template v-if="!isNullOrUndefined(key.accessLevel)">
+              &nbsp;|
+              <Icon16WarningTriangle style="color: #962590; zoom: 0.75" />
+              Требуемая роль:
+              {{ CommandHelper.getLevelText(key.accessLevel) }}
+            </template>
+          </span>
+        </template>
+        <template #label-right>
+          <AButton
+            v-if="keyIndex === 0"
+            class="a-button__opacity zoom75"
+            icon="Icon24InfoCircleOutline"
+            target="_blank"
+            to="https://vk.com/@animecm-man?anchor=klyuchi"
+          >
+            Подробнее
+          </AButton>
+        </template>
+        <div v-if="key.isDon">
+          <AButton icon="Icon24DollarCircleOutline" to="/don">
+            Требуется статус дона
+          </AButton>
+        </div>
+        <div>
+          {{ key.description }}
+        </div>
+
+        <div v-if="key.params" style="font-size: 13px">
+          <b class="">Аргументы:</b>
+          <ol style="margin: 0">
+            <li v-for="arg of key.params">
+              <div v-if="!isNullOrUndefinedOrWhiteSpace(arg.description)">
+                <ul style="padding: 0">
+                  {{
+                    arg.description
+                  }}
+                </ul>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </ACommandSection>
+
+      <ACommandSection>
+        <template #label>
+          <span>
+            <Icon16WrenchOutline style="color: #83668c; zoom: 0.75" /> Тип
+          </span>
+        </template>
+        {{ CommandHelper.getType(command.type) }}
+      </ACommandSection>
+
+      <ACommandSection
+        v-if="command.repeat === RepeatCommandConversationEnum.Yes"
+      >
+        <div class="command-boolean">
+          🆘 Повторяет ответ в беседе, если была успешно выполнена в личных
+          сообщениях.
+        </div>
+      </ACommandSection>
+
+      <ACommandSection v-if="CommandHelper.isAccessLs(command.privateMessages)">
+        <div class="command-boolean">
+          <Icon12View style="color: #c0c1ff" />
+          Разрешена всем ролям в личных сообщениях бота
+          {{
+            command.privateMessages ===
+            PermissionPrivateMessagesTypeEnum.YesImportant
+              ? " (принудительно)"
+              : ""
+          }}
+        </div>
+      </ACommandSection>
+
+      <ACommandSection v-if="command.notPrivateMessages">
+        <div class="command-boolean">
+          🚦 Можно использовать только в беседе.
+        </div>
+      </ACommandSection>
+
+      <ACommandSection v-if="command.onlyPrivateMessages">
+        <div class="command-boolean">
+          🚦 Можно использовать только в личных сообщениях бота.
+        </div>
+      </ACommandSection>
+    </template>
   </div>
 </template>
 
