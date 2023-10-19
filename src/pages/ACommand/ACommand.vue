@@ -19,7 +19,8 @@ import ACommandArgument from "./ACommandArgument.vue";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
-const { nameCommand, command, store, relatedCommands } = useCommandInfo(props);
+const { nameCommand, command, aliases, store, relatedCommands } =
+  useCommandInfo(props);
 useAppCaption(nameCommand);
 
 watch(
@@ -49,9 +50,9 @@ const {
   <div v-if="command" class="a-command">
     <ACommandSection>
       <template #label>
-        <span
-          ><Icon16Attach style="color: #6382ff; zoom: 0.75" /> Описание</span
-        >
+        <span>
+          <Icon16Attach style="color: #6382ff; zoom: 0.75" /> Описание
+        </span>
       </template>
 
       <ALinkify :value="command.helpExtended" tag="div" />
@@ -59,9 +60,11 @@ const {
 
     <ACommandSection>
       <template #label>
-        <span><Icon12Tag style="color: #259693" /> Названия</span>
+        <span><Icon12Tag style="color: #259693" /> Названия </span>
       </template>
-      {{ command.alias.join(", ") }}
+      <ol v-for="(alias, index) of aliases" :key="alias">
+        <li>{{ index + 1 }}. {{ alias }}</li>
+      </ol>
     </ACommandSection>
 
     <ACommandSection v-if="command.argumentsListString.length">
