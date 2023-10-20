@@ -17,9 +17,11 @@ import ALinkify from "../../components/ALinkify/ALinkify.vue";
 import ACommandSection from "../ACommands/ACommandSection.vue";
 import ACommandArgument from "./ACommandArgument.vue";
 import ACommandBreadcrumbs from "./ACommandBreadcrumbs.vue";
+import { useApp } from "../../store/app/app";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
+const appStore = useApp();
 const { nameCommand, command, parentCommand, aliases, store, relatedCommands } =
   useCommandInfo(props);
 useAppCaption("");
@@ -105,8 +107,8 @@ const {
       <ACommandSection>
         <template #label>
           <span>
-            <Icon16Pen style="color: #966525; zoom: 0.75" /> Полный пример (со
-            всеми аргументами)
+            <Icon16Pen style="color: #966525; zoom: 0.75" /> Полный пример
+            <span v-if="appStore.isVkCom">(со всеми аргументами)</span>
           </span>
         </template>
         <pre style="user-select: contain">{{ command.templateString }}</pre>
@@ -117,8 +119,10 @@ const {
       >
         <template #label>
           <span>
-            <Icon16Pen style="color: #966525; zoom: 0.75" /> Минимальный
-            пример(только с обязательными аргументами)
+            <Icon16Pen style="color: #966525; zoom: 0.75" /> Минимальный пример
+            <span v-if="appStore.isVkCom">
+              (только с обязательными аргументами)
+            </span>
           </span>
         </template>
         <pre style="user-select: contain">{{ command.minTemplateString }}</pre>
@@ -233,7 +237,11 @@ const {
           </AButton>
         </template>
         <div v-if="key.isDon">
-          <AButton icon="Icon24DollarCircleOutline" to="/don">
+          <AButton
+            class="bg-transparent pl-0 font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            icon="Icon24DollarCircleOutline"
+            to="/don"
+          >
             Требуется статус дона
           </AButton>
         </div>

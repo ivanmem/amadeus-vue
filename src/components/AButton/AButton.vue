@@ -3,19 +3,25 @@ import { computed, StyleValue, useSlots, VueElement } from "vue";
 import { icons } from "../../common/consts";
 import { RouteLocationRaw, useRoute } from "vue-router";
 import { router } from "../../router";
-import { isString } from "lodash";
 
-const props = defineProps<{
-  icon?: VueElement | keyof typeof icons;
-  iconStyle?: StyleValue;
-  iconClass?: any;
-  to?: RouteLocationRaw;
-  target?: string | undefined;
-  exactActiveDataType?: "accent";
-  dataType?: "accent";
-  hideContent?: boolean;
-  tag?: string;
-}>();
+const props = withDefaults(
+  defineProps<{
+    class?: string;
+    defaultClass?: string;
+    icon?: VueElement | keyof typeof icons;
+    iconStyle?: StyleValue;
+    iconClass?: any;
+    to?: RouteLocationRaw;
+    target?: string | undefined;
+    exactActiveDataType?: "accent";
+    dataType?: "accent";
+    hideContent?: boolean;
+    tag?: string;
+  }>(),
+  {
+    defaultClass: "a-button",
+  },
+);
 
 const emit = defineEmits<{
   click: [e: MouseEvent];
@@ -31,7 +37,7 @@ const onClick = computed(() => {
   return (e: MouseEvent) => {
     emit("click", e);
     if (props.to !== undefined) {
-      if (isString(props.to) && isExternalLink.value) {
+      if (typeof props.to === "string" && isExternalLink.value) {
         window.open(props.to, props.target);
       } else {
         router.push(props.to);
@@ -73,8 +79,8 @@ const iconProps = computed(() => ({
   <component
     :is="tag ?? 'button'"
     v-ripple
+    :class="[props.defaultClass, props.class]"
     :data-type="dataType"
-    class="a-button hover:animate-pulse"
     @click="onClick"
   >
     <template v-if="props.icon">

@@ -37,10 +37,9 @@ const props = defineProps<{
         class="a-command-argument__type"
         title="Тип аргумента"
       >
-        <!--        <span><b>{{ CommandHelper.getArgumentType(argument.type) }}: </b></span>-->
-        <span style="opacity: 0.8">{{
-          CommandHelper.getArgumentTypeDescription(argument.type)
-        }}</span>
+        <span>
+          {{ CommandHelper.getArgumentTypeDescription(argument.type) }}
+        </span>
       </div>
       <div
         v-if="argument.newLine"
@@ -140,7 +139,7 @@ const props = defineProps<{
   --a-command-argument__label__color: rgb(44, 45, 46);
 
   --a-command-argument__type__background-color: #2900ff1c;
-  --a-command-argument__type__color: #006274;
+  --a-command-argument__type__color: #006fff;
 }
 
 .root[data-dark="true"] {
