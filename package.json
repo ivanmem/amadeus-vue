@@ -8,7 +8,8 @@
     "dev-host": "vite --host",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && vk-miniapps-deploy"
+    "deploy": "npm run build && vk-miniapps-deploy",
+    "dev-tunnel": "concurrently \"npm run dev\" \"vk-tunnel --insecure=1 --http-protocol=https --ws-protocol=wss --host=localhost --port=5173 --timeout=10000\""
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
@@ -27,13 +28,15 @@
     "vkontakte-api": "3.0.3",
     "vue": "3.3.4",
     "vue-router": "^4.2.4",
-    "vue3-easy-data-table": "^1.5.47"
+    "vue3-easy-data-table": "^1.5.47",
+    "vue-virtual-scroller": "2.0.0-beta.8"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.197",
     "@vitejs/plugin-basic-ssl": "1.0.1",
     "@vitejs/plugin-vue": "^4.3.3",
     "@vkontakte/vk-miniapps-deploy": "^0.1.6",
+    "concurrently": "8.2.2",
     "autoprefixer": "^10.4.15",
     "postcss": "^8.4.29",
     "prettier": "^3.0.2",

@@ -18,6 +18,12 @@ export function useCommandSearch() {
   const commandsOrder = computed(() =>
     CommandHelper.getFiltered(store.commandsOrder, store.filters),
   );
+  const searchType = ref<"name" | "description">("name");
+  const searchTypes: Array<{ value: typeof searchType.value; label: string }> =
+    [
+      { value: "name", label: "По названию" },
+      { value: "description", label: "По описанию" },
+    ];
   return {
     store,
     search,
@@ -25,5 +31,7 @@ export function useCommandSearch() {
     searchCommands,
     searchDescriptions,
     commandsOrder,
+    searchType,
+    searchTypes,
   };
 }

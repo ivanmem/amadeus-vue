@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import ACommandLink from "./ACommandLink.vue";
 import { useCommandSearch } from "./useCommandSearch";
-import { icons } from "../../common/consts";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import ACommandsSearch from "./ACommandsSearch.vue";
 import { ref } from "vue";
+import { DynamicScroller, DynamicScrollerItem } from "vue-virtual-scroller";
 
 useAppCaption("Команды");
 
@@ -12,49 +12,76 @@ const commandSearch = useCommandSearch();
 const {
   searchDescriptions,
   searchCommands,
-  store,
   searchDebounce,
   commandsOrder,
+  searchType,
 } = commandSearch;
 const aCommandSearchRef = ref<any>();
-
-const { Icon12ErrorCircle } = icons;
 </script>
 
 <template>
   <div class="a-commands vkuiGroup__inner Group__inner">
     <ACommandsSearch ref="aCommandSearchRef" :command-search="commandSearch" />
-    <div class="a-commands__commands">
-      <template v-if="searchDebounce.length === 0">
-        <ACommandLink
-          v-for="command in commandsOrder"
-          :key="command.id"
-          :command="command"
-        />
+
+    <DynamicScroller
+      v-if="searchDebounce.length === 0"
+      :items="commandsOrder"
+      :min-item-size="36 + 8"
+      class="a-commands__commands"
+      key-field="id"
+    >
+      <template v-slot="{ item, index, active }">
+        <DynamicScrollerItem
+          :active="active"
+          :data-index="index"
+          :item="item"
+          style="padding-bottom: 8px"
+        >
+          <ACommandLink :key="item.id" :command="item" />
+        </DynamicScrollerItem>
       </template>
-      <template v-if="searchCommands.length">
-        <div class="a-commands__header">
-          <Icon12ErrorCircle />
-          Совпадение по названию:
-        </div>
-        <ACommandLink
-          v-for="command in searchCommands"
-          :key="command.id"
-          :command="command"
-        />
+    </DynamicScroller>
+    <template v-else>
+      <template v-if="searchType == 'name'">
+        <DynamicScroller
+          :items="searchCommands"
+          :min-item-size="36 + 8"
+          class="a-commands__commands"
+          key-field="id"
+        >
+          <template v-slot="{ item, index, active }">
+            <DynamicScrollerItem
+              :active="active"
+              :data-index="index"
+              :item="item"
+              style="padding-bottom: 8px"
+            >
+              <ACommandLink :key="item.id" :command="item" />
+            </DynamicScrollerItem>
+          </template>
+        </DynamicScroller>
       </template>
-      <template v-if="searchDescriptions.length">
-        <div class="a-commands__header">
-          <Icon12ErrorCircle />
-          Совпадение по описанию:
-        </div>
-        <ACommandLink
-          v-for="command in searchDescriptions"
-          :key="command.id"
-          :command="command"
-        />
+
+      <template v-if="searchType == 'description'">
+        <DynamicScroller
+          :items="searchDescriptions"
+          :min-item-size="36 + 8"
+          class="a-commands__commands"
+          key-field="id"
+        >
+          <template v-slot="{ item, index, active }">
+            <DynamicScrollerItem
+              :active="active"
+              :data-index="index"
+              :item="item"
+              style="padding-bottom: 8px"
+            >
+              <ACommandLink :key="item.id" :command="item" />
+            </DynamicScrollerItem>
+          </template>
+        </DynamicScroller>
       </template>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -80,7 +107,9 @@ const { Icon12ErrorCircle } = icons;
 }
 
 .a-commands__header {
-  display: block;
+  display: flex;
+  gap: 8px;
+  align-items: center;
   padding: 8px var(--vkui--size_base_padding_horizontal--regular);
   border-bottom: 1px solid currentColor;
 }
