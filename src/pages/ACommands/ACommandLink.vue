@@ -32,7 +32,7 @@ const router = useRouter();
   display: flex;
   flex-direction: row;
   text-decoration: none;
-  padding: 0 12px;
+  padding: 0 8px;
   font-family: var(--vkui--font_family_base);
   background: none;
   border: none;

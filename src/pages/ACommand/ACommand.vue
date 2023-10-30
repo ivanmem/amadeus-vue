@@ -316,7 +316,8 @@ const {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 10px;
+  padding-block: 10px;
+  padding-inline: 8px;
   gap: 15px;
   background: var(--vkui--color_background_content);
   color: var(--vkui--color--text_primary);

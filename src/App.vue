@@ -75,9 +75,9 @@ const { Icon24Linked } = icons;
 .navigation-header {
   display: flex;
   align-items: center;
-  padding-inline: 10px;
+  padding-left: 8px;
   padding-right: var(--navigation-header-padding-right, 10px);
-  min-height: 30px;
+  min-height: 36px;
 }
 
 .navigation-caption {

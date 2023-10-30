@@ -12,6 +12,6 @@
   gap: 5px;
   background: var(--vkui--color_background_content);
   color: var(--vkui--color_text_primary);
-  padding: 8px var(--vkui--size_base_padding_horizontal--regular);
+  padding: 8px;
 }
 </style>

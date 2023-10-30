@@ -1,32 +1,24 @@
 <script lang="ts" setup>
 import { UseCommandSearch } from "./useCommandSearch";
 import ACommandsFilters from "./ACommandsFilters.vue";
+import { icons } from "../../common/consts";
 
 const props = defineProps<{
   commandSearch: UseCommandSearch;
 }>();
 
 const { search } = props.commandSearch;
+const { Icon16SearchOutline } = icons;
 </script>
 
 <template>
-  <div class="TopSearch">
+  <div class="a-command-search">
     <div style="display: flex; gap: 5px; flex-grow: 1">
-      <input
-        ref="reference"
-        v-model="search"
-        class="TopSearch__input"
-        placeholder="Поиск"
-      />
-      <div
-        style="
-          display: flex;
-          gap: 5px;
-          flex-grow: 1;
-          padding: 5px;
-          margin-right: 10px;
-        "
-      >
+      <label class="a-command-search__label">
+        <Icon16SearchOutline style="margin-right: 5px" />
+        <input ref="reference" v-model="search" placeholder="Поиск" />
+      </label>
+      <div style="padding: 5px; margin-right: 10px">
         <ACommandsFilters />
       </div>
     </div>
