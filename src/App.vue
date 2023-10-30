@@ -8,6 +8,7 @@ import AButton from "./components/AButton/AButton.vue";
 import { useColorScheme } from "./useColorScheme";
 import { useApp } from "./store/app/app";
 import { icons } from "./common/consts";
+import ANavigationMenu from "./components/ANavigationMenu.vue";
 
 const route = useRoute();
 const store = useCommands();
@@ -52,62 +53,16 @@ const { Icon24Linked } = icons;
         </router-view>
       </Suspense>
     </div>
-    <div class="navigation">
-      <div class="navigation-bottom-buttons">
-        <AButton
-          :hide-content="!appStore.isVkCom"
-          icon="Icon24ArticleBoxOutline"
-          to="/"
-        >
-          <span> Команды </span>
-        </AButton>
-        <AButton
-          :hide-content="!appStore.isVkCom"
-          icon="Icon24CupOutline"
-          to="/top"
-        >
-          <span>Топы</span>
-        </AButton>
-        <AButton
-          :hide-content="!appStore.isVkCom"
-          icon="Icon24FlashOutline"
-          to="/events"
-        >
-          <span>События чата</span>
-        </AButton>
-        <AButton
-          :hide-content="!appStore.isVkCom"
-          icon="Icon24CrownOutline"
-          to="/roles"
-        >
-          <span> О ролях </span>
-        </AButton>
-        <AButton
-          :hide-content="!appStore.isVkCom"
-          icon="Icon24DollarCircleOutline"
-          to="/don"
-        >
-          <span>Дон статус</span>
-        </AButton>
-        <AButton
-          :hide-content="!appStore.isVkCom"
-          icon="Icon24LightbulbStarOutline"
-          to="/about"
-        >
-          <span> О приложении </span>
-        </AButton>
-      </div>
-    </div>
+    <ANavigationMenu />
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "styles/helpers";
 @import "styles/variables";
 
 .root {
-  padding-top: 2px;
-  padding-block: 10px;
+  padding-block: 10px 0;
   gap: 10px;
   background: var(--vkui--color_background_content);
   @extend .overflow-block;
@@ -125,12 +80,6 @@ const { Icon24Linked } = icons;
   min-height: 30px;
 }
 
-.navigation {
-  display: flex;
-  align-items: center;
-  padding-inline: 10px;
-}
-
 .navigation-caption {
   display: flex;
   align-items: flex-start;
@@ -138,40 +87,5 @@ const { Icon24Linked } = icons;
   justify-content: center;
   font-weight: bold;
   text-transform: uppercase;
-}
-
-.navigation-bottom-buttons {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  overflow: auto;
-  padding: 10px;
-  background: var(--vkui--color_background);
-  min-width: 100%;
-  border-radius: 5px;
-
-  & > * {
-    flex-grow: 1;
-  }
-
-  @at-root .root:not([data-platform="vkcom"]) & {
-    justify-content: space-around;
-    align-content: space-around;
-  }
-
-  .a-button {
-    min-height: 26px;
-    white-space: nowrap;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s linear;
-}
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
 }
 </style>

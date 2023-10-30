@@ -78,7 +78,6 @@ const iconProps = computed(() => ({
 <template>
   <component
     :is="tag ?? 'button'"
-    v-ripple
     :class="[props.defaultClass, props.class]"
     :data-type="dataType"
     @click="onClick"

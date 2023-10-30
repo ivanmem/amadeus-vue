@@ -4,7 +4,7 @@ import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import amadeus1Path from "../../assets/amadeus1.webp";
 import { useAppCaption } from "../../hooks/useAppCaption";
 
-useAppCaption("О приложении");
+useAppCaption("Source");
 
 const backgroundImageStyle = `
 background-image: linear-gradient(

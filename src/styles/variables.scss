@@ -166,6 +166,9 @@
   --nth-child-1-color: rgb(49, 134, 212);
   --nth-child-2-color: rgb(56, 199, 175);
   --border-separator-color: #f2f3f5;
+
+  --navigation-bottom-background: #f9f9f9;
+  --navigation-bottom-color: #9aa2ad;
 }
 
 .root[data-dark="true"] {
@@ -174,7 +177,11 @@
   --separator_common: var(--gray_750);
   --nth-child-1-color: rgb(49, 134, 212);
   --nth-child-2-color: rgb(56, 199, 175);
-  --border-separator-color: #1d1d1d;
+  --norder-separator-color: #1d1d1d;
+
+  --navigation-bottom-background: #2c2d2f;
+  --navigation-bottom-color: #77787a;
+
   --easy-table-header-background-color: #505050;
   --easy-table-border: black;
   --easy-table-row-border: #a4a4a4;
