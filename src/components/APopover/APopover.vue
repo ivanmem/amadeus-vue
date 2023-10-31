@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 </script>
 <template>

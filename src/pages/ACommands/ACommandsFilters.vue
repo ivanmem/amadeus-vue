@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {
   CREATOR_COMMANDS_OPTIONS,
   TYPES_COMMAND_OPTIONS,
@@ -18,14 +18,14 @@ const commandsStore = useCommands();
 
     <div class="flex flex-col gap-3">
       <ASelect
-        label="Тип"
-        :options="TYPES_COMMAND_OPTIONS"
         v-model="commandsStore.filters.type"
+        :options="TYPES_COMMAND_OPTIONS"
+        label="Тип"
       />
       <ASelect
-        label="Команда только для создателя бота"
-        :options="CREATOR_COMMANDS_OPTIONS"
         v-model="commandsStore.filters.isOnlyBotCreator"
+        :options="CREATOR_COMMANDS_OPTIONS"
+        label="Команда только для создателя бота"
       />
     </div>
   </APopover>

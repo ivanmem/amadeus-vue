@@ -15,7 +15,7 @@ const fontSize = 14;
 </script>
 
 <template>
-  <APageContainer class="a-events" v-if="events">
+  <APageContainer v-if="events" class="a-events">
     <AButton
       data-type="accent"
       icon="Icon16Link"
@@ -25,8 +25,8 @@ const fontSize = 14;
     </AButton>
     <h1>Шаблонные аргументы для команд</h1>
     <div
-      class="a-event-block"
       v-for="(value, key) of events.templateArgumentsDescription"
+      class="a-event-block"
     >
       <ACopyButton
         :size="fontSize"
@@ -51,9 +51,9 @@ const fontSize = 14;
           <div>
             <b>Описание:</b>&nbsp;
             <ALinkify
-              tag="pre"
-              style="white-space: pre-line"
               :value="option.description"
+              style="white-space: pre-line"
+              tag="pre"
             />
           </div>
           <div v-if="option.example">
@@ -83,14 +83,14 @@ const fontSize = 14;
 
 .a-event-block {
   background: var(--vkui--color_background);
-  color: var(--vkui--color--text_primary);
-  border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
   border-block: 0.5px solid var(--vkui--color_text_tertiary);
-  padding: 10px;
+  border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
+  color: var(--vkui--color--text_primary);
   display: flex;
   flex-direction: column;
-  gap: 5px;
   font-size: v-bind("fontSize + 'px'");
+  gap: 5px;
+  padding: 10px;
 
   .a-copy-button {
     font-size: inherit;

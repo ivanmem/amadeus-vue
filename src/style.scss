@@ -6,15 +6,13 @@
 @import "styles/animations";
 
 :root {
-  line-height: 1.5;
-  font-weight: 400;
-
   background: var(--vkui--color_background_content);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+  font-weight: 400;
+  line-height: 1.5;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -36,11 +34,11 @@ pre {
 html,
 body {
   @extend .overflow-block;
-  width: 100vw;
-  height: 100vh;
   background: var(--vkui--color_background_content);
   font-family: var(--vkui--font_text--font_family--regular);
+  height: 100vh;
   letter-spacing: 0.2px;
+  width: 100vw;
 }
 
 #app {
@@ -53,6 +51,6 @@ h3,
 h4,
 h5,
 h6 {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }

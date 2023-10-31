@@ -14,7 +14,8 @@ textarea,
 input.big_text,
 input.file,
 div[contenteditable="true"] {
-  font-size: var(--vkui--font_text--font_size--compact);
+  -webkit-box-shadow: none;
+  box-shadow: none;
   font-family: var(
     --palette-vk-font,
     -apple-system,
@@ -41,32 +42,30 @@ div[contenteditable="true"] {
     verdana,
     sans-serif
   );
+  font-size: var(--vkui--font_text--font_size--compact);
   outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 
 .a-command-search__label {
+  align-items: center;
   display: flex;
   flex-grow: 1;
-  align-items: center;
   padding-left: 8px;
 
   input {
-    flex-grow: 1;
+    background-color: initial;
     border: 0;
+    border-radius: var(--vkui--size_border_radius--regular, 8px);
+    color: var(--text_primary);
+    flex-grow: 1;
+    line-height: 100%;
+    margin: 0;
     -webkit-transition:
       background-color 0.05s,
       color 0.05s;
     transition:
       background-color 0.05s,
       color 0.05s;
-    background-color: initial;
-    border-radius: var(--vkui--size_border_radius--regular, 8px);
-    margin: 0;
-    color: var(--text_primary);
-    line-height: 100%;
-    flex-grow: 1;
 
     &:focus-visible {
       outline: none;

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useAppCaption } from "../../hooks/useAppCaption";
 import ATable from "../../components/ATable/ATable.vue";
 import { useCommands } from "../../store/commands/commands";
@@ -8,7 +8,7 @@ import { ATableHeader } from "../../components/ATable/types";
 
 useAppCaption("Топ команд (за всё время)");
 const items: object[] = await fetch(
-  "https://xeleos.ddns.net/api/top/commands"
+  "https://xeleos.ddns.net/api/top/commands",
 ).then((x) => x.json());
 
 const headers: ATableHeader[] = [
@@ -22,7 +22,7 @@ const headers: ATableHeader[] = [
 const commands = useCommands();
 </script>
 <template>
-  <ATable :items="items" :headers="headers">
+  <ATable :headers="headers" :items="items">
     <template #item-commandId="{ commandId }">
       <AButton class="opacity" @click="router.push('/command/' + commandId)">
         {{ commands.getCommandFullName(commandId) }}

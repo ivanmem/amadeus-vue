@@ -79,10 +79,10 @@ const props = defineProps<{
 }
 
 .a-command-argument__access-values {
-  display: flex;
-  gap: 6px;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
+  gap: 6px;
   margin-block: 5px;
 }
 
@@ -93,42 +93,42 @@ const props = defineProps<{
 }
 
 .a-command-argument__type {
-  display: flex;
-  background-color: var(--a-command-argument__type__background-color);
-  color: var(--a-command-argument__type__color);
   align-items: center;
+  background-color: var(--a-command-argument__type__background-color);
   border-radius: 3px;
-  margin-block: 5px;
+  color: var(--a-command-argument__type__color);
+  display: flex;
   font-size: 13px;
   gap: 5px;
+  margin-block: 5px;
 
   &:before {
-    display: flex;
-    padding-inline: 10px;
-    min-width: 70px;
-    font-weight: bold;
-    font-size: 15px;
     content: attr(data-type) ":";
+    display: flex;
+    font-size: 15px;
+    font-weight: bold;
+    min-width: 70px;
+    padding-inline: 10px;
   }
 }
 
 .a-command-argument__label {
-  display: flex;
-  background-color: var(--a-command-argument__label__background-color);
-  color: var(--a-command-argument__label__color);
   align-items: center;
+  background-color: var(--a-command-argument__label__background-color);
   border-radius: 3px;
-  margin-block: 5px;
+  color: var(--a-command-argument__label__color);
+  display: flex;
   font-size: 13px;
   gap: 5px;
+  margin-block: 5px;
 
   &:before {
-    display: flex;
-    min-width: 25px;
-    font-weight: bold;
-    font-size: 18px;
-    padding-inline: 10px;
     content: attr(data-icon);
+    display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 25px;
+    padding-inline: 10px;
   }
 }
 

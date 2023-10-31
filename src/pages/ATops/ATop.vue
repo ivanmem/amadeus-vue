@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import AButton from "../../components/AButton/AButton.vue";

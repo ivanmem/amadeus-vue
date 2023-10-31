@@ -39,8 +39,8 @@ const products = [
           :key="product.caption"
           :to="product.to"
           class="a-button__left-content"
-          icon="Icon16Link"
           data-type="accent"
+          icon="Icon16Link"
         >
           {{ product.caption }}
         </AButton>

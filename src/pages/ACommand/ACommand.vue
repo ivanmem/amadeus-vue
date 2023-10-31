@@ -313,16 +313,16 @@ const {
 
 <style lang="scss">
 .a-command {
+  background: var(--vkui--color_background_content);
+  border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
+  color: var(--vkui--color--text_primary);
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  gap: 15px;
+  overflow-y: scroll;
   padding-block: 10px;
   padding-inline: 8px;
-  gap: 15px;
-  background: var(--vkui--color_background_content);
-  color: var(--vkui--color--text_primary);
-  border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
-  overflow-y: scroll;
 
   .a-command {
     background: inherit;
@@ -334,23 +334,23 @@ const {
   }
 
   section {
+    background: var(--vkui--color_background);
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     gap: 5px;
-    background: var(--vkui--color_background);
-    border-radius: 5px;
 
     header {
-      display: flex;
-      justify-content: space-between;
       border-block: 0.5px solid var(--vkui--color_text_tertiary);
       border-radius: 5px;
-      font-weight: 500;
+      display: flex;
       font-style: oblique;
+      font-weight: 500;
+      justify-content: space-between;
 
       span {
-        display: flex;
         align-items: center;
+        display: flex;
         gap: 5px;
 
         svg {
@@ -369,18 +369,18 @@ const {
   }
 
   .command-boolean {
-    display: flex;
     align-items: center;
-    gap: 5px;
+    display: flex;
     font-size: var(--vkui--font_headline1--font_size--compact, 15px);
     font-weight: 500;
+    gap: 5px;
     line-height: var(--vkui--font_headline1--line_height--compact, 20px);
   }
 }
 
 .a-command__buttons {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
 }
 </style>

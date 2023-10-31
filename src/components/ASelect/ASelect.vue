@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import uniqueId from "lodash/uniqueId";
 import { PropType } from "vue";
 import { ASelectOption } from "./types";
@@ -39,16 +39,16 @@ const id = uniqueId("a-select__select");
     >
       <option
         v-if="emptyValue !== false"
-        :value="emptyValue"
         :selected="modelValue === emptyValue"
+        :value="emptyValue"
       >
         {{ emptyLabel ?? "-- Не выбрано --" }}
       </option>
       <option
         v-for="option of options"
         :key="option.value"
-        :value="option.value"
         :selected="modelValue === option.value"
+        :value="option.value"
       >
         {{ option.label }}
       </option>

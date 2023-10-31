@@ -27,19 +27,19 @@ import AButton from "./AButton/AButton.vue";
 </template>
 <style lang="scss">
 .navigation {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .navigation-bottom-buttons {
-  display: flex;
   align-items: center;
-  overflow: auto;
   background: var(--navigation-bottom-background);
-  min-width: 100%;
-  padding: 4px 6px 3px;
   border-color: var(--vkui--color_separator_primary);
   box-shadow: 0 0 2px 0 var(--vkui--color_separator_primary);
+  display: flex;
+  min-width: 100%;
+  overflow: auto;
+  padding: 4px 6px 3px;
 
   & > * {
     flex-grow: 1;
@@ -51,14 +51,14 @@ import AButton from "./AButton/AButton.vue";
   }
 
   .a-button {
-    flex-direction: column;
-    gap: 3px;
-    white-space: nowrap;
-    padding: 0;
     background-color: transparent;
     color: var(--navigation-bottom-color);
+    flex-direction: column;
     font-size: 10px;
+    gap: 3px;
     line-height: 100%;
+    padding: 0;
+    white-space: nowrap;
 
     @at-root .root[data-platform="vkcom"] & {
       flex-direction: row;
@@ -71,9 +71,9 @@ import AButton from "./AButton/AButton.vue";
     }
 
     .a-button__icon {
+      height: 28px;
       margin: 0;
       width: 28px;
-      height: 28px;
     }
   }
 }

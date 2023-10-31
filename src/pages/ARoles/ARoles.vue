@@ -68,9 +68,9 @@ const roles: {
 <style lang="scss">
 .a-roles {
   .a-roles__level {
-    display: flex;
     align-items: center;
     column-gap: 5px;
+    display: flex;
   }
 }
 </style>

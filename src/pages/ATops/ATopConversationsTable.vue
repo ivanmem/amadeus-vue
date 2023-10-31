@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import ATable from "../../components/ATable/ATable.vue";
 import { conversationHeaders } from "./consts";
 
 const props = defineProps<{ items: object[] }>();
 </script>
 <template>
-  <ATable :items="items" :headers="conversationHeaders">
+  <ATable :headers="conversationHeaders" :items="items">
     <template #item-percentBot="{ percentBot }">
       {{ percentBot ?? 0 }}%
     </template>

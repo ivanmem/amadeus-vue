@@ -62,9 +62,9 @@ const { Icon24Linked } = icons;
 @import "styles/variables";
 
 .root {
-  padding-block: 10px 0;
-  gap: 10px;
   background: var(--vkui--color_background_content);
+  gap: 10px;
+  padding-block: 10px 0;
   @extend .overflow-block;
 }
 
@@ -73,19 +73,19 @@ const { Icon24Linked } = icons;
 }
 
 .navigation-header {
-  display: flex;
   align-items: center;
+  display: flex;
+  min-height: 36px;
   padding-left: 8px;
   padding-right: var(--navigation-header-padding-right, 10px);
-  min-height: 36px;
 }
 
 .navigation-caption {
-  display: flex;
   align-items: flex-start;
-  justify-items: center;
-  justify-content: center;
+  display: flex;
   font-weight: bold;
+  justify-content: center;
+  justify-items: center;
   text-transform: uppercase;
 }
 </style>

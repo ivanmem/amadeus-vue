@@ -89,28 +89,28 @@ const aCommandSearchRef = ref<any>();
 @import "/src/styles/variables.scss";
 
 .a-commands {
+  background: var(--vkui--color_background_content);
+  color: var(--vkui--color_text_primary);
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
-  background: var(--vkui--color_background_content);
-  color: var(--vkui--color_text_primary);
 }
 
 .a-commands__commands {
   display: flex;
-  flex-grow: 1;
-  overflow: auto;
   flex-direction: column;
+  flex-grow: 1;
   gap: 8px;
+  overflow: auto;
   padding-block: 12px;
 }
 
 .a-commands__header {
+  align-items: center;
+  border-bottom: 1px solid currentColor;
   display: flex;
   gap: 8px;
-  align-items: center;
   padding: 8px var(--vkui--size_base_padding_horizontal--regular);
-  border-bottom: 1px solid currentColor;
 }
 </style>

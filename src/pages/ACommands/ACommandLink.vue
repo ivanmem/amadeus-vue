@@ -29,17 +29,17 @@ const router = useRouter();
 
 <style lang="scss">
 .a-command-link {
-  display: flex;
-  flex-direction: row;
-  text-decoration: none;
-  padding: 0 8px;
-  font-family: var(--vkui--font_family_base);
+  align-items: center;
   background: none;
   border: none;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: left;
   border-radius: 0;
+  display: flex;
+  flex-direction: row;
+  font-family: var(--vkui--font_family_base);
+  justify-content: flex-start;
+  padding: 0 8px;
+  text-align: left;
+  text-decoration: none;
 
   &:nth-child(2n + 1) {
     color: var(--nth-child-1-color);
@@ -50,16 +50,16 @@ const router = useRouter();
   }
 
   svg {
-    min-width: 16px;
     min-height: 16px;
+    min-width: 16px;
   }
 }
 
 .a-command-link__content {
+  color: var(--vkui--color_text_primary);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  color: var(--vkui--color_text_primary);
 }
 
 .a-command-link__name {
@@ -68,15 +68,15 @@ const router = useRouter();
 }
 
 .a-command-link__help {
-  font-size: 12px;
   flex-grow: 1;
+  font-family: var(--vkui--font_title1--font_family--regular);
+  font-size: 12px;
+  font-weight: var(--vkui--font_subhead--font_weight--regular, 400);
+  line-height: var(--vkui--font_subhead--line_height--compact, 16px);
   max-width: 100%;
+  opacity: 0.8;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  line-height: var(--vkui--font_subhead--line_height--compact, 16px);
-  font-weight: var(--vkui--font_subhead--font_weight--regular, 400);
-  font-family: var(--vkui--font_title1--font_family--regular);
-  opacity: 0.8;
 }
 </style>

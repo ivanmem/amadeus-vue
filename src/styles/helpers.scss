@@ -29,22 +29,22 @@
 }
 
 .a-popup {
+  background: var(--vkui--color_background);
+  border: 1px solid var(--separator_common);
+  border-radius: var(--vkui--size_border_radius_paper--regular);
+  box-shadow: inset 0 0 0 var(--vkui_internal--thin_border)
+    var(--vkui--color_field_border_alpha);
+  padding: 20px;
   position: relative;
   width: max-content;
   z-index: 1;
-  padding: 20px;
-  background: var(--vkui--color_background);
-  box-shadow: inset 0 0 0 var(--vkui_internal--thin_border)
-    var(--vkui--color_field_border_alpha);
-  border: 1px solid var(--separator_common);
-  border-radius: var(--vkui--size_border_radius_paper--regular);
 }
 
 .a-border-separator:not(:last-child)::after {
-  margin-top: 10px;
-  height: 1px;
-  min-width: 100%;
+  border-bottom: 1px solid var(--border-separator-color);
   content: "";
   display: flex;
-  border-bottom: 1px solid var(--border-separator-color);
+  height: 1px;
+  margin-top: 10px;
+  min-width: 100%;
 }

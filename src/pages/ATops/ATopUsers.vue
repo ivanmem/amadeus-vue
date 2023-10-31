@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useAppCaption } from "../../hooks/useAppCaption";
 import ATable from "../../components/ATable/ATable.vue";
 import { ATableHeader } from "../../components/ATable/types";
 
 useAppCaption("Топ пользователей (за всё время)");
 const items: object[] = await fetch(
-  "https://xeleos.ddns.net/api/top/users"
+  "https://xeleos.ddns.net/api/top/users",
 ).then((x) => x.json());
 
 const headers: ATableHeader[] = [
@@ -18,5 +18,5 @@ const headers: ATableHeader[] = [
 ];
 </script>
 <template>
-  <ATable :items="items" :headers="headers" />
+  <ATable :headers="headers" :items="items" />
 </template>

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import AButton from "../../components/AButton/AButton.vue";
 import { computed, h } from "vue";
 import { icons } from "../../common/consts";
@@ -15,7 +15,7 @@ const CopyIcon = computed(() =>
 );
 </script>
 <template>
-  <AButton class="a-copy-button opacity" :tag="tag">
+  <AButton :tag="tag" class="a-copy-button opacity">
     <template #icon="iconProps">
       <CopyIcon v-bind="iconProps" />
     </template>
@@ -25,8 +25,8 @@ const CopyIcon = computed(() =>
 <style lang="scss">
 .a-copy-button {
   display: flex;
-  vertical-align: top;
-  padding: 0;
   min-height: 0;
+  padding: 0;
+  vertical-align: top;
 }
 </style>

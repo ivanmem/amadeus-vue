@@ -26,7 +26,7 @@ const { Icon24ArticleBoxOutline } = icons;
             class="inline-flex items-center text-sm font-medium hover:text-blue-600 dark:hover:text-amber-200"
             href="#"
           >
-           <Icon24ArticleBoxOutline width="20" height="20"/>
+            <Icon24ArticleBoxOutline height="20" width="20" />
           </a>
         </li>
         <li>
