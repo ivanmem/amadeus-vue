@@ -12,6 +12,6 @@
   flex-grow: 1;
   gap: 5px;
   overflow: auto;
-  padding: 8px;
+  padding: var(--page-padding);
 }
 </style>

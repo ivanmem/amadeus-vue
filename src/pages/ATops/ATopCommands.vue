@@ -5,6 +5,7 @@ import { useCommands } from "../../store/commands/commands";
 import AButton from "../../components/AButton/AButton.vue";
 import { router } from "../../router";
 import { ATableHeader } from "../../components/ATable/types";
+import APageContainer from "../../components/APageContainer/APageContainer.vue";
 
 useAppCaption("Топ команд (за всё время)");
 const items: object[] = await fetch(
@@ -22,11 +23,13 @@ const headers: ATableHeader[] = [
 const commands = useCommands();
 </script>
 <template>
-  <ATable :headers="headers" :items="items">
-    <template #item-commandId="{ commandId }">
-      <AButton class="opacity" @click="router.push('/command/' + commandId)">
-        {{ commands.getCommandFullName(commandId) }}
-      </AButton>
-    </template>
-  </ATable>
+  <APageContainer style="padding-inline: 0">
+    <ATable :headers="headers" :items="items">
+      <template #item-commandId="{ commandId }">
+        <AButton class="opacity" @click="router.push('/command/' + commandId)">
+          {{ commands.getCommandFullName(commandId) }}
+        </AButton>
+      </template>
+    </ATable>
+  </APageContainer>
 </template>

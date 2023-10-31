@@ -50,7 +50,7 @@ div[contenteditable="true"] {
   align-items: center;
   display: flex;
   flex-grow: 1;
-  padding-left: 8px;
+  padding-inline: var(--page-padding-inline);
 
   input {
     background-color: initial;

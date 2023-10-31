@@ -18,7 +18,7 @@ const { Icon16SearchOutline } = icons;
         <Icon16SearchOutline style="margin-right: 5px" />
         <input ref="reference" v-model="search" placeholder="Поиск" />
       </label>
-      <div style="padding: 5px; margin-right: 10px">
+      <div style="padding: 5px">
         <ACommandsFilters />
       </div>
     </div>

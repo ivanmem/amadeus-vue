@@ -1,27 +1,13 @@
 <script lang="ts" setup>
-import { computed, StyleValue, useSlots, VueElement } from "vue";
+import { computed, useSlots } from "vue";
 import { icons } from "../../common/consts";
-import { RouteLocationRaw, useRoute } from "vue-router";
-import { router } from "../../router";
+import { useLink } from "vue-router";
+import { AButtonProps } from "./types";
 
-const props = withDefaults(
-  defineProps<{
-    class?: string;
-    defaultClass?: string;
-    icon?: VueElement | keyof typeof icons;
-    iconStyle?: StyleValue;
-    iconClass?: any;
-    to?: RouteLocationRaw;
-    target?: string | undefined;
-    exactActiveDataType?: "accent";
-    dataType?: "accent";
-    hideContent?: boolean;
-    tag?: string;
-  }>(),
-  {
-    defaultClass: "a-button",
-  },
-);
+const props = withDefaults(defineProps<AButtonProps>(), {
+  defaultClass: "a-button",
+  exactActiveDataType: "accent",
+});
 
 const emit = defineEmits<{
   click: [e: MouseEvent];
@@ -31,32 +17,40 @@ const isExternalLink = computed(
   () => typeof props.to === "string" && props.to.startsWith("http"),
 );
 
-const route = useRoute();
+const link = computed<Partial<ReturnType<typeof useLink>>>(() => {
+  if (isExternalLink.value) {
+    return {};
+  }
+
+  return useLink(props as any);
+});
 
 const onClick = computed(() => {
   return (e: MouseEvent) => {
     emit("click", e);
-    if (props.to !== undefined) {
-      if (typeof props.to === "string" && isExternalLink.value) {
-        window.open(props.to, props.target);
-      } else {
-        router.push(props.to);
-      }
+    if (!props.to) {
+      return;
+    }
+
+    if (typeof props.to === "string" && isExternalLink.value) {
+      window.open(props.to, props.target);
+    } else if (link.value.navigate) {
+      link.value.navigate(e);
     }
   };
 });
 
-const link = computed(() => {
+const dataType = computed(() => {
   if (!props.to || isExternalLink.value) {
     return undefined;
   }
 
-  return { isExactActive: route.path === props.to };
-});
+  if (link.value.isActive?.value && props.activeDataType) {
+    return props.activeDataType;
+  }
 
-const dataType = computed(() => {
-  if (link.value?.isExactActive && !isExternalLink.value) {
-    return props.exactActiveDataType ?? "accent";
+  if (link.value.isExactActive?.value && props.exactActiveDataType) {
+    return props.exactActiveDataType;
   }
 
   return props.dataType;
@@ -80,6 +74,7 @@ const iconProps = computed(() => ({
     :is="tag ?? 'button'"
     :class="[props.defaultClass, props.class]"
     :data-type="dataType"
+    custom
     @click="onClick"
   >
     <template v-if="props.icon">

@@ -17,7 +17,6 @@ const props = defineProps<Props>();
     alternating
     hide-footer
     show-index
-    style="padding: 0 10px"
   >
     <template v-for="(_, slot) of $slots" #[slot]="scope">
       <slot :name="slot" v-bind="scope" />

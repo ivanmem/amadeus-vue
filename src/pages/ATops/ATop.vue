@@ -36,14 +36,14 @@ useAppCaption("Топы");
         icon="Icon24Users3Outline"
         to="/top/users/today"
       >
-        Топ пользователей (за сегодня)
+        Топ пользователей за сегодня
       </AButton>
       <AButton
         class="a-button__left-content"
         icon="Icon24Users3Outline"
         to="/top/users"
       >
-        Топ пользователей (за всё время)
+        Топ пользователей за всё время
       </AButton>
       <AButton
         class="a-button__left-content"

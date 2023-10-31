@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import bridge from "@vkontakte/vk-bridge";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/", component: () => import("../pages/ACommands/ACommands.vue") },
   {
     path: "/command/:id",
     component: () => import("../pages/ACommand/ACommand.vue"),
@@ -10,6 +9,12 @@ const routes: RouteRecordRaw[] = [
       return { id };
     },
   },
+  { path: "/", redirect: "/command/" },
+  {
+    path: "/command/",
+    component: () => import("../pages/ACommands/ACommands.vue"),
+  },
+
   { path: "/about", component: () => import("../pages/AAbout/AAbout.vue") },
   { path: "/roles", component: () => import("../pages/ARoles/ARoles.vue") },
   { path: "/don", component: () => import("../pages/ADon/ADon.vue") },

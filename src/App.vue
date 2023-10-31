@@ -46,11 +46,11 @@ const { Icon24Linked } = icons;
     </div>
     <div class="route-view">
       <Suspense>
-        <router-view v-slot="{ Component }">
-          <keep-alive max="3">
+        <RouterView v-slot="{ Component }">
+          <KeepAlive max="3">
             <component :is="Component" />
-          </keep-alive>
-        </router-view>
+          </KeepAlive>
+        </RouterView>
       </Suspense>
     </div>
     <ANavigationMenu />
@@ -82,6 +82,7 @@ const { Icon24Linked } = icons;
 .navigation-caption {
   align-items: flex-start;
   display: flex;
+  font-size: 12px;
   font-weight: bold;
   justify-content: center;
   justify-items: center;

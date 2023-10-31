@@ -1,13 +1,25 @@
 <script lang="ts" setup>
 import AButton from "./AButton/AButton.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+console.log(route);
 </script>
 <template>
   <div class="navigation">
     <div class="navigation-bottom-buttons">
-      <AButton icon="Icon24ArticleBoxOutline" to="/">
+      <AButton
+        :data-type="route.path.startsWith('/command/') ? 'accent' : undefined"
+        icon="Icon24ArticleBoxOutline"
+        to="/command/"
+      >
         <span> Команды </span>
       </AButton>
-      <AButton icon="Icon24CupOutline" to="/top">
+      <AButton
+        :data-type="route.path.startsWith('/top/') ? 'accent' : undefined"
+        icon="Icon24CupOutline"
+        to="/top"
+      >
         <span>Топы</span>
       </AButton>
       <AButton icon="Icon24FlashOutline" to="/events">
