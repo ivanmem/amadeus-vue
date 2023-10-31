@@ -53,13 +53,18 @@ import AButton from "./AButton/AButton.vue";
   .a-button {
     flex-direction: column;
     gap: 3px;
-    min-height: 26px;
     white-space: nowrap;
     padding: 0;
     background-color: transparent;
     color: var(--navigation-bottom-color);
     font-size: 10px;
     line-height: 100%;
+
+    @at-root .root[data-platform="vkcom"] & {
+      flex-direction: row;
+      font-size: 14px;
+      gap: 6px;
+    }
 
     &[data-type="accent"] {
       color: var(--vkui--color_background_accent_themed);
