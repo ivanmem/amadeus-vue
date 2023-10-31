@@ -47,7 +47,7 @@ const { Icon24ArticleBoxOutline } = icons;
               />
             </svg>
 
-            <span class="ml-1 text-sm font-medium md:ml-2">
+            <span class="ml-1 text-xs font-medium md:ml-2">
               <template v-if="props.parentCommand">
                 <RouterLink
                   :to="`/command/${props.parentCommand.id}`"
