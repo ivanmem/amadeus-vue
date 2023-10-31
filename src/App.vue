@@ -63,7 +63,6 @@ const { Icon24Linked } = icons;
 
 .root {
   background: var(--vkui--color_background_content);
-  gap: 10px;
   padding-block: 10px 0;
   @extend .overflow-block;
 }

@@ -32,42 +32,64 @@ import AButton from "./AButton/AButton.vue";
 }
 
 .navigation-bottom-buttons {
+  align-content: space-around;
   align-items: center;
   background: var(--navigation-bottom-background);
-  border-color: var(--vkui--color_separator_primary);
-  box-shadow: 0 0 2px 0 var(--vkui--color_separator_primary);
+  box-shadow:
+    0 0 2px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--vkui--elevation3);
   display: flex;
+  justify-content: space-around;
   min-width: 100%;
   overflow: auto;
-  padding: 4px 6px 3px;
-
-  & > * {
-    flex-grow: 1;
-  }
-
-  @at-root .root:not([data-platform="vkcom"]) & {
-    justify-content: space-around;
-    align-content: space-around;
-  }
 
   .a-button {
     background-color: transparent;
     color: var(--navigation-bottom-color);
+    flex-basis: 0;
     flex-direction: column;
-    font-size: 10px;
-    gap: 3px;
-    line-height: 100%;
-    padding: 0;
-    white-space: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    gap: 2px;
+    height: var(--vkui_internal--tabbar_height);
+    justify-content: center;
+    max-width: 100%;
+    min-width: 0;
+    outline: none;
+    padding: 4px 2px 2px;
+    position: relative;
+    text-decoration: none;
+
+    span {
+      display: block;
+      font-family:
+        -apple-system,
+        system-ui,
+        Helvetica Neue,
+        Roboto,
+        sans-serif;
+      font-family: var(--vkui--font_footnote--font_family--regular);
+      font-size: 10px;
+      font-weight: var(--vkui--font_weight_accent2);
+      line-height: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
     @at-root .root[data-platform="vkcom"] & {
       flex-direction: row;
-      font-size: 14px;
-      gap: 6px;
+      gap: 8px;
+
+      span {
+        font-size: 14px;
+      }
     }
 
     &[data-type="accent"] {
-      color: var(--vkui--color_background_accent_themed);
+      color: var(--vkui--color_text_accent_themed);
     }
 
     .a-button__icon {
