@@ -30,7 +30,7 @@ const { Icon24ArticleBoxOutline } = icons;
           </a>
         </li>
         <li>
-          <div class="flex items-center">
+          <div class="flex items-center pr-0.5">
             <svg
               aria-hidden="true"
               class="w-3 h-3 mx-1"

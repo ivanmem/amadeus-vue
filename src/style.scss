@@ -59,3 +59,7 @@ a {
   color: revert;
   text-decoration: revert;
 }
+
+svg {
+  min-width: max-content;
+}

@@ -215,7 +215,9 @@ const {
       <ACommandSection v-for="(key, keyIndex) of command.keys" :key="key.key">
         <template #label>
           <span>
-            <Icon16KeyOutline style="color: #f9c23c; zoom: 0.75" />
+            <Icon16KeyOutline
+              style="color: #f9c23c; width: 12px; height: 12px"
+            />
             {{ key.header.replace("🔑", "") }}
             <template v-if="!isNullOrUndefined(key.accessLevel)">
               &nbsp;|
@@ -352,6 +354,7 @@ const {
         align-items: center;
         display: flex;
         gap: 5px;
+        text-align: left;
 
         svg {
           margin-left: 5px;

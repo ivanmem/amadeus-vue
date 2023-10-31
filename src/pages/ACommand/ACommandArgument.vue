@@ -107,7 +107,7 @@ const props = defineProps<{
     display: flex;
     font-size: 15px;
     font-weight: bold;
-    min-width: 70px;
+    min-width: max-content;
     padding-inline: 10px;
   }
 }
