@@ -61,5 +61,5 @@ a {
 }
 
 svg {
-  min-width: max-content;
+  flex-shrink: 0;
 }
