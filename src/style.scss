@@ -35,13 +35,6 @@ body {
     env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 }
 
-//@include mixins.platform-body(
-//  padding-bottom,
-//  env(safe-area-inset-bottom),
-//  env(safe-area-inset-bottom),
-//  8px
-//);
-
 pre {
   overflow: auto;
 }
