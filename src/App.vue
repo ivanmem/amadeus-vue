@@ -127,8 +127,8 @@ watch(
     padding-inline: 8px;
 
     svg {
-      @include mixins.platform(height, 20px, 20px, 18px);
-      @include mixins.platform(width, 20px, 20px, 18px);
+      @include mixins.platform(height, 20px, 18px, 16px);
+      @include mixins.platform(width, 20px, 18px, 16px);
     }
 
     &:active {
