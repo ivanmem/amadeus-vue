@@ -21,12 +21,12 @@ const { Icon24ArticleBoxOutline } = icons;
     >
       <ol class="inline-flex items-center space-x-1">
         <li class="inline-flex items-center">
-          <a
+          <RouterLink
             class="inline-flex items-center text-sm font-medium hover:text-blue-600 dark:hover:text-amber-200"
-            href="#"
+            to="/"
           >
             <Icon24ArticleBoxOutline height="20" width="20" />
-          </a>
+          </RouterLink>
         </li>
         <li>
           <div class="flex items-center pr-0.5">

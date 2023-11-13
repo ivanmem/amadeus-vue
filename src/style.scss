@@ -1,3 +1,5 @@
+@use "styles/mixins";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,6 +35,13 @@ body {
     env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 }
 
+//@include mixins.platform-body(
+//  padding-bottom,
+//  env(safe-area-inset-bottom),
+//  env(safe-area-inset-bottom),
+//  8px
+//);
+
 pre {
   overflow: auto;
 }
@@ -43,6 +52,7 @@ body {
   background: var(--vkui--color_background_content);
   font-family: var(--vkui--font_text--font_family--regular);
   height: 100vh;
+  height: 100dvh;
   letter-spacing: 0.2px;
   width: 100vw;
 }

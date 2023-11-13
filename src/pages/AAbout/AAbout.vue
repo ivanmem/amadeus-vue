@@ -7,6 +7,7 @@ import { useApp } from "../../store/app/app";
 useAppCaption("Source");
 
 const appStore = useApp();
+const userAgent = navigator.userAgent;
 </script>
 
 <template>
@@ -39,6 +40,15 @@ const appStore = useApp();
     <span>
       Ваша платформа: <b>{{ appStore.platform }}</b>
     </span>
+    <div class="overflow-block">
+      <pre
+        >{{ appStore.webAppConfig }}
+________
+{{ appStore.urlParams }}
+________
+{{ userAgent }}
+      </pre>
+    </div>
   </APageContainer>
 </template>
 <style lang="scss">

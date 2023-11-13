@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { onMounted, shallowRef, watch } from "vue";
-import bridge from "@vkontakte/vk-bridge";
 import { useRoute } from "vue-router";
 import copy from "copy-to-clipboard";
 import { useCommands } from "./store/commands/commands";
@@ -15,14 +14,31 @@ const store = useCommands();
 const appStore = useApp();
 useColorScheme();
 
-onMounted(async () => {
-  await bridge.send("VKWebAppInit", {});
+onMounted(() => {
+  return appStore.init();
 });
 
 watch(
   () => appStore.platform,
   () => {
     document.body.dataset.platform = appStore.platform;
+  },
+  { immediate: true },
+);
+watch(
+  () => appStore.webAppConfig,
+  () => {
+    if (!appStore.webAppConfig) {
+      return;
+    }
+
+    document.body.dataset.app = appStore.webAppConfig.app ? "true" : "false";
+    if (appStore.webAppConfig.insets) {
+      const { top, left, right, bottom } = appStore.webAppConfig.insets;
+      document.body.style.padding = `${top}px ${right}px ${bottom}px ${left}px`;
+    } else if (appStore.isAppIos) {
+      document.body.style.paddingBottom = "8px";
+    }
   },
   { immediate: true },
 );
