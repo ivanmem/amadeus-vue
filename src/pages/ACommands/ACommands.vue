@@ -86,8 +86,6 @@ const aCommandSearchRef = ref<any>();
 </template>
 
 <style lang="scss">
-@import "/src/styles/variables.scss";
-
 .a-commands {
   background: var(--vkui--color_background_content);
   color: var(--vkui--color_text_primary);

@@ -1,22 +1,16 @@
 <script lang="ts" setup>
 import AButton from "../../components/AButton/AButton.vue";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
-import amadeus1Path from "../../assets/amadeus1.webp";
 import { useAppCaption } from "../../hooks/useAppCaption";
+import { useApp } from "../../store/app/app";
 
 useAppCaption("Source");
 
-const backgroundImageStyle = `
-background-image: linear-gradient(
-  var(--vkui--color_background_content), transparent,
-  var(--vkui--color_background_content)),
-  url(${amadeus1Path}
-);
-`;
+const appStore = useApp();
 </script>
 
 <template>
-  <APageContainer :style="backgroundImageStyle" class="a-about">
+  <APageContainer class="a-about">
     <span>
       Это приложение с открытым исходным кодом.
       <br />Вы можете внести свой вклад. <br />Для этого вам необходимо изучить:
@@ -42,10 +36,21 @@ background-image: linear-gradient(
       </svg>
       Github
     </AButton>
+    <span>
+      Ваша платформа: <b>{{ appStore.platform }}</b>
+    </span>
   </APageContainer>
 </template>
 <style lang="scss">
 .a-about {
+  background-image:
+    linear-gradient
+      (
+        var(--vkui--color_background_content),
+        transparent,
+        var(--vkui--color_background_content)
+      ),
+    url(/src/assets/amadeus1.webp);
   background-position: right;
   background-repeat: repeat, no-repeat;
   background-size: auto, contain;

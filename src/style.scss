@@ -21,10 +21,16 @@
 }
 
 html,
-body,
 pre {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background: var(--vkui--color_background_content);
+  margin: 0;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
+    env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 }
 
 pre {
@@ -34,7 +40,7 @@ pre {
 html,
 body {
   @extend .overflow-block;
-  background: var(--vkui--color_background_content);
+  background: var(--vkui--color_background_content) !important;
   font-family: var(--vkui--font_text--font_family--regular);
   height: 100vh;
   letter-spacing: 0.2px;

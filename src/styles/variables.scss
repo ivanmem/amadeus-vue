@@ -1,3 +1,5 @@
+@use "mixins";
+
 .root[data-dark="false"] {
   --azure_300: #397dcc;
   --azure_a100: #0077ff;
@@ -190,6 +192,12 @@
 }
 
 :root {
-  --page-padding: 8px;
+  --navigation-background-color: rgba(40, 43, 46, 0.2);
+  --navigation-background-color-active: rgba(40, 43, 46, 0.3);
+  --navigation-header-height: 36px;
+
+  --page-padding-top: 10px;
   --page-padding-inline: 8px;
+  --page-padding: 8px;
+  @include mixins.platform-body(--navigation-header-height, 36px, 36px, 32px);
 }

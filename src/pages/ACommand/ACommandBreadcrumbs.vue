@@ -17,8 +17,7 @@ const { Icon24ArticleBoxOutline } = icons;
   <FixedTeleport v-if="isMounted" to="#navigation-caption">
     <nav
       aria-label="Breadcrumb"
-      class="flex px-1 mr-1 mb-1 text-gray-700 border border-gray-200 rounded-lg bg-gray-100 dark:bg-gray-950 dark:border-gray-700 dark:text-gray-100"
-      style="height: 36px"
+      class="a-command-breadcrumbs flex px-1 mr-1 mb-1 rounded-lg"
     >
       <ol class="inline-flex items-center space-x-1">
         <li class="inline-flex items-center">
@@ -65,3 +64,10 @@ const { Icon24ArticleBoxOutline } = icons;
     </nav>
   </FixedTeleport>
 </template>
+<style lang="scss">
+.a-command-breadcrumbs {
+  background-color: var(--navigation-background-color);
+  max-height: var(--navigation-header-height);
+  min-height: var(--navigation-header-height);
+}
+</style>
