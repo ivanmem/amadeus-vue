@@ -21,6 +21,7 @@
     "copy-to-clipboard": "3.3.3",
     "linkify-html": "^4.1.2",
     "linkifyjs": "^4.1.2",
+    "linq-to-typescript": "^11.0.0",
     "lodash": "4.17.21",
     "pinia": "^2.1.7",
     "styles": "^0.2.1",

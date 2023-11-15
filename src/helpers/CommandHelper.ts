@@ -6,6 +6,8 @@ import {
 } from "../store/commands/types";
 import { FiltersType, useCommands } from "../store/commands/commands";
 import { ASelectOption } from "../components/ASelect/types";
+import { IEnumerable } from "linq-to-typescript";
+import { ILang } from "../types/ILang";
 
 export const TYPES_COMMAND = {
   [TypeCommandEnum.Unselected]: "-- Не выбрано --",
@@ -35,12 +37,12 @@ export const CREATOR_COMMANDS_OPTIONS: ASelectOption[] = [
 ];
 
 class CommandHelper {
-  static getFiltered(commands: Command[], filters?: FiltersType) {
+  static getFiltered(commands: IEnumerable<Command>, filters?: FiltersType) {
     if (!filters) {
       return commands;
     }
 
-    return commands.filter((command) => {
+    return commands.where((command) => {
       if (filters.isOnlyBotCreator === "hide" && command.isOnlyBotCreator) {
         return false;
       }
@@ -117,6 +119,14 @@ class CommandHelper {
     return (
       useCommands().docs?.commandsSchema.typeDescriptionDictionary[type] ?? ""
     );
+  }
+
+  static getAliasByLang(aliases: string[], lang: ILang) {
+    if (lang == "ru") {
+      return aliases[0];
+    }
+
+    return aliases[aliases.length - 1];
   }
 
   // Разрешена ли команда в личных сообщениях

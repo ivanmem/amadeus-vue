@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
 import { Command, Docs, TypeCommandEnum } from "./types";
-import orderBy from "lodash/orderBy";
 import CommandsService from "../../services/CommandsService";
 import CommandHelper from "../../helpers/CommandHelper";
+import { from, IEnumerable } from "linq-to-typescript";
+import { ILang } from "../../types/ILang";
 
 export interface FiltersType {
   type: TypeCommandEnum;
@@ -44,7 +45,7 @@ export const useCommands = defineStore("commands", {
     getCommandById(id: string | number): Command {
       return this.commands[id];
     },
-    getCommandFullName(id: number | string): string {
+    getCommandFullName(id: number | string, lang: ILang = "ru"): string {
       const command = this.getCommandById(id);
       if (!command) {
         if (!this.commandsLoaded) {
@@ -55,12 +56,14 @@ export const useCommands = defineStore("commands", {
       }
 
       if (!command.idOriginal) {
-        return command.alias[0];
+        return CommandHelper.getAliasByLang(command.alias, lang);
       }
 
       const commandOriginal = this.getCommandById(command.idOriginal);
-
-      return `${commandOriginal.alias[0]} ${command.alias[0]}`;
+      return `${CommandHelper.getAliasByLang(
+        commandOriginal.alias,
+        lang,
+      )} ${CommandHelper.getAliasByLang(command.alias, lang)}`;
     },
     searchCommand(_search: string, filters?: FiltersType): Command[] {
       const search = _search.trim().toLowerCase();
@@ -68,14 +71,29 @@ export const useCommands = defineStore("commands", {
         return [];
       }
 
-      return CommandHelper.getFiltered(
-        (
-          this.commandsAllVariantsNames.filter((x) =>
-            x.names.find((name) => name.includes(search)),
-          ) || []
-        ).map((x) => this.getCommandById(x.id)),
-        filters,
-      );
+      const whereName = (name: string) => name.includes(search);
+      const searchCommands = from(this.commandsAllVariantsNames)
+        .where((x: CommandAllVariantsNames) => {
+          return Boolean(x.names.find((name) => whereName(name)));
+        })
+        .selectMany((x) => x.names.map((name) => ({ id: x.id, name })))
+        .where((x) => whereName(x.name))
+        .orderBy(
+          (x) => x,
+          (a, b) => {
+            if (a.name.indexOf(search) > b.name.indexOf(search)) {
+              return 1;
+            } else if (a.name.indexOf(search) < b.name.indexOf(search)) {
+              return -1;
+            } else {
+              if (a.name.length > b.name.length) return 1;
+              else return -1;
+            }
+          },
+        )
+        .distinct((x, y) => x.id === y.id)
+        .select((x) => this.getCommandById(x.id));
+      return CommandHelper.getFiltered(searchCommands, filters).toArray();
     },
     searchDescription(_search: string, filters?: FiltersType): Command[] {
       const search = _search.trim().toLowerCase();
@@ -83,12 +101,10 @@ export const useCommands = defineStore("commands", {
         return [];
       }
 
-      return CommandHelper.getFiltered(
-        this.commandsOrder.filter((x) =>
-          x.helpExtended.toLowerCase().includes(search),
-        ),
-        filters,
+      const searchCommands = from(this.commandsOrder).where((x) =>
+        x.helpExtended.toLowerCase().includes(search),
       );
+      return CommandHelper.getFiltered(searchCommands, filters).toArray();
     },
   },
   getters: {
@@ -101,58 +117,60 @@ export const useCommands = defineStore("commands", {
     // возвращает все команды и их модификаторы
     commandsOrder(): Command[] {
       const store = useCommands();
-      const commands = Object.keys(store.commands).map(
+      const commands = from(Object.keys(store.commands)).select(
         (key) => store.commands[key],
       );
-      return CommandsService.orderBy(commands);
+      return CommandsService.orderBy(commands).toArray();
     },
     // сортировка команд по полному названию
     orderBy(): Command[] {
       const store = useCommands();
-      return orderBy(
-        store.commands,
-        [(x) => useCommands().getCommandFullName(x.id)],
-        "asc",
-      );
+      return from(Object.values(store.commands))
+        .orderBy((x) => useCommands().getCommandFullName(x.id))
+        .toArray();
     },
     // возвращает только основные команды (без их модификаторов)
     commandsOriginal(): Command[] {
       const store = useCommands();
-      const commands = Object.keys(store.commands)
-        .filter((key) => Number(key) > 0)
-        .map((key) => store.commands[key]);
-      return CommandsService.orderBy(commands);
+      const commands = from(Object.keys(store.commands))
+        .where((key) => Number(key) > 0)
+        .select((key) => store.commands[key]);
+      return CommandsService.orderBy(commands).toArray();
     },
     // возвращает только модификаторы команд
     commandsModifiers(): Command[] {
       const store = useCommands();
-      const commands = Object.keys(store.commands!)
-        .filter((key) => Number(key) < 0)
-        .map((key) => store.commands![key]);
-      return CommandsService.orderBy(commands);
+      const commands = from(Object.keys(store.commands))
+        .where((key) => Number(key) < 0)
+        .select((key) => store.commands![key]);
+      return CommandsService.orderBy(commands).toArray();
     },
     commandsAllVariantsNames(): CommandAllVariantsNames[] {
       const store = useCommands();
-      const commandsOriginal: CommandAllVariantsNames[] =
-        store.commandsOriginal.map((command) => ({
+      const commandsOriginal: IEnumerable<CommandAllVariantsNames> = from(
+        store.commandsOriginal,
+      ).select((command) => ({
+        id: command.id,
+        names: command.alias,
+      }));
+
+      const commandsModifiers: IEnumerable<CommandAllVariantsNames> = from(
+        store.commandsModifiers,
+      ).select((command) => {
+        const commandOriginal = store.getCommandById(command.idOriginal!);
+        const names = from(commandOriginal.alias)
+          .select((aliasOriginal) =>
+            command.alias.map((alias) => `${aliasOriginal} ${alias}`),
+          )
+          .selectMany((x) => x)
+          .toArray();
+        return {
           id: command.id,
-          names: command.alias,
-        }));
+          names,
+        };
+      });
 
-      const commandsModifiers: CommandAllVariantsNames[] =
-        store.commandsModifiers.map((command) => {
-          const commandOriginal = store.getCommandById(command.idOriginal!);
-          return {
-            id: command.id,
-            names: commandOriginal.alias
-              .map((aliasOriginal) => [
-                ...command.alias.map((alias) => `${aliasOriginal} ${alias}`),
-              ])
-              .flat(),
-          };
-        });
-
-      return [...commandsOriginal, ...commandsModifiers];
+      return commandsOriginal.concatenate(commandsModifiers).toArray();
     },
   },
 });

@@ -3,7 +3,6 @@ import AButton from "./AButton/AButton.vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-console.log(route);
 </script>
 <template>
   <div class="navigation">

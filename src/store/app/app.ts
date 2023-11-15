@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { platform } from "@vkontakte/vkui";
-import { random } from "lodash";
+import random from "lodash/random";
 import bridge from "@vkontakte/vk-bridge";
 import {
   MobileUpdateConfigData,

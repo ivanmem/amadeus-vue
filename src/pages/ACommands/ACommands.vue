@@ -37,7 +37,11 @@ const aCommandSearchRef = ref<any>();
           :item="item"
           style="padding-bottom: 8px"
         >
-          <ACommandLink :key="item.id" :command="item" />
+          <ACommandLink
+            :key="item.id"
+            :command="item"
+            :lang="commandSearch.searchLang.value"
+          />
         </DynamicScrollerItem>
       </template>
     </DynamicScroller>
@@ -56,7 +60,11 @@ const aCommandSearchRef = ref<any>();
               :item="item"
               style="padding-bottom: 8px"
             >
-              <ACommandLink :key="item.id" :command="item" />
+              <ACommandLink
+                :key="item.id"
+                :command="item"
+                :lang="commandSearch.searchLang.value"
+              />
             </DynamicScrollerItem>
           </template>
         </DynamicScroller>
@@ -76,7 +84,11 @@ const aCommandSearchRef = ref<any>();
               :item="item"
               style="padding-bottom: 8px"
             >
-              <ACommandLink :key="item.id" :command="item" />
+              <ACommandLink
+                :key="item.id"
+                :command="item"
+                :lang="commandSearch.searchLang.value"
+              />
             </DynamicScrollerItem>
           </template>
         </DynamicScroller>

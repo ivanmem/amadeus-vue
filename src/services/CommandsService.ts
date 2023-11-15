@@ -1,12 +1,12 @@
 import { useCommands } from "../store/commands/commands";
 import { Command } from "../store/commands/types";
-import orderBy from "lodash/orderBy";
+import { IEnumerable } from "linq-to-typescript";
 
 class CommandsService {
   // сортировка команд по полному названию
-  orderBy(commands: Command[]) {
+  orderBy(commands: IEnumerable<Command>) {
     const store = useCommands();
-    return orderBy(commands, [(x) => store.getCommandFullName(x.id)], "asc");
+    return commands.orderBy((x) => store.getCommandFullName(x.id));
   }
 }
 

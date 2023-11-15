@@ -3,12 +3,20 @@ import { Command } from "../../store/commands/types";
 import { useCommands } from "../../store/commands/commands";
 import AButton from "../../components/AButton/AButton.vue";
 import { useRouter } from "vue-router";
+import { ILang } from "../../types/ILang";
 
-const props = defineProps<{
-  command: Command;
-}>();
+const props = withDefaults(
+  defineProps<{
+    command: Command;
+    lang?: ILang;
+  }>(),
+  {
+    lang: "ru",
+  },
+);
 const store = useCommands();
 const router = useRouter();
+console.log(props.lang);
 </script>
 
 <template>
@@ -20,7 +28,7 @@ const router = useRouter();
   >
     <div class="a-command-link__content">
       <div class="a-command-link__name">
-        {{ store.getCommandFullName(props.command.id) }}
+        {{ store.getCommandFullName(props.command.id, props.lang) }}
       </div>
       <div class="a-command-link__help">{{ props.command.helpExtended }}</div>
     </div>
