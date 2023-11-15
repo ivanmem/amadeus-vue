@@ -58,19 +58,6 @@ export const useApp = defineStore("app", {
       });
       await bridge.send("VKWebAppInit", {});
       this.urlParams = Object.fromEntries(new URLSearchParams(location.search));
-      return await new Promise<void>((resolve) => {
-        let unwatch = undefined as any;
-        unwatch = watch(
-          () => appStore.webAppConfig,
-          () => {
-            if (appStore.webAppConfig) {
-              resolve();
-              unwatch();
-            }
-          },
-          { immediate: true },
-        );
-      });
     },
     getLoadingFinisher(): () => void {
       const id = random(true);
