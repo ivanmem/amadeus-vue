@@ -17,39 +17,34 @@ const isExternalLink = computed(
   () => typeof props.to === "string" && props.to.startsWith("http"),
 );
 
-const link = computed<Partial<ReturnType<typeof useLink>>>(() => {
-  if (isExternalLink.value) {
-    return {};
+const link = useLink({
+  to: computed(() => (isExternalLink.value ? "/" : props.to ?? "/")),
+  replace: computed(() => props.replace),
+});
+
+const onClick = (e: MouseEvent) => {
+  emit("click", e);
+  if (!props.to) {
+    return;
   }
 
-  return useLink(props as any);
-});
-
-const onClick = computed(() => {
-  return (e: MouseEvent) => {
-    emit("click", e);
-    if (!props.to) {
-      return;
-    }
-
-    if (typeof props.to === "string" && isExternalLink.value) {
-      window.open(props.to, props.target);
-    } else if (link.value.navigate) {
-      link.value.navigate(e);
-    }
-  };
-});
+  if (typeof props.to === "string" && isExternalLink.value) {
+    window.open(props.to, props.target);
+  } else if (!isExternalLink.value) {
+    link.navigate(e);
+  }
+};
 
 const dataType = computed(() => {
   if (!props.to || isExternalLink.value) {
     return undefined;
   }
 
-  if (link.value.isActive?.value && props.activeDataType) {
+  if (link.isActive.value && props.activeDataType) {
     return props.activeDataType;
   }
 
-  if (link.value.isExactActive?.value && props.exactActiveDataType) {
+  if (link.isExactActive.value && props.exactActiveDataType) {
     return props.exactActiveDataType;
   }
 
