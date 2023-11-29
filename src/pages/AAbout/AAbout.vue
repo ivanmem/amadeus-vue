@@ -3,6 +3,7 @@ import AButton from "../../components/AButton/AButton.vue";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import { useApp } from "../../store/app/app";
+import AToggle from "../../components/AToggle/AToggle.vue";
 
 useAppCaption("Source");
 
@@ -37,6 +38,7 @@ const userAgent = navigator.userAgent;
       </svg>
       Github
     </AButton>
+    <AToggle v-model="appStore.config.eruda">Eruda</AToggle>
     <span>
       Ваша платформа: <b>{{ appStore.platform }}</b>
     </span>

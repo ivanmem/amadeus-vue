@@ -8,6 +8,7 @@ import {
   VKUpdateConfigData,
 } from "@vkontakte/vk-bridge/dist/types/src/types/data";
 import { watch } from "vue";
+import { setEruda } from "../../helpers/setEruda";
 
 interface AppState {
   caption: string;
@@ -17,6 +18,11 @@ interface AppState {
     MobileUpdateConfigData & MVKUpdateConfigData & VKUpdateConfigData
   >;
   urlParams: Record<any, any>;
+  config: IAppConfig;
+}
+
+export interface IAppConfig {
+  eruda?: boolean;
 }
 
 export const useApp = defineStore("app", {
@@ -27,6 +33,9 @@ export const useApp = defineStore("app", {
       platform: platform(),
       webAppConfig: {},
       urlParams: {},
+      config: {
+        eruda: false,
+      },
     };
   },
   getters: {
@@ -36,13 +45,12 @@ export const useApp = defineStore("app", {
     isVkCom(): boolean {
       return this.platform === "vkcom";
     },
-    isAppIos(): boolean {
-      return (
-        this.platform === "ios" &&
-        navigator.userAgent.startsWith("com.vk.vkclient")
-      );
+    isIos(): boolean {
+      return this.platform === "ios";
     },
-
+    isAppIos(): boolean {
+      return this.isIos && navigator.userAgent.startsWith("com.vk.vkclient");
+    },
     isApp(): boolean {
       return Boolean(this.webAppConfig?.app);
     },
@@ -58,6 +66,13 @@ export const useApp = defineStore("app", {
       });
       await bridge.send("VKWebAppInit", {});
       this.urlParams = Object.fromEntries(new URLSearchParams(location.search));
+      watch(
+        () => this.config.eruda,
+        useApp().wrapLoading(() => {
+          return setEruda(Boolean(this.config.eruda));
+        }),
+        { immediate: this.config.eruda },
+      );
     },
     getLoadingFinisher(): () => void {
       const id = random(true);

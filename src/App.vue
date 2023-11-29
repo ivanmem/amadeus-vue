@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { onMounted, shallowRef, watch } from "vue";
-import { useRoute } from "vue-router";
+import { nextTick, onMounted, shallowRef, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import copy from "copy-to-clipboard";
 import { useCommands } from "./store/commands/commands";
 import AButton from "./components/AButton/AButton.vue";
@@ -8,7 +8,11 @@ import { useColorScheme } from "./useColorScheme";
 import { useApp } from "./store/app/app";
 import { icons } from "./common/consts";
 import ANavigationMenu from "./components/ANavigationMenu.vue";
+import { useSwipes } from "./composables/useSwipes";
+import { sleep } from "./helpers/sleep";
+import { goBack } from "./router";
 
+const router = useRouter();
 const route = useRoute();
 const store = useCommands();
 const appStore = useApp();
@@ -52,10 +56,14 @@ watch(
     LinkIcon.value = Icon24Linked;
   },
 );
+
+const swipes = useSwipes({
+  onLeft: goBack,
+});
 </script>
 
 <template>
-  <div v-if="store.docs" class="app">
+  <div v-if="store.docs" class="app" v-on="swipes">
     <div class="navigation-header">
       <div id="navigation-caption" class="overflow-block navigation-caption">
         <template v-if="appStore.caption.length">

@@ -16,7 +16,6 @@ const props = withDefaults(
 );
 const store = useCommands();
 const router = useRouter();
-console.log(props.lang);
 </script>
 
 <template>

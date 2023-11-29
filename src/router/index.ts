@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import bridge from "@vkontakte/vk-bridge";
+import { sleep } from "../helpers/sleep";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -70,3 +71,14 @@ bridge.subscribe((event) => {
     router.replace(event.detail.data.location);
   }
 });
+
+export async function goBack() {
+  const originalFullPath = router.currentRoute.value.fullPath;
+  router.back();
+  await sleep(1);
+  // Если роут не изменился
+  if (originalFullPath === router.currentRoute.value.fullPath) {
+    // Отправляем bridge на закрытие сервиса.
+    bridge.send("VKWebAppClose", { status: "success" });
+  }
+}
