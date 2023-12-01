@@ -146,7 +146,6 @@ const {
           <AButton
             v-for="commandImplicitId of command.modifiers"
             :key="commandImplicitId"
-            data-size="middle"
             data-type="accent"
             @click="router.push('/command/' + commandImplicitId)"
           >
@@ -203,7 +202,6 @@ const {
           <AButton
             v-for="relatedCommandId of relatedCommands"
             :key="relatedCommandId"
-            data-size="middle"
             data-type="accent"
             @click="router.push('/command/' + relatedCommandId)"
           >

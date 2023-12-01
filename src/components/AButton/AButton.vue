@@ -22,6 +22,18 @@ const link = useLink({
   replace: computed(() => props.replace),
 });
 
+const tag = computed(() =>
+  props.tag ?? props.to
+    ? isExternalLink.value
+      ? "a"
+      : "router-link"
+    : "button",
+);
+
+const target = computed(() =>
+  props.target ?? isExternalLink.value ? "_blank" : "_self",
+);
+
 const onClick = (e: MouseEvent) => {
   emit("click", e);
   if (!props.to) {
@@ -29,8 +41,12 @@ const onClick = (e: MouseEvent) => {
   }
 
   if (typeof props.to === "string" && isExternalLink.value) {
-    window.open(props.to, props.target);
+    if (tag.value !== "a") {
+      window.open(props.to, target.value);
+      return;
+    }
   } else if (!isExternalLink.value) {
+    e.preventDefault();
     link.navigate(e);
   }
 };
@@ -62,14 +78,31 @@ const iconProps = computed(() => ({
   class: ["a-button__icon", props.iconClass],
   "data-has-content": hasContent.value,
 }));
+
+const componentProps = computed(() => {
+  const value: Record<any, any> = {};
+  if (props.to) {
+    switch (tag.value) {
+      case "a":
+        value.href = props.to;
+        value.target = "_blank";
+        break;
+      case "router-link":
+        value.to = props.to;
+        break;
+    }
+  }
+
+  return value;
+});
 </script>
 
 <template>
   <component
     :is="tag ?? 'button'"
+    :="componentProps"
     :class="[props.defaultClass, props.class]"
     :data-type="dataType"
-    custom
     @click="onClick"
   >
     <template v-if="props.icon">

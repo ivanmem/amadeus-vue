@@ -39,18 +39,19 @@ const userAgent = navigator.userAgent;
       Github
     </AButton>
     <AToggle v-model="appStore.config.eruda">Eruda</AToggle>
-    <span>
-      Ваша платформа: <b>{{ appStore.platform }}</b>
-    </span>
-    <div class="overflow-block">
-      <pre
-        >{{ appStore.webAppConfig }}
-________
-{{ appStore.urlParams }}
-________
-{{ userAgent }}
-      </pre>
-    </div>
+    <template v-if="appStore.config.eruda">
+      <span>
+        Ваша платформа: <b>{{ appStore.platform }}</b>
+      </span>
+      <div class="overflow-block">
+        <b>webAppConfig:</b>
+        <pre>{{ appStore.webAppConfig }}</pre>
+        <b>urlParams:</b>
+        <pre>{{ appStore.urlParams }}</pre>
+        <b>userAgent:</b>
+        <pre>{{ userAgent }}</pre>
+      </div>
+    </template>
   </APageContainer>
 </template>
 <style lang="scss">
@@ -66,5 +67,12 @@ ________
   background-position: right;
   background-repeat: repeat, no-repeat;
   background-size: auto, contain;
+
+  pre {
+    flex: 1;
+    margin: 0;
+    min-width: 0;
+    overflow: auto;
+  }
 }
 </style>
