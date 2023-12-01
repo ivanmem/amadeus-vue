@@ -15,6 +15,8 @@ export interface UsableSwipesOptions {
    * Максимальное значение - 50%, тогда срабатывать будет в любом случае.
    * При 0% срабатывать будет только под полным прямым углом.*/
   precisionDirection?: number;
+  /** @description Предотвратить срабатывание свайпов, если на элементе присутствует scrollbar */
+  scrollPrevent?: boolean;
 }
 
 /** @description Функция позволяет установить обработчики на свайпы в определённые стороны и contextmenu (модернизированный для работы с IOS mobile) */
@@ -32,6 +34,14 @@ export function useSwipes(opts: UsableSwipesOptions) {
   const appStore = useApp();
 
   function touchstart(evt: TouchEvent) {
+    if (
+      opts.scrollPrevent === true &&
+      evt.target instanceof HTMLElement &&
+      evt.target.scrollWidth > evt.target.offsetWidth
+    ) {
+      return;
+    }
+
     const firstTouch = evt.touches[0];
     xDown = firstTouch.clientX;
     yDown = firstTouch.clientY;

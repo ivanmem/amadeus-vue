@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { nextTick, onMounted, shallowRef, watch } from "vue";
+import { onMounted, shallowRef, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import copy from "copy-to-clipboard";
 import { useCommands } from "./store/commands/commands";
@@ -9,7 +9,6 @@ import { useApp } from "./store/app/app";
 import { icons } from "./common/consts";
 import ANavigationMenu from "./components/ANavigationMenu.vue";
 import { useSwipes } from "./composables/useSwipes";
-import { sleep } from "./helpers/sleep";
 import { goBack } from "./router";
 
 const router = useRouter();
@@ -59,6 +58,7 @@ watch(
 
 const swipes = useSwipes({
   onLeft: goBack,
+  scrollPrevent: true,
 });
 </script>
 
