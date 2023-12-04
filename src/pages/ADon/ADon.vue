@@ -3,8 +3,10 @@ import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import AButton from "../../components/AButton/AButton.vue";
 import { darkColorScheme } from "../../common/consts";
 import { useAppCaption } from "../../hooks/useAppCaption";
+import { useApp } from "../../store/app/app";
 
 useAppCaption("Дон Статус");
+const appService = useApp();
 
 const products = [
   {
@@ -23,65 +25,72 @@ const products = [
 </script>
 <template>
   <APageContainer class="a-don">
-    <AButton
-      data-type="accent"
-      icon="Icon16Link"
-      to="https://vk.com/@animecm-don"
-    >
-      Подробно про статус дона
-    </AButton>
+    <template v-if="appService.isApp">
+      Эта страница недоступна с приложения.
+    </template>
+    <template v-else>
+      <AButton
+        data-type="accent"
+        icon="Icon16Link"
+        to="https://vk.com/@animecm-don"
+      >
+        Подробно про статус дона
+      </AButton>
 
-    <div>
-      <h3 style="padding: 10px 0">Каталог товаров</h3>
-      <div class="a-button__left-content-block">
-        <AButton
-          v-for="product of products"
-          :key="product.caption"
-          :to="product.to"
-          class="a-button__left-content"
-          data-type="accent"
-          icon="Icon16Link"
-        >
-          {{ product.caption }}
-        </AButton>
+      <div>
+        <h3 style="padding: 10px 0">Каталог товаров</h3>
+        <div class="a-button__left-content-block">
+          <AButton
+            v-for="product of products"
+            :key="product.caption"
+            :to="product.to"
+            class="a-button__left-content"
+            data-type="accent"
+            icon="Icon16Link"
+          >
+            {{ product.caption }}
+          </AButton>
+        </div>
+        <div style="padding: 10px 0">
+          Цена минимальная, с такой мы ничего не зарабатываем. Всё уходит на
+          поддержку сервера. Даже в минус уходим.
+        </div>
       </div>
-      <div style="padding: 10px 0">
-        Цена минимальная, с такой мы ничего не зарабатываем. Всё уходит на
-        поддержку сервера. Даже в минус уходим.
+
+      <AButton
+        data-type="accent"
+        icon="Icon16Link"
+        to="https://vk.com/@animecm-terms-of-use"
+      >
+        Пользовательское соглашение
+      </AButton>
+
+      <div>
+        <h2>Контактные данные</h2>
+        Мелентьев Иван Андреевич, Почта: animecm@mail.ru, ИНН: 500178253300
       </div>
-    </div>
 
-    <AButton
-      data-type="accent"
-      icon="Icon16Link"
-      to="https://vk.com/@animecm-terms-of-use"
-    >
-      Пользовательское соглашение
-    </AButton>
-
-    <div>
-      <h2>Контактные данные</h2>
-      Мелентьев Иван Андреевич, Почта: animecm@mail.ru, ИНН: 500178253300
-    </div>
-
-    <a
-      href="https://yookassa.ru/protection?utm_campaign=kassa_protection&utm_source=merchants"
-      rel="noopener"
-      target="_blank"
-    >
-      <picture>
-        <source
-          v-if="darkColorScheme"
-          srcset="https://yoomoney.ru/i/html-letters/safe-kassa-logo-white.svg"
-        />
-        <img
-          alt="Платежи под защитой ЮKassa."
-          height="60"
-          src="https://yoomoney.ru/i/html-letters/safe-kassa-logo-black.svg"
-          width="173"
-        />
-      </picture>
-    </a>
+      <a
+        href="https://yookassa.ru/protection?utm_campaign=kassa_protection&utm_source=merchants"
+        rel="noopener"
+        target="_blank"
+      >
+        <picture>
+          <source
+            v-if="darkColorScheme"
+            srcset="
+              https://yoomoney.ru/i/html-letters/safe-kassa-logo-white.svg
+            "
+          />
+          <img
+            alt="Платежи под защитой ЮKassa."
+            height="60"
+            src="https://yoomoney.ru/i/html-letters/safe-kassa-logo-black.svg"
+            width="173"
+          />
+        </picture>
+      </a>
+    </template>
   </APageContainer>
 </template>
 <style lang="scss">

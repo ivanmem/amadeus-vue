@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import AButton from "./AButton/AButton.vue";
 import { useRoute } from "vue-router";
+import { useApp } from "../store/app/app";
 
 const route = useRoute();
+const appService = useApp();
 </script>
 <template>
   <div class="navigation">
@@ -27,7 +29,11 @@ const route = useRoute();
       <AButton icon="Icon24CrownOutline" to="/roles">
         <span> О ролях </span>
       </AButton>
-      <AButton icon="Icon24DollarCircleOutline" to="/don">
+      <AButton
+        v-if="!appService.isApp"
+        icon="Icon24DollarCircleOutline"
+        to="/don"
+      >
         <span>Дон статус</span>
       </AButton>
       <AButton icon="Icon24LightbulbStarOutline" to="/about">
