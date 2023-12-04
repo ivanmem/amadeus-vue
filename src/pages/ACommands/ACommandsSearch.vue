@@ -13,7 +13,7 @@ const { Icon16SearchOutline } = icons;
 
 <template>
   <div class="a-command-search">
-    <div style="display: flex; gap: 5px; flex-grow: 1">
+    <div style="display: flex; gap: 5px; flex-grow: 1; padding-right: 6px">
       <label class="a-command-search__label">
         <Icon16SearchOutline style="margin-right: 5px" />
         <input ref="reference" v-model="search" placeholder="Поиск" />

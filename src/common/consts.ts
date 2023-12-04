@@ -18,6 +18,7 @@ import Icon24View from "@vkontakte/icons/src/svg/24/view_24.svg?component";
 import Icon24CopyOutline from "@vkontakte/icons/src/svg/24/copy_outline_24.svg?component";
 import Icon24ChevronDown from "@vkontakte/icons/src/svg/24/chevron_down_24.svg?component";
 import Icon24ChevronUp from "@vkontakte/icons/src/svg/24/chevron_up_24.svg?component";
+import Icon24QuestionOutline from "@vkontakte/icons/src/svg/24/question_outline_24.svg?component";
 
 import Icon20FunnelOutline from "@vkontakte/icons/src/svg/20/funnel_outline_20.svg?component";
 
@@ -62,6 +63,7 @@ export const icons = {
   Icon24CopyOutline,
   Icon24ChevronDown,
   Icon24ChevronUp,
+  Icon24QuestionOutline,
 
   Icon20FunnelOutline,
 
@@ -88,3 +90,5 @@ export const icons = {
 export const darkColorScheme = ref(false);
 
 export const isDev = process.env.NODE_ENV === "development";
+
+export const MAX_SIZE_ONE_VK_VALUE = 2236;

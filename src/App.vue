@@ -46,7 +46,7 @@ watch(
   { immediate: true },
 );
 
-const { Icon24Linked, Icon24CopyOutline } = icons;
+const { Icon24Linked, Icon24CopyOutline, Icon24QuestionOutline } = icons;
 
 const LinkIcon = shallowRef(Icon24Linked);
 watch(
@@ -71,13 +71,19 @@ const swipes = useSwipes({
         </template>
       </div>
       <AButton
-        v-if="route.path !== '/'"
+        v-show="route.path !== '/command/'"
         @click="
           copy('vk.com/app51547376#' + route.path);
           LinkIcon = Icon24CopyOutline;
         "
       >
         <LinkIcon />
+      </AButton>
+      <AButton
+        v-show="route.path === '/command/'"
+        @click="appStore.initSlides()"
+      >
+        <Icon24QuestionOutline />
       </AButton>
     </div>
     <div class="route-view">

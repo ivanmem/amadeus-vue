@@ -1,6 +1,7 @@
 ## Зависимости
 
-Положите описание команд в директорию `/public/doc.json` (возьмите его из сервиса в ВК с помощью devtools или получите по [ссылке](https://xeleos.ddns.net/api/commands/doc)).
+Положите описание команд в директорию `/public/doc.json` (возьмите его из сервиса в ВК с помощью devtools или получите
+по [ссылке](https://xeleos.ddns.net/api/commands/doc)).
 А так же установите npm пакеты:
 
 ```shell
@@ -30,4 +31,4 @@ npm run deploy
 
 ## Ссылки
 
-[Амадеус Alpha](https://vk.com/app51547376)
+[Амадеус](https://vk.com/app51547376)
