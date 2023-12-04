@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, shallowRef, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import copy from "copy-to-clipboard";
 import { useCommands } from "./store/commands/commands";
 import AButton from "./components/AButton/AButton.vue";
 import { useColorScheme } from "./useColorScheme";
@@ -10,11 +9,13 @@ import { icons } from "./common/consts";
 import ANavigationMenu from "./components/ANavigationMenu.vue";
 import { useSwipes } from "./composables/useSwipes";
 import { goBack } from "./router";
+import { useVk } from "./store/vk/vk";
 
 const router = useRouter();
 const route = useRoute();
 const store = useCommands();
 const appStore = useApp();
+const vkService = useVk();
 useColorScheme();
 
 onMounted(() => {
@@ -73,7 +74,7 @@ const swipes = useSwipes({
       <AButton
         v-show="route.path !== '/command/'"
         @click="
-          copy('vk.com/app51547376#' + route.path);
+          vkService.copyText('vk.com/app51547376#' + route.path);
           LinkIcon = Icon24CopyOutline;
         "
       >

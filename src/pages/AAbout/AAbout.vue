@@ -5,7 +5,7 @@ import { useAppCaption } from "../../hooks/useAppCaption";
 import { useApp } from "../../store/app/app";
 import AToggle from "../../components/AToggle/AToggle.vue";
 
-useAppCaption("Source");
+useAppCaption("Справка");
 
 const appStore = useApp();
 const userAgent = navigator.userAgent;
@@ -19,7 +19,15 @@ const userAgent = navigator.userAgent;
       <b>TypeScript, Vite, Vue 3, Pinia, SCSS, Tailwind</b>.
     </span>
 
-    <div class="flex flex-wrap gap-10">
+    <div class="flex flex-wrap gap-2">
+      <AButton to="https://vk.com/@animecm-install" icon="Icon24Add"
+        >Инструкция по подключению бота</AButton
+      >
+      <AButton
+        to="https://vk.com/@animecm-articles"
+        icon="Icon24ArticleBoxOutline"
+        >Оглавление</AButton
+      >
       <AButton
         class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2"
         style="height: 36px"

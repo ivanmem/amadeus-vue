@@ -4,11 +4,12 @@ import { useAppCaption } from "../../hooks/useAppCaption";
 import { useCommands } from "../../store/commands/commands";
 import { computed } from "vue";
 import ALinkify from "../../components/ALinkify/ALinkify.vue";
-import copy from "copy-to-clipboard";
 import ACopyButton from "../../components/ACopyButton/ACopyButton.vue";
 import AButton from "../../components/AButton/AButton.vue";
+import { useVk } from "../../store/vk/vk";
 
 useAppCaption("События чата");
+const vkService = useVk();
 const events = computed(() => useCommands().docs?.events);
 
 const fontSize = 14;
@@ -30,7 +31,7 @@ const fontSize = 14;
     >
       <ACopyButton
         :size="fontSize"
-        @click="copy(`%${events.templateArguments[key]}%`)"
+        @click="vkService.copyText(`%${events.templateArguments[key]}%`)"
       >
         <b>{{ `%${events.templateArguments[key]}%` }}</b>
       </ACopyButton>
@@ -43,7 +44,10 @@ const fontSize = 14;
       <div v-for="option of events.options">
         <div class="a-event-block">
           <div>
-            <ACopyButton :size="fontSize" @click="copy(option.alias[0])">
+            <ACopyButton
+              :size="fontSize"
+              @click="vkService.copyText(option.alias[0])"
+            >
               <b>Название:</b>&nbsp;
             </ACopyButton>
             <pre>{{ option.alias.join(", ") }}</pre>
@@ -57,7 +61,10 @@ const fontSize = 14;
             />
           </div>
           <div v-if="option.example">
-            <ACopyButton :size="fontSize" @click="copy(option.example)">
+            <ACopyButton
+              :size="fontSize"
+              @click="vkService.copyText(option.example)"
+            >
               <b>Пример:</b>
             </ACopyButton>
             <pre>{{ option.example }}</pre>

@@ -116,5 +116,10 @@ export const useVk = defineStore("vk", {
     sendVKWebAppStorageGet(data: { keys: string[] }) {
       return bridge.send("VKWebAppStorageGet", data);
     },
+    copyText(text: string) {
+      return bridge.send("VKWebAppCopyText", {
+        text,
+      });
+    },
   },
 });

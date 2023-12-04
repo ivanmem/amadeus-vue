@@ -163,7 +163,7 @@ export const useApp = defineStore("app", {
             type: "image",
           },
           title: "Команды",
-          subtitle: 'Найдите справку к любой команде из чат-бота "Амадеус".',
+          subtitle: "Найдите справку к любой команде из чат-бота «Амадеус».",
         },
         {
           media: {

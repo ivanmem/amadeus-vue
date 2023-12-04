@@ -37,7 +37,7 @@ const appService = useApp();
         <span>Дон статус</span>
       </AButton>
       <AButton icon="Icon24LightbulbStarOutline" to="/about">
-        <span>Source</span>
+        <span>Справка</span>
       </AButton>
     </div>
   </div>
