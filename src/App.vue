@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, shallowRef, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useCommands } from "./store/commands/commands";
 import AButton from "./components/AButton/AButton.vue";
 import { useColorScheme } from "./useColorScheme";
@@ -72,7 +72,7 @@ const swipes = useSwipes({
         </template>
       </div>
       <AButton
-        v-show="route.path !== '/command/'"
+        v-show="route.path !== '/command/' && route.path !== '/'"
         @click="
           vkService.copyText('vk.com/app51547376#' + route.path);
           LinkIcon = Icon24CopyOutline;

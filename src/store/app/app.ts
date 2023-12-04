@@ -150,11 +150,11 @@ export const useApp = defineStore("app", {
       }
     },
     async initSlides() {
-      const [commands, tops, events, source] = await Promise.all([
+      const [commands, tops, events, about] = await Promise.all([
         imageUrlToBase64("/slides/commands.png"),
         imageUrlToBase64("/slides/tops.png"),
         imageUrlToBase64("/slides/events.png"),
-        imageUrlToBase64("/slides/source.png"),
+        imageUrlToBase64("/slides/about.png"),
       ]);
       const slides: ShowSlidesSheetRequest["slides"] = [
         {
@@ -185,12 +185,12 @@ export const useApp = defineStore("app", {
         },
         {
           media: {
-            blob: source,
+            blob: about,
             type: "image",
           },
-          title: "Открытый исходный код",
+          title: "Дополнительно",
           subtitle:
-            "Напишите своё пожелание к данному приложению в нашем репозитории на гитхабе, либо реализуйте его самостоятельно!",
+            "Остальные инструкции находятся в разделе «Справка».",
         },
       ];
       await bridge.send("VKWebAppShowSlidesSheet", {
