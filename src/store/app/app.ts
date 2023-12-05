@@ -11,6 +11,7 @@ import { watch, watchEffect } from "vue";
 import { setEruda } from "../../helpers/setEruda";
 import { useVk } from "../vk/vk";
 import { imageUrlToBase64 } from "../../helpers/imageUrlToBase64";
+import { router } from "../../router";
 
 interface AppState {
   caption: string;
@@ -113,7 +114,11 @@ export const useApp = defineStore("app", {
       );
 
       if (this.config.slides) {
-        this.initSlides().then(() => delete this.config.slides);
+        const { action } = await this.initSlides();
+        if (action === "confirm") {
+          delete this.config.slides;
+          await router.push("/about");
+        }
       }
     },
     getLoadingFinisher(): () => void {
@@ -191,10 +196,10 @@ export const useApp = defineStore("app", {
           },
           title: "Как им пользоваться?",
           subtitle:
-            "Инструкции по добавлению бота в чат находятся в разделе «Справка».",
+            "Инструкции по добавлению бота в чат и настройке находятся в разделе «Справка».",
         },
       ];
-      await bridge.send("VKWebAppShowSlidesSheet", {
+      return await bridge.send("VKWebAppShowSlidesSheet", {
         slides,
       });
     },

@@ -4,11 +4,25 @@ import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import { useApp } from "../../store/app/app";
 import AToggle from "../../components/AToggle/AToggle.vue";
+import { useVk } from "../../store/vk/vk";
 
 useAppCaption("Справка");
 
 const appStore = useApp();
+const vkService = useVk();
 const userAgent = navigator.userAgent;
+
+const onAllowMessages = async (e: MouseEvent) => {
+  const { result } = await vkService.allowMessages();
+
+  if (!result) {
+    return;
+  }
+
+  if (e.target instanceof HTMLElement) {
+    e.target.style.setProperty("display", "none");
+  }
+};
 </script>
 
 <template>
@@ -20,14 +34,18 @@ const userAgent = navigator.userAgent;
     </span>
 
     <div class="flex flex-wrap gap-2">
-      <AButton to="https://vk.com/@animecm-install" icon="Icon24Add"
-        >Инструкция по подключению бота</AButton
-      >
+      <AButton icon="Icon24Add" to="https://vk.com/@animecm-install">
+        Инструкция по подключению бота
+      </AButton>
       <AButton
-        to="https://vk.com/@animecm-articles"
         icon="Icon24ArticleBoxOutline"
-        >Оглавление</AButton
+        to="https://vk.com/@animecm-articles"
       >
+        Оглавление
+      </AButton>
+      <AButton icon="Icon16Pen" @click="onAllowMessages">
+        Разрешить боту писать вам
+      </AButton>
       <AButton
         class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2"
         style="height: 36px"

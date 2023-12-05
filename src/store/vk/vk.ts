@@ -17,6 +17,7 @@ interface VkState {
   token?: {
     access_token: string;
   };
+  groupId: number;
 }
 
 export const useVk = defineStore("vk", {
@@ -25,6 +26,7 @@ export const useVk = defineStore("vk", {
       chunksMaxCount: 20, // можно получить не более десяти за 1 запрос
       vkWebAppStorageSetCount: 0,
       webAppConfig: {},
+      groupId: +import.meta.env.VITE_GROUP_ID,
     };
   },
   actions: {
@@ -119,6 +121,11 @@ export const useVk = defineStore("vk", {
     copyText(text: string) {
       return bridge.send("VKWebAppCopyText", {
         text,
+      });
+    },
+    allowMessages() {
+      return bridge.send("VKWebAppAllowMessagesFromGroup", {
+        group_id: this.groupId,
       });
     },
   },
