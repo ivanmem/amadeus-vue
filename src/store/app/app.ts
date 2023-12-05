@@ -150,47 +150,48 @@ export const useApp = defineStore("app", {
       }
     },
     async initSlides() {
-      const [commands, tops, events, about] = await Promise.all([
+      const [commands, tops, about, amadeus] = await Promise.all([
         imageUrlToBase64("/slides/commands.png"),
         imageUrlToBase64("/slides/tops.png"),
-        imageUrlToBase64("/slides/events.png"),
         imageUrlToBase64("/slides/about.png"),
+        imageUrlToBase64("/slides/amadeus.png"),
       ]);
       const slides: ShowSlidesSheetRequest["slides"] = [
+        {
+          media: {
+            blob: amadeus,
+            type: "image",
+          },
+          title: "Чат-бот «Амадеус»",
+          subtitle:
+            "Создан специально для поклонников аниме и у него более 300 команд!",
+        },
         {
           media: {
             blob: commands,
             type: "image",
           },
-          title: "Команды",
-          subtitle: "Найдите справку к любой команде из чат-бота «Амадеус».",
+          title: "Функционал",
+          subtitle:
+            "Забанить, удалить сообщение или может налить чаю? Найдите в поиске то, что вам нужно.",
         },
         {
           media: {
             blob: tops,
             type: "image",
           },
-          title: "Топы",
+          title: "Ищите друзей-анимешников",
           subtitle:
-            "Попробуйте заявить о себе, заняв место в топе или поместите свой чат в каталог для привлечения новых участников.",
-        },
-        {
-          media: {
-            blob: events,
-            type: "image",
-          },
-          title: "События",
-          subtitle:
-            "Ознакомьтесь с примерами событий чата для детальной настройки бота.",
+            "Попробуйте занять место в топе или поместите свой чат в каталог.",
         },
         {
           media: {
             blob: about,
             type: "image",
           },
-          title: "Дополнительно",
+          title: "Как им пользоваться?",
           subtitle:
-            "Остальные инструкции находятся в разделе «Справка».",
+            "Инструкции по добавлению бота в чат находятся в разделе «Справка».",
         },
       ];
       await bridge.send("VKWebAppShowSlidesSheet", {
