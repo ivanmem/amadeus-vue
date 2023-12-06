@@ -7,6 +7,7 @@ import {
 } from "@vkontakte/vk-bridge/dist/types/src/types/data";
 import { chunkString } from "../../helpers/chunkString";
 import { MAX_SIZE_ONE_VK_VALUE } from "../../common/consts";
+import { absoluteUrl } from "../../helpers/absoluteUrl";
 
 interface VkState {
   chunksMaxCount: number;
@@ -126,6 +127,11 @@ export const useVk = defineStore("vk", {
     allowMessages() {
       return bridge.send("VKWebAppAllowMessagesFromGroup", {
         group_id: this.groupId,
+      });
+    },
+    showImages(images: string[]) {
+      return bridge.send("VKWebAppShowImages", {
+        images: images.map((x) => (x.startsWith("/") ? absoluteUrl(x) : x)),
       });
     },
   },

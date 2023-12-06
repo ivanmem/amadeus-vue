@@ -117,7 +117,7 @@ export const useApp = defineStore("app", {
         const { action } = await this.initSlides();
         if (action === "confirm") {
           delete this.config.slides;
-          await router.push("/about");
+          await router.push("/about/");
         }
       }
     },

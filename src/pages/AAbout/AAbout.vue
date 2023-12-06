@@ -27,24 +27,12 @@ const onAllowMessages = async (e: MouseEvent) => {
 
 <template>
   <APageContainer class="a-about">
-    <span>
-      Это приложение с открытым исходным кодом.
-      <br />Вы можете внести свой вклад. <br />Для этого вам необходимо изучить:
-      <b>TypeScript, Vite, Vue 3, Pinia, SCSS, Tailwind</b>.
-    </span>
-
-    <div class="flex flex-wrap gap-2">
-      <AButton icon="Icon24Add" to="https://vk.com/@animecm-install">
-        Инструкция по подключению бота
-      </AButton>
-      <AButton
-        icon="Icon24ArticleBoxOutline"
-        to="https://vk.com/@animecm-articles"
-      >
-        Оглавление
+    <div class="flex flex-wrap gap-3">
+      <AButton icon="Icon24ArticleBoxOutline" to="/about/man-add-to-chat">
+        Добавить бота в чат
       </AButton>
       <AButton icon="Icon16Pen" @click="onAllowMessages">
-        Разрешить боту писать вам
+        Разрешить боту писать в диалог со мной
       </AButton>
       <AButton
         class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2"
@@ -69,6 +57,11 @@ const onAllowMessages = async (e: MouseEvent) => {
       </AButton>
       <AToggle v-model="appStore.config.eruda">Eruda</AToggle>
     </div>
+    <span>
+      У этого приложения открытый исходный код.
+      <br />Вы можете внести свой вклад. <br />Для этого вам необходимо изучить:
+      <b>TypeScript, Vite, Vue 3, Pinia, SCSS, Tailwind</b>.
+    </span>
     <template v-if="appStore.config.eruda">
       <span>
         Ваша платформа: <b>{{ appStore.platform }}</b>

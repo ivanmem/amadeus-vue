@@ -36,7 +36,11 @@ const appService = useApp();
       >
         <span>Дон статус</span>
       </AButton>
-      <AButton icon="Icon24LightbulbStarOutline" to="/about">
+      <AButton
+        :data-type="route.path.startsWith('/about/') ? 'accent' : undefined"
+        icon="Icon24LightbulbStarOutline"
+        to="/about/"
+      >
         <span>Справка</span>
       </AButton>
     </div>

@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import("../pages/ACommands/ACommands.vue"),
   },
 
-  { path: "/about", component: () => import("../pages/AAbout/AAbout.vue") },
+  { path: "/about/", component: () => import("../pages/AAbout/AAbout.vue") },
   { path: "/roles", component: () => import("../pages/ARoles/ARoles.vue") },
   { path: "/don", component: () => import("../pages/ADon/ADon.vue") },
   { path: "/events", component: () => import("../pages/AEvents/AEvents.vue") },
@@ -47,6 +47,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/top/commands",
     component: () => import("../pages/ATops/ATopCommands.vue"),
+  },
+  {
+    path: "/about/man-add-to-chat",
+    component: () => import("../pages/AAbout/AManAddToChat.vue"),
   },
 ];
 
