@@ -84,7 +84,7 @@ bridge.subscribe((event) => {
 export async function goBack() {
   const originalFullPath = router.currentRoute.value.fullPath;
   router.back();
-  await sleep(1);
+  await sleep(10);
   // Если роут не изменился
   if (originalFullPath === router.currentRoute.value.fullPath) {
     // Отправляем bridge на закрытие сервиса.
