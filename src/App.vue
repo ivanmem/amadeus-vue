@@ -118,10 +118,13 @@ const swipes = useSwipes({
   padding-left: 8px;
   padding-right: var(--navigation-header-padding-right, 10px);
 
-  a,
-  svg,
-  span {
+  svg {
     color: white;
+  }
+
+  a,
+  span {
+    color: currentColor;
   }
 
   a {
@@ -132,13 +135,15 @@ const swipes = useSwipes({
 
   .a-button {
     background-color: var(--navigation-background-color);
-    color: white;
+    color: currentColor;
     max-height: var(--navigation-header-height);
     min-height: var(--navigation-header-height);
     overflow: hidden;
     padding-inline: 8px;
 
     svg {
+      color: white;
+
       @include mixins.platform(height, 20px, 18px, 16px);
       @include mixins.platform(width, 20px, 18px, 16px);
     }
