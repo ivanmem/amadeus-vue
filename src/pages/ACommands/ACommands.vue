@@ -37,8 +37,12 @@ const currentCommands = computed(() => {
       :lang="commandSearch.searchLang.value"
     />
     <AMessage
-      v-if="searchDebounce.length && currentCommands.value.length === 0"
-      style="flex-grow: 1; padding-inline: var(--page-padding-inline)"
+      v-if="currentCommands.value.length === 0"
+      style="
+        flex-grow: 1;
+        padding-top: 5px;
+        padding-inline: var(--page-padding-inline);
+      "
     >
       Подходящие команды отсутствуют.
     </AMessage>
