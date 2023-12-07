@@ -13,25 +13,30 @@ const items = await TopService.get("/top/conversations/catalog");
   <APageContainer style="padding-inline: 0">
     <details style="padding: var(--page-padding)">
       <summary style="cursor: pointer">Хотите попасть в каталог?</summary>
-      <ol>
-        <li>
+      <div>
+        <br />
+        <div>
           1) Установите ссылку на ваш чат с помощью команды:
           <AButton class="a-button__inline" to="/command/63">
             ЗадатьСсылку
           </AButton>
-        </li>
-        <li>
+        </div>
+        <br />
+        <div>
           2) Выполните команду:
           <AButton class="a-button__inline" to="/command/70">
             ПубличнаяСсылка
           </AButton>
-        </li>
-      </ol>
-      Для скрытия ссылки выполните команду
-      <AButton class="a-button__inline" to="/command/70">
-        ПубличнаяСсылка
-      </AButton>
-      ещё раз.
+        </div>
+        <br />
+        <div>
+          * Для скрытия ссылки выполните команду
+          <AButton class="a-button__inline" to="/command/70">
+            ПубличнаяСсылка
+          </AButton>
+          ещё раз.
+        </div>
+      </div>
     </details>
     <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
     <ATopConversationsTable v-else :items="items" />

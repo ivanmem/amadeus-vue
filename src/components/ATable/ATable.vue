@@ -12,9 +12,14 @@ const props = defineProps<Props>();
 <template>
   <EasyDataTable
     :headers="headers"
+    :index-column-width="30"
     :items="items"
     :rows-per-page="9999"
     alternating
+    body-text-direction="center"
+    border-cell
+    fixed-index
+    header-text-direction="center"
     hide-footer
     show-index
   >
