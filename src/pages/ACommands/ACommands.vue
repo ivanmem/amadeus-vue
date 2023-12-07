@@ -5,6 +5,7 @@ import ACommandsSearch from "./ACommandsSearch.vue";
 import { computed, ref } from "vue";
 import ACommandsDynamicScroller from "./ACommandsDynamicScroller.vue";
 import AMessage from "../../components/AMessage/AMessage.vue";
+import { icons } from "../../common/consts";
 
 useAppCaption("Команды");
 
@@ -26,6 +27,8 @@ const currentCommands = computed(() => {
 
   return searchType.value == "name" ? searchCommands : searchDescriptions;
 });
+
+const { Icon16WarningTriangle } = icons;
 </script>
 
 <template>
@@ -39,11 +42,12 @@ const currentCommands = computed(() => {
     <AMessage
       v-if="currentCommands.value.length === 0"
       style="
-        flex-grow: 1;
-        padding-top: 5px;
+        padding-top: 10px;
         padding-inline: var(--page-padding-inline);
+        gap: 5px;
       "
     >
+      <Icon16WarningTriangle />
       Подходящие команды отсутствуют.
     </AMessage>
   </div>
@@ -66,6 +70,7 @@ const currentCommands = computed(() => {
   gap: 8px;
   overflow: auto;
   padding-block: 12px;
+  padding-top: 10px;
 }
 
 .a-commands__header {

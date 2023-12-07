@@ -50,6 +50,7 @@ div[contenteditable="true"] {
   align-items: center;
   display: flex;
   flex-grow: 1;
+  height: 36px;
   padding-inline: var(--page-padding-inline);
 
   input {

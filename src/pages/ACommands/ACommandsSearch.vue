@@ -2,20 +2,23 @@
 import { UseCommandSearch } from "./useCommandSearch";
 import ACommandsFilters from "./ACommandsFilters.vue";
 import { icons } from "../../common/consts";
+import { computed } from "vue";
 
 const props = defineProps<{
   commandSearch: UseCommandSearch;
 }>();
 
 const { search } = props.commandSearch;
-const { Icon16SearchOutline } = icons;
+const IconSearch = computed(() =>
+  search.value.length ? icons.Icon16Cancel : icons.Icon16SearchOutline,
+);
 </script>
 
 <template>
   <div class="a-command-search">
     <div style="display: flex; gap: 5px; flex-grow: 1; padding-right: 6px">
       <label class="a-command-search__label">
-        <Icon16SearchOutline style="margin-right: 5px" />
+        <IconSearch style="margin-right: 5px" @click="search = ''" />
         <input ref="reference" v-model="search" placeholder="Поиск" />
       </label>
       <div style="padding: 5px">
@@ -32,10 +35,10 @@ const { Icon16SearchOutline } = icons;
   </div>
   <div
     v-if="props.commandSearch.searchDebounce.value.length > 0"
-    class="box-border"
+    class="a-command-search__types box-border"
   >
     <ul
-      class="items-center text-sm font-medium m-2 select-none text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      class="items-center text-sm font-medium select-none text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
     >
       <li
         v-for="type of props.commandSearch.searchTypes"
@@ -62,3 +65,9 @@ const { Icon16SearchOutline } = icons;
     </ul>
   </div>
 </template>
+<style lang="scss">
+.a-command-search__types {
+  padding-inline: var(--page-padding-inline);
+  padding-top: 10px;
+}
+</style>

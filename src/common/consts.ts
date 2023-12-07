@@ -35,6 +35,7 @@ import Icon16KeyOutline from "@vkontakte/icons/src/svg/16/key_outline_16.svg?com
 import Icon16Dash from "@vkontakte/icons/src/svg/16/dash_16.svg?component";
 import Icon16CopyOutline from "@vkontakte/icons/src/svg/16/copy_outline_16.svg?component";
 import Icon16SearchOutline from "@vkontakte/icons/src/svg/16/search_outline_16.svg?component";
+import Icon16Cancel from "@vkontakte/icons/src/svg/16/cancel_16.svg?component";
 
 import Icon12ErrorCircle from "@vkontakte/icons/src/svg/12/error_circle_12.svg?component";
 import Icon12Tag from "@vkontakte/icons/src/svg/12/tag_12.svg?component";
@@ -83,6 +84,7 @@ export const icons = {
   Icon16Dash,
   Icon16CopyOutline,
   Icon16SearchOutline,
+  Icon16Cancel,
 
   Icon12ErrorCircle,
   Icon12Tag,
