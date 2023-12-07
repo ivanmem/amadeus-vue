@@ -52,6 +52,11 @@ const routes: RouteRecordRaw[] = [
     path: "/about/man-add-to-chat",
     component: () => import("../pages/AAbout/AManAddToChat.vue"),
   },
+  {
+    path: "/:catchAll(.*)",
+    component: () => import("../components/PageNotFound.vue"),
+    strict: false,
+  },
 ];
 
 export const router = createRouter({
