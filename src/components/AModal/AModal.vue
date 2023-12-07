@@ -27,9 +27,10 @@ function openModal() {
 const slots = useSlots();
 
 defineSlots<{
-  header?: (props: {}) => any;
-  content?: (props: {}) => any;
-  footer?: (props: {}) => any;
+  button?: any;
+  header?: any;
+  content?: any;
+  footer?: any;
 }>();
 
 const hasHeader = computed<boolean>(() => !!slots.header);
