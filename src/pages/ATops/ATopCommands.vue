@@ -6,12 +6,11 @@ import AButton from "../../components/AButton/AButton.vue";
 import { router } from "../../router";
 import { ATableHeader } from "../../components/ATable/types";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
+import ATopError from "./ATopError.vue";
+import { TopService } from "../../services/TopService";
 
 useAppCaption("Топ команд (за всё время)");
-const items: object[] = await fetch(
-  "https://xeleos.ddns.net/api/top/commands",
-).then((x) => x.json());
-
+const items = await TopService.get("/top/commands");
 const headers: ATableHeader[] = [
   { value: "commandId", text: "Название", sortable: true },
   {
@@ -24,7 +23,8 @@ const commands = useCommands();
 </script>
 <template>
   <APageContainer style="padding-inline: 0">
-    <ATable :headers="headers" :items="items">
+    <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
+    <ATable v-else :headers="headers" :items="items">
       <template #item-commandId="{ commandId }">
         <AButton class="opacity" @click="router.push('/command/' + commandId)">
           {{ commands.getCommandFullName(commandId) }}

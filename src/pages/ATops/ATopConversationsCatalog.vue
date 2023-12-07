@@ -3,11 +3,11 @@ import { useAppCaption } from "../../hooks/useAppCaption";
 import ATopConversationsTable from "./ATopConversationsTable.vue";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import AButton from "../../components/AButton/AButton.vue";
+import ATopError from "./ATopError.vue";
+import { TopService } from "../../services/TopService";
 
 useAppCaption("Каталог чатов");
-const items: object[] = await fetch(
-  "https://xeleos.ddns.net/api/top/conversations/catalog",
-).then((x) => x.json());
+const items = await TopService.get("/top/conversations/catalog");
 </script>
 <template>
   <APageContainer style="padding-inline: 0">
@@ -33,6 +33,7 @@ const items: object[] = await fetch(
       </AButton>
       ещё раз.
     </details>
-    <ATopConversationsTable :items="items" />
+    <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
+    <ATopConversationsTable v-else :items="items" />
   </APageContainer>
 </template>

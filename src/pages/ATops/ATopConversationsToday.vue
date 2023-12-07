@@ -2,14 +2,15 @@
 import { useAppCaption } from "../../hooks/useAppCaption";
 import ATopConversationsTable from "./ATopConversationsTable.vue";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
+import ATopError from "./ATopError.vue";
+import { TopService } from "../../services/TopService";
 
 useAppCaption("Топ чатов (за сегодня)");
-const items: object[] = await fetch(
-  "https://xeleos.ddns.net/api/top/conversations/today",
-).then((x) => x.json());
+const items = await TopService.get("/top/conversations/today");
 </script>
 <template>
   <APageContainer style="padding-inline: 0">
-    <ATopConversationsTable :items="items" />
+    <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
+    <ATopConversationsTable v-else :items="items" />
   </APageContainer>
 </template>

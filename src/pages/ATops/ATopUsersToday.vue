@@ -3,12 +3,11 @@ import { useAppCaption } from "../../hooks/useAppCaption";
 import ATable from "../../components/ATable/ATable.vue";
 import { ATableHeader } from "../../components/ATable/types";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
+import ATopError from "./ATopError.vue";
+import { TopService } from "../../services/TopService";
 
 useAppCaption("Топ пользователей за сегодня");
-const items: object[] = await fetch(
-  "https://xeleos.ddns.net/api/top/users/today",
-).then((x) => x.json());
-
+const items = await TopService.get("/top/users/today");
 const headers: ATableHeader[] = [
   { value: "name", text: "Название", sortable: true },
   {
@@ -20,6 +19,7 @@ const headers: ATableHeader[] = [
 </script>
 <template>
   <APageContainer style="padding-inline: 0">
-    <ATable :headers="headers" :items="items" />
+    <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
+    <ATable v-else :headers="headers" :items="items" />
   </APageContainer>
 </template>
