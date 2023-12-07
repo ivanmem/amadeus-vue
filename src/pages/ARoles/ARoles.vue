@@ -44,7 +44,7 @@ const roles: {
 
 <template>
   <APageContainer class="a-roles">
-    <h4>В Амадеусе используется 11ти уровневая ролевая система.</h4>
+    <h4>В Амадеусе используется 11-ти уровневая ролевая система.</h4>
     <div v-for="role of roles" :key="role.level" class="a-roles__level">
       <img
         :alt="role.level.toString()"
