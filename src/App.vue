@@ -71,22 +71,18 @@ const swipes = useSwipes({
           {{ appStore.caption }}
         </template>
       </div>
-      <div id="navigation-header__right"></div>
-      <AButton
-        v-show="route.path !== '/command/' && route.path !== '/'"
-        @click="
-          vkService.copyText('vk.com/app51547376#' + route.path);
-          LinkIcon = Icon24CopyOutline;
-        "
-      >
-        <LinkIcon />
-      </AButton>
-      <AButton
-        v-show="route.path === '/command/'"
-        @click="appStore.initSlides()"
-      >
-        <Icon24QuestionOutline />
-      </AButton>
+      <div class="navigation-header__buttons">
+        <div id="navigation-header__right"></div>
+        <AButton
+          v-show="route.path !== '/command/' && route.path !== '/'"
+          @click="
+            vkService.copyText('vk.com/app51547376#' + route.path);
+            LinkIcon = Icon24CopyOutline;
+          "
+        >
+          <LinkIcon />
+        </AButton>
+      </div>
     </div>
     <div class="route-view">
       <Suspense>
@@ -161,5 +157,15 @@ const swipes = useSwipes({
   justify-content: center;
   justify-items: center;
   text-transform: uppercase;
+}
+
+.navigation-header__buttons {
+  display: flex;
+  gap: 3px;
+
+  #navigation-header__right {
+    display: inherit;
+    gap: inherit;
+  }
 }
 </style>

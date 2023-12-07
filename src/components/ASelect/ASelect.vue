@@ -32,7 +32,7 @@ const id = uniqueId("a-select__select");
     </label>
     <select
       :id="id"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="a-select__element text-sm focus:ring-blue-500 block w-full p-2.5"
       @change="
         emit('update:modelValue', ($event.target as HTMLSelectElement).value)
       "
@@ -55,3 +55,20 @@ const id = uniqueId("a-select__select");
     </select>
   </div>
 </template>
+<style lang="scss">
+.a-select__element {
+  background-color: var(--vkui--color_field_background);
+  border: var(--vkui--size_border--regular) solid
+    var(--vkui--color_field_border_alpha);
+  border-radius: var(--vkui--size_border_radius--regular);
+  min-height: var(--vkui--size_field_height--compact);
+
+  &:focus,
+  &:active,
+  &:target,
+  &:focus-visible {
+    outline: #2688eb solid var(--vkui--size_border--regular);
+    outline-offset: calc(-1 * var(--vkui--size_border--regular));
+  }
+}
+</style>
