@@ -8,6 +8,7 @@ import {
 import { chunkString } from "../../helpers/chunkString";
 import { MAX_SIZE_ONE_VK_VALUE } from "../../common/consts";
 import { absoluteUrl } from "../../helpers/absoluteUrl";
+import { toStr } from "../../helpers/toStr";
 
 interface VkState {
   chunksMaxCount: number;
@@ -119,9 +120,9 @@ export const useVk = defineStore("vk", {
     sendVKWebAppStorageGet(data: { keys: string[] }) {
       return bridge.send("VKWebAppStorageGet", data);
     },
-    copyText(text: string) {
+    copyText(text: any) {
       return bridge.send("VKWebAppCopyText", {
-        text,
+        text: toStr(text),
       });
     },
     allowMessages() {

@@ -5,6 +5,7 @@ import { useAppCaption } from "../../hooks/useAppCaption";
 import { useApp } from "../../store/app/app";
 import AToggle from "../../components/AToggle/AToggle.vue";
 import { useVk } from "../../store/vk/vk";
+import ACopyButton from "../../components/ACopyButton/ACopyButton.vue";
 
 useAppCaption("Справка");
 
@@ -23,6 +24,8 @@ const onAllowMessages = async (e: MouseEvent) => {
     e.target.style.setProperty("display", "none");
   }
 };
+
+const fontSize = 16;
 </script>
 
 <template>
@@ -67,11 +70,31 @@ const onAllowMessages = async (e: MouseEvent) => {
         Ваша платформа: <b>{{ appStore.platform }}</b>
       </span>
       <div class="overflow-block">
-        <b>webAppConfig:</b>
+        <span>
+          <ACopyButton
+            :size="fontSize"
+            @click="vkService.copyText(appStore.webAppConfig)"
+          >
+            <b>webAppConfig:</b>
+          </ACopyButton>
+        </span>
         <pre>{{ appStore.webAppConfig }}</pre>
-        <b>urlParams:</b>
+        <br />
+        <span>
+          <ACopyButton
+            :size="fontSize"
+            @click="vkService.copyText(appStore.urlParams)"
+          >
+            <b>urlParams:</b>
+          </ACopyButton>
+        </span>
         <pre>{{ appStore.urlParams }}</pre>
-        <b>userAgent:</b>
+        <br />
+        <span>
+          <ACopyButton :size="fontSize" @click="vkService.copyText(userAgent)">
+            <b>userAgent:</b>
+          </ACopyButton>
+        </span>
         <pre>{{ userAgent }}</pre>
       </div>
     </template>
