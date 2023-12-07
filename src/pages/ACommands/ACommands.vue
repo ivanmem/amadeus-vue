@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import ACommandLink from "./ACommandLink.vue";
 import { useCommandSearch } from "./useCommandSearch";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import ACommandsSearch from "./ACommandsSearch.vue";
-import { ref } from "vue";
-import { DynamicScroller, DynamicScrollerItem } from "vue-virtual-scroller";
+import { computed, ref } from "vue";
+import ACommandsDynamicScroller from "./ACommandsDynamicScroller.vue";
+import AMessage from "../../components/AMessage/AMessage.vue";
 
 useAppCaption("Команды");
 
@@ -16,84 +16,32 @@ const {
   commandsOrder,
   searchType,
 } = commandSearch;
+
 const aCommandSearchRef = ref<any>();
+
+const currentCommands = computed(() => {
+  if (searchDebounce.value.length === 0) {
+    return commandsOrder;
+  }
+
+  return searchType.value == "name" ? searchCommands : searchDescriptions;
+});
 </script>
 
 <template>
   <div class="a-commands vkuiGroup__inner Group__inner">
     <ACommandsSearch ref="aCommandSearchRef" :command-search="commandSearch" />
-
-    <DynamicScroller
-      v-if="searchDebounce.length === 0"
-      :items="commandsOrder"
-      :min-item-size="36 + 8"
-      class="a-commands__commands"
-      key-field="id"
+    <ACommandsDynamicScroller
+      v-if="currentCommands.value.length > 0"
+      :commands="currentCommands.value"
+      :lang="commandSearch.searchLang.value"
+    />
+    <AMessage
+      v-if="searchDebounce.length && currentCommands.value.length === 0"
+      style="flex-grow: 1; padding-inline: var(--page-padding-inline)"
     >
-      <template v-slot="{ item, index, active }">
-        <DynamicScrollerItem
-          :active="active"
-          :data-index="index"
-          :item="item"
-          style="padding-bottom: 8px"
-        >
-          <ACommandLink
-            :key="item.id"
-            :command="item"
-            :lang="commandSearch.searchLang.value"
-          />
-        </DynamicScrollerItem>
-      </template>
-    </DynamicScroller>
-    <template v-else>
-      <template v-if="searchType == 'name'">
-        <DynamicScroller
-          :items="searchCommands"
-          :min-item-size="36 + 8"
-          class="a-commands__commands"
-          key-field="id"
-        >
-          <template v-slot="{ item, index, active }">
-            <DynamicScrollerItem
-              :active="active"
-              :data-index="index"
-              :item="item"
-              style="padding-bottom: 8px"
-            >
-              <ACommandLink
-                :key="item.id"
-                :command="item"
-                :lang="commandSearch.searchLang.value"
-              />
-            </DynamicScrollerItem>
-          </template>
-        </DynamicScroller>
-      </template>
-
-      <template v-if="searchType == 'description'">
-        <DynamicScroller
-          :items="searchDescriptions"
-          :min-item-size="36 + 8"
-          class="a-commands__commands"
-          key-field="id"
-        >
-          <template v-slot="{ item, index, active }">
-            <DynamicScrollerItem
-              :active="active"
-              :data-index="index"
-              :item="item"
-              style="padding-bottom: 8px"
-            >
-              <ACommandLink
-                :key="item.id"
-                :command="item"
-                :lang="commandSearch.searchLang.value"
-              />
-            </DynamicScrollerItem>
-          </template>
-        </DynamicScroller>
-      </template>
-    </template>
+      Подходящие команды отсутствуют.
+    </AMessage>
   </div>
 </template>
 
