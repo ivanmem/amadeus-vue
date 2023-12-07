@@ -62,7 +62,7 @@ const fontSize = 16;
     </div>
     <span>
       У этого приложения открытый исходный код.
-      <br />Вы можете внести свой вклад. <br />Для этого вам необходимо изучить:
+      <br />Вы можете внести свой вклад. <br />Для этого Вам необходимо изучить:
       <b>TypeScript, Vite, Vue 3, Pinia, SCSS, Tailwind</b>.
     </span>
     <template v-if="appStore.config.eruda">
