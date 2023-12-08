@@ -22,6 +22,7 @@ const props = defineProps<Props>();
     header-text-direction="center"
     hide-footer
     show-index
+    @touchstart.stop
   >
     <template v-for="(_, slot) of $slots" #[slot]="scope">
       <slot :name="slot" v-bind="scope" />
