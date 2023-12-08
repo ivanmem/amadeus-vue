@@ -10,7 +10,6 @@ import ATopError from "./ATopError.vue";
 import { TopService } from "../../services/TopService";
 
 useAppCaption("Топ команд (за всё время)");
-const items = await TopService.get("/top/commands");
 const headers: ATableHeader[] = [
   { value: "commandId", text: "Название", sortable: true },
   {
@@ -20,6 +19,7 @@ const headers: ATableHeader[] = [
   },
 ];
 const commands = useCommands();
+const items = await TopService.get("/top/commands");
 </script>
 <template>
   <APageContainer style="padding-inline: 0">

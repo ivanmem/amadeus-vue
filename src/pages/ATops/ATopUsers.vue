@@ -7,7 +7,6 @@ import ATopError from "./ATopError.vue";
 import { TopService } from "../../services/TopService";
 
 useAppCaption("Топ пользователей за всё время");
-const items = await TopService.get("/top/users");
 const headers: ATableHeader[] = [
   { value: "name", text: "Название", sortable: true },
   {
@@ -16,6 +15,7 @@ const headers: ATableHeader[] = [
     sortable: true,
   },
 ];
+const items = await TopService.get("/top/users");
 </script>
 <template>
   <APageContainer style="padding-inline: 0">

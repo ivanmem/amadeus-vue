@@ -6,4 +6,8 @@ import basicSsl from "@vitejs/plugin-basic-ssl";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), svgLoader({ svgo: false }), basicSsl()],
+  build: {
+    minify: false,
+    target: "ES2019",
+  },
 });
