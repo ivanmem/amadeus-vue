@@ -26,9 +26,14 @@ const items = await TopService.get("/top/commands");
     <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
     <ATable v-else :headers="headers" :items="items">
       <template #item-commandId="{ commandId }">
-        <AButton class="opacity" @click="router.push('/command/' + commandId)">
-          {{ commands.getCommandFullName(commandId) }}
-        </AButton>
+        <div class="flex flex-grow justify-center">
+          <AButton
+            class="opacity"
+            @click="router.push('/command/' + commandId)"
+          >
+            {{ commands.getCommandFullName(commandId) }}
+          </AButton>
+        </div>
       </template>
     </ATable>
   </APageContainer>
