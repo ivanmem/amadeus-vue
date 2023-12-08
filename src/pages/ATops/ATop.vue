@@ -2,55 +2,46 @@
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import AButton from "../../components/AButton/AButton.vue";
+import { icons } from "../../common/consts";
 
 useAppCaption("Топы");
+const { Icon24CupOutline } = icons;
 </script>
 <template>
   <APageContainer class="a-tops">
-    <div class="a-button__left-content-block">
-      <AButton
-        class="a-button__left-content"
-        icon="Icon28ChatsOutline"
-        icon-style="width: 24px; height: 24px;"
-        to="/top/conversations/today"
-      >
-        Топ чатов (за сегодня)
+    <span class="top-header"> <Icon24CupOutline /> Чаты </span>
+    <div class="flex gap-3 flex-wrap">
+      <AButton icon="Icon24Chats" to="/top/conversations/catalog">
+        Каталог
       </AButton>
       <AButton
-        class="a-button__left-content"
         icon="Icon28ChatsOutline"
         icon-style="width: 24px; height: 24px;"
         to="/top/conversations"
       >
-        Топ чатов (за всё время)
+        Общий
       </AButton>
       <AButton
-        class="a-button__left-content"
-        icon="Icon24Chats"
-        to="/top/conversations/catalog"
+        icon="Icon28ChatsOutline"
+        icon-style="width: 24px; height: 24px;"
+        to="/top/conversations/today"
       >
-        Каталог чатов
+        Сегодня
       </AButton>
-      <AButton
-        class="a-button__left-content"
-        icon="Icon24Users3Outline"
-        to="/top/users/today"
-      >
-        Топ пользователей за сегодня
+    </div>
+    <br />
+    <span class="top-header"> <Icon24CupOutline /> Пользователи </span>
+    <div class="flex gap-3 flex-wrap">
+      <AButton icon="Icon24Users3Outline" to="/top/users"> Общий </AButton>
+      <AButton icon="Icon24Users3Outline" to="/top/users/today">
+        Сегодня
       </AButton>
-      <AButton
-        class="a-button__left-content"
-        icon="Icon24Users3Outline"
-        to="/top/users"
-      >
-        Топ пользователей за всё время
-      </AButton>
-      <AButton
-        class="a-button__left-content"
-        icon="Icon24View"
-        to="/top/commands"
-      >
-        Топ команд (за всё время)
+    </div>
+    <br />
+    <span class="top-header"> <Icon24CupOutline /> Команды </span>
+    <div class="flex gap-3 flex-wrap">
+      <AButton icon="Icon24Squareshape4HorizontalOutline" to="/top/commands">
+        Общий
       </AButton>
     </div>
   </APageContainer>
@@ -60,5 +51,11 @@ useAppCaption("Топы");
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  .top-header {
+    display: inline-flex;
+    gap: 5px;
+    margin-left: 4px;
+  }
 }
 </style>

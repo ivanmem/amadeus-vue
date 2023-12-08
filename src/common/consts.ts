@@ -22,6 +22,7 @@ import Icon24QuestionOutline from "@vkontakte/icons/src/svg/24/question_outline_
 import Icon24Add from "@vkontakte/icons/src/svg/24/add_24.svg?component";
 import Icon24BookSpreadOutline from "@vkontakte/icons/src/svg/24/book_spread_outline_24.svg?component";
 import Icon24Picture from "@vkontakte/icons/src/svg/24/picture_24.svg?component";
+import Icon24Squareshape4HorizontalOutline from "@vkontakte/icons/src/svg/24/squareshape_4_horizontal_outline_24.svg?component";
 
 import Icon20FunnelOutline from "@vkontakte/icons/src/svg/20/funnel_outline_20.svg?component";
 
@@ -71,6 +72,7 @@ export const icons = {
   Icon24Add,
   Icon24BookSpreadOutline,
   Icon24Picture,
+  Icon24Squareshape4HorizontalOutline,
 
   Icon20FunnelOutline,
 
