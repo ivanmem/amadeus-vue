@@ -4,7 +4,6 @@ import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import { useApp } from "../../store/app/app";
 import { useVk } from "../../store/vk/vk";
-import { useMounted } from "@vueuse/core/index";
 import FixedTeleport from "../../components/FixedTeleport.vue";
 import { icons } from "../../common/consts";
 
@@ -12,12 +11,11 @@ useAppCaption("");
 
 const appStore = useApp();
 const vkService = useVk();
-const isMounted = useMounted();
 const { Icon24LightbulbStarOutline } = icons;
 </script>
 
 <template>
-  <FixedTeleport v-if="isMounted" to="#navigation-caption">
+  <FixedTeleport mounted to="#navigation-caption">
     <nav
       aria-label="Breadcrumb"
       class="a-command-breadcrumbs flex px-1 mr-1 mb-1 rounded-lg"

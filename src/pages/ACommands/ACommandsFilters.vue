@@ -20,7 +20,7 @@ const show = reactive({
 });
 </script>
 <template>
-  <FixedTeleport to="#navigation-header__right">
+  <FixedTeleport mounted to="#navigation-header__right">
     <AModal v-model="show.filters">
       <template #button>
         <AButton

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useMounted } from "@vueuse/core";
 import FixedTeleport from "../../components/FixedTeleport.vue";
 import { Command } from "../../store/commands/types";
 import { icons } from "../../common/consts";
@@ -9,12 +8,10 @@ const props = defineProps<{
   parentCommand?: Command;
   nameCommand: string;
 }>();
-
-const isMounted = useMounted();
 const { Icon24ArticleBoxOutline } = icons;
 </script>
 <template>
-  <FixedTeleport v-if="isMounted" to="#navigation-caption">
+  <FixedTeleport mounted to="#navigation-caption">
     <nav
       aria-label="Breadcrumb"
       class="a-command-breadcrumbs flex px-1 mr-1 mb-1 rounded-lg"
