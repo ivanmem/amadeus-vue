@@ -38,6 +38,7 @@
   -webkit-tap-highlight-color: transparent;
   text-decoration: none;
   user-select: none;
+  word-break: break-word;
 
   &[data-type="accent"] {
     background-color: var(--vkui--color_background_accent_themed);

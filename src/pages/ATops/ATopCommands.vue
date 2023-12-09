@@ -11,15 +11,17 @@ import { TopService } from "../../services/TopService";
 
 useAppCaption("Топ команд (за всё время)");
 const headers: ATableHeader[] = [
-  { value: "commandId", text: "Название", sortable: true },
+  { value: "commandId", text: "Название", sortable: true, width: 100 },
   {
     value: "countExecute",
     text: "Использований",
     sortable: true,
+    width: 60,
   },
 ];
 const commands = useCommands();
 const items = await TopService.get("/top/commands");
+const formater = new Intl.NumberFormat("ru-RU");
 </script>
 <template>
   <APageContainer style="padding-inline: 0">
@@ -28,12 +30,15 @@ const items = await TopService.get("/top/commands");
       <template #item-commandId="{ commandId }">
         <div class="flex flex-grow justify-center">
           <AButton
-            class="opacity"
+            class="opacity whitespace-pre-wrap"
             @click="router.push('/command/' + commandId)"
           >
             {{ commands.getCommandFullName(commandId) }}
           </AButton>
         </div>
+      </template>
+      <template #item-countExecute="{ countExecute }">
+        {{ formater.format(countExecute) }}
       </template>
     </ATable>
   </APageContainer>
