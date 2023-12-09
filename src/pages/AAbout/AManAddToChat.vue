@@ -62,6 +62,7 @@ const { Icon24LightbulbStarOutline } = icons;
       только создатель чата сможет добавить бота.
     </span>
     <AButton
+      class="self-start"
       icon="Icon24Picture"
       @click="vkService.showImages(['/slides/add-administrator.jpg'])"
     >
@@ -72,7 +73,11 @@ const { Icon24LightbulbStarOutline } = icons;
       2. Пригласите бота в чат с помощью кнопки ниже. Внимание, не давайте ему
       права на чтение!
     </span>
-    <AButton icon="Icon24Add" to="https://vk.com/app6441755_-178374368">
+    <AButton
+      class="self-start"
+      icon="Icon24Add"
+      to="https://vk.com/app6441755_-178374368"
+    >
       Пригласить в чат
     </AButton>
     <br />

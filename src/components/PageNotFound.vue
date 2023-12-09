@@ -8,6 +8,8 @@ useAppCaption("Ошибка");
 <template>
   <APageContainer>
     <div>Данной страницы не существует или она была удалена.</div>
-    <AButton to="/command/">Перейти к командам</AButton>
+    <AButton class="self-start" icon="Icon24Back" to="/command/"
+      >Перейти к командам
+    </AButton>
   </APageContainer>
 </template>

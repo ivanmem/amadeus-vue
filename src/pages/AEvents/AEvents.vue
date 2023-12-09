@@ -18,6 +18,7 @@ const fontSize = 14;
 <template>
   <APageContainer v-if="events" class="a-events">
     <AButton
+      class="self-start"
       data-type="accent"
       icon="Icon16Link"
       to="https://vk.com/@animecm-template-events"
@@ -35,32 +36,34 @@ const fontSize = 14;
       >
         <b>{{ `%${events.templateArguments[key]}%` }}</b>
       </ACopyButton>
-      <pre style="white-space: pre-line">
+      <pre class="whitespace-pre-line">
         {{ value }}
       </pre>
     </div>
     <h1>Существующие типы событий:</h1>
-    <div style="display: flex; flex-direction: column; gap: 10px">
-      <div v-for="option of events.options">
+    <div class="flex flex-col gap-3 items-start">
+      <template v-for="option of events.options">
         <div class="a-event-block">
-          <div>
+          <div class="max-w-full overflow-auto">
             <ACopyButton
               :size="fontSize"
               @click="vkService.copyText(option.alias[0])"
             >
               <b>Название:</b>&nbsp;
             </ACopyButton>
-            <pre>{{ option.alias.join(", ") }}</pre>
+            <pre class="break-words whitespace-pre-wrap">{{
+              option.alias.join(", ")
+            }}</pre>
           </div>
           <div>
             <b>Описание:</b>&nbsp;
             <ALinkify
               :value="option.description"
-              style="white-space: pre-line"
+              class="whitespace-pre-line"
               tag="pre"
             />
           </div>
-          <div v-if="option.example">
+          <div v-if="option.example" class="max-w-full overflow-auto">
             <ACopyButton
               :size="fontSize"
               @click="vkService.copyText(option.example)"
@@ -77,7 +80,7 @@ const fontSize = 14;
             {{ option.max ?? "♾️" }}
           </div>
         </div>
-      </div>
+      </template>
     </div>
   </APageContainer>
 </template>
@@ -89,6 +92,8 @@ const fontSize = 14;
 }
 
 .a-event-block {
+  align-items: flex-start;
+  align-self: stretch;
   background: var(--vkui--color_background);
   border-block: 0.5px solid var(--vkui--color_text_tertiary);
   border-radius: var(--vkui--size_border_radius_paper--regular, 12px);
