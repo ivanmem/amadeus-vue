@@ -10,15 +10,15 @@ const appService = useApp();
 
 const products = [
   {
-    caption: "Дон статус на 1 месяц (30 дней)",
+    caption: "1 месяц (30 дней)",
     to: "https://vk.com/market-178374368?w=product-178374368_4186671%2Fquery",
   },
   {
-    caption: "Дон статус на 3 месяца (90 дней)",
+    caption: "3 месяца (90 дней)",
     to: "https://vk.com/market-178374368?w=product-178374368_4186977%2Fquery",
   },
   {
-    caption: "Дон статус на 6 месяцев (180 дней)",
+    caption: "6 месяцев (180 дней)",
     to: "https://vk.com/market-178374368?w=product-178374368_4186979%2Fquery",
   },
 ];
@@ -32,13 +32,14 @@ const products = [
       <AButton
         data-type="accent"
         icon="Icon16Link"
+        style="max-width: 300px"
         to="https://vk.com/@animecm-don"
       >
         Подробно про статус дона
       </AButton>
 
       <div>
-        <h3 style="padding: 10px 0">Каталог товаров</h3>
+        <h3 style="padding: 10px 0">Товар «<b>Дон статус</b>»</h3>
         <div class="a-button__left-content-block">
           <AButton
             v-for="product of products"
@@ -53,13 +54,15 @@ const products = [
         </div>
         <div style="padding: 10px 0">
           Все денежные средства, переведённые в счёт оплаты "Статуса дона", идут
-          на развитие проекта и рассматриваются как добровольные пожертвования. Возврат не предусмотрен.
+          на развитие проекта и рассматриваются как добровольные пожертвования.
+          Возврат не предусмотрен.
         </div>
       </div>
 
       <AButton
         data-type="accent"
         icon="Icon16Link"
+        style="max-width: 300px"
         to="https://vk.com/@animecm-terms-of-use"
       >
         Пользовательское соглашение

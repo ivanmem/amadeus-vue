@@ -3,6 +3,7 @@ import ATable from "../../components/ATable/ATable.vue";
 import { conversationHeaders } from "./consts";
 
 const props = defineProps<{ items: object[] }>();
+const formater = new Intl.NumberFormat("ru-RU");
 </script>
 <template>
   <ATable :headers="conversationHeaders" :items="items">
@@ -11,6 +12,9 @@ const props = defineProps<{ items: object[] }>();
     </template>
     <template #item-peerId="{ peerId }">
       {{ peerId - 2000000000 }}
+    </template>
+    <template #item-countSms="{ countSms }">
+      {{ formater.format(countSms) }}
     </template>
     <template #item-name="{ name, link }">
       <a :href="link" target="_blank">{{ name }}</a>

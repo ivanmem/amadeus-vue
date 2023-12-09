@@ -16,10 +16,15 @@ const headers: ATableHeader[] = [
   },
 ];
 const items = await TopService.get("/top/users/today");
+const formater = new Intl.NumberFormat("ru-RU");
 </script>
 <template>
   <APageContainer style="padding-inline: 0">
     <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
-    <ATable v-else :headers="headers" :items="items" />
+    <ATable v-else :headers="headers" :items="items">
+      <template #item-countSms="{ countSms }">
+        {{ formater.format(countSms) }}
+      </template>
+    </ATable>
   </APageContainer>
 </template>
