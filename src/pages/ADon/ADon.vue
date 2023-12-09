@@ -74,6 +74,7 @@ const products = [
       </div>
 
       <a
+        class="self-start"
         href="https://yookassa.ru/protection?utm_campaign=kassa_protection&utm_source=merchants"
         rel="noopener"
         target="_blank"
