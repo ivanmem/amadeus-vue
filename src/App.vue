@@ -7,8 +7,6 @@ import { useColorScheme } from "./useColorScheme";
 import { useApp } from "./store/app/app";
 import { icons } from "./common/consts";
 import ANavigationMenu from "./components/ANavigationMenu.vue";
-import { useSwipes } from "./composables/useSwipes";
-import { goBack } from "./router";
 import { useVk } from "./store/vk/vk";
 
 const router = useRouter();
@@ -56,15 +54,10 @@ watch(
     LinkIcon.value = Icon24Linked;
   },
 );
-
-const swipes = useSwipes({
-  onLeft: goBack,
-  scrollPrevent: true,
-});
 </script>
 
 <template>
-  <div v-if="store.docs" class="app" v-on="swipes">
+  <div v-if="store.docs" class="app">
     <div class="navigation-header">
       <div id="navigation-caption" class="overflow-block navigation-caption">
         <template v-if="appStore.caption.length">
