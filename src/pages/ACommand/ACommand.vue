@@ -234,9 +234,9 @@ const {
             Подробнее
           </AButton>
         </template>
-        <div v-if="key.isDon">
+        <div v-if="key.isDon" class="flex flex-col">
           <AButton
-            class="bg-transparent pl-0 font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            class="bg-transparent pl-0 font-medium text-blue-600 dark:text-blue-500 hover:underline self-start"
             icon="Icon24DollarCircleOutline"
             to="/don"
           >
