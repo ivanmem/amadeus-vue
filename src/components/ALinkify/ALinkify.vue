@@ -11,5 +11,11 @@ const options: LinkifyHtmlOptions = {
 const html = computed(() => linkifyHtml(props.value ?? "", options));
 </script>
 <template>
-  <component :is="tag ?? 'span'" v-html="html" />
+  <component :is="tag ?? 'span'" class="a-linkify" v-html="html" />
 </template>
+<style lang="scss">
+.a-linkify {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+</style>
