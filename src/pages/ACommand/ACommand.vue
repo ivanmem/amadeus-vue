@@ -17,10 +17,12 @@ import ACommandSection from "../ACommands/ACommandSection.vue";
 import ACommandArgument from "./ACommandArgument.vue";
 import ACommandBreadcrumbs from "./ACommandBreadcrumbs.vue";
 import { useApp } from "../../store/app/app";
+import { useVk } from "../../store/vk/vk";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
 const appStore = useApp();
+const vkStore = useVk();
 const { nameCommand, command, parentCommand, aliases, store, relatedCommands } =
   useCommandInfo(props);
 
@@ -109,7 +111,11 @@ const {
             <span v-if="appStore.isVkCom">(со всеми аргументами)</span>
           </span>
         </template>
-        <pre style="user-select: contain">{{ command.templateString }}</pre>
+        <pre
+          style="user-select: contain; cursor: copy"
+          @click="vkStore.copyText(command.templateString)"
+          >{{ command.templateString }}</pre
+        >
       </ACommandSection>
 
       <ACommandSection
@@ -123,7 +129,11 @@ const {
             </span>
           </span>
         </template>
-        <pre style="user-select: contain">{{ command.minTemplateString }}</pre>
+        <pre
+          style="user-select: contain; cursor: copy"
+          @click="vkStore.copyText(command.minTemplateString)"
+          >{{ command.minTemplateString }}</pre
+        >
       </ACommandSection>
 
       <ACommandSection>
