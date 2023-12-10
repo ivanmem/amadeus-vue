@@ -7,6 +7,7 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { computed, useSlots } from "vue";
+import { useActivated } from "../../composables/useActivated";
 
 const props = defineProps({
   modelValue: [Boolean],
@@ -36,11 +37,12 @@ defineSlots<{
 const hasHeader = computed<boolean>(() => !!slots.header);
 const hasContent = computed<boolean>(() => !!slots.content);
 const hasFooter = computed<boolean>(() => !!slots.footer);
+const isActive = useActivated();
 </script>
 
 <template>
   <slot name="button" />
-  <TransitionRoot :show="modelValue" appear as="template">
+  <TransitionRoot :show="modelValue && isActive" appear as="template">
     <Dialog as="div" class="relative z-10" @close="closeModal">
       <TransitionChild
         as="template"
