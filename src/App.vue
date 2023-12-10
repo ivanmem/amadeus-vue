@@ -110,6 +110,7 @@ watch(
   min-height: var(--navigation-header-height);
   padding-left: 8px;
   padding-right: var(--navigation-header-padding-right, 10px);
+  user-select: none;
 
   svg {
     color: white;
