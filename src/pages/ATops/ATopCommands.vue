@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useAppCaption } from "../../hooks/useAppCaption";
 import ATable from "../../components/ATable/ATable.vue";
 import { useCommands } from "../../store/commands/commands";
 import AButton from "../../components/AButton/AButton.vue";
@@ -8,8 +7,8 @@ import { ATableHeader } from "../../components/ATable/types";
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import ATopError from "./ATopError.vue";
 import { TopService } from "../../services/TopService";
+import ATopBreadcrumbs from "./ATopBreadcrumbs.vue";
 
-useAppCaption("Топ команд (за всё время)");
 const headers: ATableHeader[] = [
   { value: "commandId", text: "Название", sortable: true, width: 100 },
   {
@@ -24,6 +23,7 @@ const items = await TopService.get("/top/commands");
 const formater = new Intl.NumberFormat("ru-RU");
 </script>
 <template>
+  <ATopBreadcrumbs caption="Общий топ команд" />
   <APageContainer style="padding-inline: 0">
     <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
     <ATable v-else :headers="headers" :items="items">

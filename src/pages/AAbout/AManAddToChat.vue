@@ -4,8 +4,9 @@ import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import { useApp } from "../../store/app/app";
 import { useVk } from "../../store/vk/vk";
-import FixedTeleport from "../../components/FixedTeleport.vue";
 import { icons } from "../../common/consts";
+import ABreadcrumbs from "../../components/ABreadcrumbs/ABreadcrumbs.vue";
+import ABreadcrumbItem from "../../components/ABreadcrumbs/ABreadcrumbItem.vue";
 
 useAppCaption("");
 
@@ -15,46 +16,9 @@ const { Icon24LightbulbStarOutline } = icons;
 </script>
 
 <template>
-  <FixedTeleport mounted to="#navigation-caption">
-    <nav
-      aria-label="Breadcrumb"
-      class="a-command-breadcrumbs flex px-1 mr-1 mb-1 rounded-lg"
-    >
-      <ol class="inline-flex items-center space-x-1">
-        <li class="inline-flex items-center">
-          <RouterLink
-            class="inline-flex items-center text-sm font-medium hover:text-blue-600 dark:hover:text-amber-200"
-            to="/"
-          >
-            <Icon24LightbulbStarOutline height="20" width="20" />
-          </RouterLink>
-        </li>
-        <li>
-          <div class="flex items-center pr-0.5">
-            <svg
-              aria-hidden="true"
-              class="w-3 h-3 mx-1"
-              fill="none"
-              viewBox="0 0 6 10"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="m1 9 4-4-4-4"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-              />
-            </svg>
-
-            <span class="ml-1 text-xs font-medium md:ml-2">
-              Добавление бота в чат
-            </span>
-          </div>
-        </li>
-      </ol>
-    </nav>
-  </FixedTeleport>
+  <ABreadcrumbs :icon="Icon24LightbulbStarOutline" to="/about">
+    <ABreadcrumbItem> Добавление бота в чат</ABreadcrumbItem>
+  </ABreadcrumbs>
   <APageContainer class="a-man-add-to-chat">
     <span>
       1. Зайдите в список участников чата и убедитесь, что Вам доступна кнопка

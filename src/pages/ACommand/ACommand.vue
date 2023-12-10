@@ -12,7 +12,6 @@ import { watch } from "vue";
 import { isNullOrUndefined } from "../../helpers/isNullOrUndefined";
 import { isNullOrUndefinedOrWhiteSpace } from "../../helpers/isNullOrUndefinedOrWhiteSpace";
 import { icons } from "../../common/consts";
-import { useAppCaption } from "../../hooks/useAppCaption";
 import ALinkify from "../../components/ALinkify/ALinkify.vue";
 import ACommandSection from "../ACommands/ACommandSection.vue";
 import ACommandArgument from "./ACommandArgument.vue";
@@ -24,7 +23,6 @@ const router = useRouter();
 const appStore = useApp();
 const { nameCommand, command, parentCommand, aliases, store, relatedCommands } =
   useCommandInfo(props);
-useAppCaption("");
 
 watch(
   () => props.id,
