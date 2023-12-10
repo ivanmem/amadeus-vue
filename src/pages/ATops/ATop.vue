@@ -11,9 +11,6 @@ const { Icon24CupOutline } = icons;
   <APageContainer class="a-tops">
     <span class="top-header"> <Icon24CupOutline /> Чаты </span>
     <div class="flex gap-3 flex-wrap">
-      <AButton icon="Icon24Chats" to="/top/conversations/catalog">
-        Каталог
-      </AButton>
       <AButton
         icon="Icon28ChatsOutline"
         icon-style="width: 24px; height: 24px;"
@@ -27,6 +24,9 @@ const { Icon24CupOutline } = icons;
         to="/top/conversations/today"
       >
         Сегодня
+      </AButton>
+      <AButton icon="Icon24Chats" to="/top/conversations/catalog">
+        Каталог
       </AButton>
     </div>
     <br />
