@@ -10,7 +10,7 @@ const headers: ATableHeader[] = [
   { value: "name", text: "Название", sortable: true },
   {
     value: "countSms",
-    text: "Количество сообщений",
+    text: "Сообщений",
     sortable: true,
   },
 ];
