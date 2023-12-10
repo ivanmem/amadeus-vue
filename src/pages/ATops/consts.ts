@@ -10,7 +10,7 @@ export const conversationHeaders: ATableHeader[] = [
   },
   {
     value: "percentBot",
-    text: "Процент ботов",
+    text: "Ботов",
     sortable: true,
   },
 ];
