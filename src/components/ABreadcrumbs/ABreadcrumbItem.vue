@@ -4,8 +4,6 @@ import ABreadcrumbDelimiter from "./ABreadcrumbDelimiter.vue";
 <template>
   <ABreadcrumbDelimiter />
   <li>
-    <span class="text-xs font-medium md-2">
-      <slot />
-    </span>
+    <slot />
   </li>
 </template>

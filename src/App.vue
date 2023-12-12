@@ -155,6 +155,9 @@ watch(
   font-weight: bold;
   justify-content: center;
   justify-items: center;
+  line-height: 120%;
+  min-width: 0;
+  overflow: hidden;
   text-transform: uppercase;
 }
 

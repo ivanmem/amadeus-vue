@@ -5,6 +5,7 @@ import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import ATopError from "./ATopError.vue";
 import { TopService } from "../../services/TopService";
 import ATopBreadcrumbs from "./ATopBreadcrumbs.vue";
+import ACellCrownWrapper from "./ACellCrownWrapper.vue";
 
 const headers: ATableHeader[] = [
   { value: "name", text: "Название", sortable: true },
@@ -24,6 +25,11 @@ const formater = new Intl.NumberFormat("ru-RU");
     <ATable v-else :headers="headers" :items="items">
       <template #item-countSms="{ countSms }">
         {{ formater.format(countSms) }}
+      </template>
+      <template #item-name="{ name, __index }">
+        <ACellCrownWrapper :index="__index">
+          {{ name }}
+        </ACellCrownWrapper>
       </template>
     </ATable>
   </APageContainer>

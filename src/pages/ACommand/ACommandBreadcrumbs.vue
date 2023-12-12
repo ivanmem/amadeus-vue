@@ -27,10 +27,4 @@ const { Icon24ArticleBoxOutline } = icons;
     </ABreadcrumbItem>
   </ABreadcrumbs>
 </template>
-<style lang="scss">
-.a-command-breadcrumbs {
-  background-color: var(--navigation-background-color);
-  max-height: var(--navigation-header-height);
-  min-height: var(--navigation-header-height);
-}
-</style>
+<style lang="scss"></style>

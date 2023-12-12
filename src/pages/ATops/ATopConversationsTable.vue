@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import ATable from "../../components/ATable/ATable.vue";
 import { conversationHeaders } from "./consts";
+import ACellCrownWrapper from "./ACellCrownWrapper.vue";
 
 const props = defineProps<{ items: object[] }>();
 const formater = new Intl.NumberFormat("ru-RU");
@@ -16,8 +17,10 @@ const formater = new Intl.NumberFormat("ru-RU");
     <template #item-countSms="{ countSms }">
       {{ formater.format(countSms) }}
     </template>
-    <template #item-name="{ name, link }">
-      <a :href="link" target="_blank">{{ name }}</a>
+    <template #item-name="{ name, link, __index }">
+      <ACellCrownWrapper :index="__index">
+        <a :href="link" target="_blank">{{ name }}</a>
+      </ACellCrownWrapper>
     </template>
   </ATable>
 </template>

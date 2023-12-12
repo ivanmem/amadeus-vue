@@ -45,6 +45,10 @@ import Icon12Flash from "@vkontakte/icons/src/svg/12/flash_12.svg?component";
 import Icon12Question from "@vkontakte/icons/src/svg/12/question_12.svg?component";
 import Icon12View from "@vkontakte/icons/src/svg/12/view_12.svg?component";
 import Icon12Cards from "@vkontakte/icons/src/svg/12/cards_2_12.svg?component";
+import Icon12Star from "@vkontakte/icons/src/svg/12/star_12.svg?component";
+import Icon12StarCircle from "@vkontakte/icons/src/svg/12/star_circle_12.svg?component";
+import Icon12StarCircleFillYellow from "@vkontakte/icons/src/svg/12/star_circle_fill_yellow_12.svg?component";
+import Icon12Crown from "@vkontakte/icons/src/svg/12/crown_12.svg?component";
 import { ref } from "vue";
 
 export const icons = {
@@ -95,6 +99,10 @@ export const icons = {
   Icon12Question,
   Icon12View,
   Icon12Cards,
+  Icon12Star,
+  Icon12StarCircle,
+  Icon12StarCircleFillYellow,
+  Icon12Crown,
 };
 
 export const darkColorScheme = ref(false);
