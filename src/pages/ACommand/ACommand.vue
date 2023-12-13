@@ -30,7 +30,7 @@ watch(
   () => props.id,
   () => {
     // сброс скролла при смене команды
-    document.querySelector(".route-view")!.scroll(0, 0);
+    document.querySelector(".route-view")?.scroll(0, 0);
   },
   { flush: "post", immediate: true },
 );

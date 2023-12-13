@@ -42,7 +42,9 @@ useAppCaption("");
 .a-breadcrumbs {
   background-color: var(--navigation-background-color);
   max-height: var(--navigation-header-height);
+  max-width: 100%;
   min-height: var(--navigation-header-height);
+  overflow: hidden;
   padding-inline: 5px;
 
   ol,
@@ -51,6 +53,8 @@ useAppCaption("");
     display: inline-flex;
     justify-content: center;
     margin: 0;
+    max-width: 100%;
+    overflow: hidden;
     padding: 0;
   }
 
