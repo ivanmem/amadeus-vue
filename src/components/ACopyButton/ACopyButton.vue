@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import AButton from "../../components/AButton/AButton.vue";
-import { computed, h } from "vue";
+import { computed, h, shallowRef } from "vue";
 import { icons } from "../../common/consts";
 
 const props = defineProps({
@@ -8,14 +8,30 @@ const props = defineProps({
   size: { type: Number, default: 16 },
 });
 
+const initialCopyIcon = icons.Icon16CopyOutline;
+const clickedCopyIcon = icons.Icon16DoneCircle;
+
+const currentCopyIcon = shallowRef(initialCopyIcon);
+
 const CopyIcon = computed(() =>
-  h(icons.Icon16CopyOutline, {
+  h(currentCopyIcon.value, {
     style: `width: ${props.size}px; height: ${props.size}px;`,
   }),
 );
+
+let timeout: any;
+
+const onClick = () => {
+  clearTimeout(timeout);
+  currentCopyIcon.value = clickedCopyIcon;
+
+  timeout = setTimeout(() => {
+    currentCopyIcon.value = initialCopyIcon;
+  }, 1500);
+};
 </script>
 <template>
-  <AButton :tag="tag" class="a-copy-button opacity">
+  <AButton :tag="tag" class="a-copy-button opacity" @click="onClick">
     <template #icon="iconProps">
       <CopyIcon v-bind="iconProps" />
     </template>
