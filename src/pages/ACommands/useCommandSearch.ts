@@ -6,12 +6,13 @@ import { from } from "linq-to-typescript";
 import { stringIsCyrillic } from "../../helpers/stringIsCyrillic";
 import { stringIsSpecialChar } from "../../helpers/stringIsSpecialChar";
 import { ILang } from "../../types/ILang";
+import { useActivatedRouteQuery } from "../../composables/useActivatedRouteQuery";
 
 export type UseCommandSearch = ReturnType<typeof useCommandSearch>;
 
 export function useCommandSearch() {
   const store = useCommands();
-  const search = ref("");
+  const search = useActivatedRouteQuery("search", "", { transform: String });
   const searchDebounce: Readonly<Ref<string>> = refDebounced(search, 200);
   const searchCommands = computed(() =>
     store.searchCommand(searchDebounce.value, store.filters),
@@ -40,6 +41,7 @@ export function useCommandSearch() {
       ? "ru"
       : "en";
   });
+
   return {
     store,
     search,
