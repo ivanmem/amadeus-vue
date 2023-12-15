@@ -75,7 +75,7 @@ const { Icon24LightbulbStarOutline } = icons;
         icon="Icon24Chats"
         to="https://vk.me/join/PE73yGJH2zM8cfMRom7ASQjmbgaqHWw_Ivo="
       >
-        Официальная беседа Амадеус
+        Официальный чат
       </AButton>
     </div>
   </APageContainer>
