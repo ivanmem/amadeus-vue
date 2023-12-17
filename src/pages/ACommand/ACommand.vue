@@ -18,6 +18,7 @@ import ACommandArgument from "./ACommandArgument.vue";
 import ACommandBreadcrumbs from "./ACommandBreadcrumbs.vue";
 import { useApp } from "../../store/app/app";
 import { useVk } from "../../store/vk/vk";
+import { useScriptTag } from "@vueuse/core";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
@@ -47,6 +48,8 @@ const {
   Icon16WrenchOutline,
   Icon16KeyOutline,
 } = icons;
+
+const { scriptTag } = useScriptTag("https://vk.com/js/api/openapi.js?168");
 </script>
 
 <template>
@@ -56,7 +59,7 @@ const {
       :name-command="nameCommand"
       :parent-command="parentCommand"
     />
-    <template v-if="command">
+    <template v-if="command && appStore.webAppConfig.app_id && scriptTag">
       <ACommandSection>
         <template #label>
           <span>
@@ -315,6 +318,15 @@ const {
           🚦 Можно использовать только в личных сообщениях бота.
         </div>
       </ACommandSection>
+
+      <component :is="'script'" type="text/javascript">
+        VK.init({ apiId: {{ appStore.webAppConfig.app_id }}, onlyWidgets: true
+        });
+      </component>
+      <div id="vk_comments"></div>
+      <component :is="'script'" type="text/javascript">
+        VK.Widgets.Comments("vk_comments", {limit: 10, attach: "*"});
+      </component>
     </template>
   </div>
 </template>
