@@ -116,7 +116,7 @@ export const useApp = defineStore("app", {
       );
 
       watch(
-        this.config,
+        () => this.config,
         () => {
           return this.saveCurrentConfig();
         },
@@ -124,7 +124,7 @@ export const useApp = defineStore("app", {
       );
 
       watch(
-        commandsStore.filters,
+        () => commandsStore.filters,
         () => {
           return commandsStore.saveCurrentFilters();
         },
@@ -132,7 +132,7 @@ export const useApp = defineStore("app", {
       );
 
       watch(
-        commandsStore.favorite,
+        () => commandsStore.favorite,
         () => {
           return commandsStore.saveCurrentFavorite();
         },
