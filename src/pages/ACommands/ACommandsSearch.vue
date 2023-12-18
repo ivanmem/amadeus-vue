@@ -4,6 +4,7 @@ import ACommandsFilters from "./ACommandsFilters.vue";
 import { icons } from "../../common/consts";
 import { computed } from "vue";
 import AMessage from "../../components/AMessage/AMessage.vue";
+import ASearch from "../../components/ASearch.vue";
 
 const props = defineProps<{
   commandSearch: UseCommandSearch;
@@ -18,10 +19,7 @@ const IconSearch = computed(() =>
 <template>
   <div class="a-command-search">
     <div style="display: flex; gap: 5px; flex-grow: 1; padding-right: 6px">
-      <label class="a-command-search__label">
-        <IconSearch style="margin-right: 5px" @click="search = ''" />
-        <input ref="reference" v-model="search" placeholder="Поиск" />
-      </label>
+      <ASearch v-model="search" />
       <div style="padding: 5px">
         <ACommandsFilters />
       </div>

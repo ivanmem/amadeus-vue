@@ -45,31 +45,3 @@ div[contenteditable="true"] {
   font-size: var(--vkui--font_text--font_size--compact);
   outline: 0;
 }
-
-.a-command-search__label {
-  align-items: center;
-  display: flex;
-  flex-grow: 1;
-  height: 36px;
-  padding-inline: var(--page-padding-inline);
-
-  input {
-    background-color: initial;
-    border: 0;
-    border-radius: var(--vkui--size_border_radius--regular, 8px);
-    color: var(--text_primary);
-    flex-grow: 1;
-    line-height: 100%;
-    margin: 0;
-    -webkit-transition:
-      background-color 0.05s,
-      color 0.05s;
-    transition:
-      background-color 0.05s,
-      color 0.05s;
-
-    &:focus-visible {
-      outline: none;
-    }
-  }
-}

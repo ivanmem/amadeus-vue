@@ -11,33 +11,35 @@ const items = await TopService.get("/top/conversations/catalog");
 <template>
   <ATopBreadcrumbs caption="Каталог чатов" />
   <APageContainer style="padding-inline: 0">
-    <details style="padding: var(--page-padding)">
-      <summary style="cursor: pointer">Хотите попасть в каталог?</summary>
-      <div>
-        <br />
+    <div class="page-padding-inline">
+      <details style="padding: var(--page-padding)">
+        <summary style="cursor: pointer">Хотите попасть в каталог?</summary>
         <div>
-          1) Установите ссылку на ваш чат с помощью команды:
-          <AButton class="a-button__inline" to="/command/63">
-            ЗадатьСсылку
-          </AButton>
+          <br />
+          <div>
+            1) Установите ссылку на ваш чат с помощью команды:
+            <AButton class="a-button__inline" to="/command/63">
+              ЗадатьСсылку
+            </AButton>
+          </div>
+          <br />
+          <div>
+            2) Выполните команду:
+            <AButton class="a-button__inline" to="/command/70">
+              ПубличнаяСсылка
+            </AButton>
+          </div>
+          <br />
+          <div>
+            * Для скрытия ссылки выполните команду
+            <AButton class="a-button__inline" to="/command/70">
+              ПубличнаяСсылка
+            </AButton>
+            ещё раз.
+          </div>
         </div>
-        <br />
-        <div>
-          2) Выполните команду:
-          <AButton class="a-button__inline" to="/command/70">
-            ПубличнаяСсылка
-          </AButton>
-        </div>
-        <br />
-        <div>
-          * Для скрытия ссылки выполните команду
-          <AButton class="a-button__inline" to="/command/70">
-            ПубличнаяСсылка
-          </AButton>
-          ещё раз.
-        </div>
-      </div>
-    </details>
+      </details>
+    </div>
     <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
     <ATopConversationsTable v-else :items="items" />
   </APageContainer>

@@ -7,7 +7,7 @@ const props = defineProps<{ items: object[] }>();
 const formater = new Intl.NumberFormat("ru-RU");
 </script>
 <template>
-  <ATable :headers="conversationHeaders" :items="items">
+  <ATable :headers="conversationHeaders" :items="items" search-field="name">
     <template #item-percentBot="{ percentBot }">
       {{ percentBot ?? 0 }}%
     </template>

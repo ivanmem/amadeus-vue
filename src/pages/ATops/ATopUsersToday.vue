@@ -22,7 +22,7 @@ const formater = new Intl.NumberFormat("ru-RU");
   <ATopBreadcrumbs caption="Сегодняшний топ пользователей" />
   <APageContainer style="padding-inline: 0">
     <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
-    <ATable v-else :headers="headers" :items="items">
+    <ATable v-else :headers="headers" :items="items" search-field="name">
       <template #item-countSms="{ countSms }">
         {{ formater.format(countSms) }}
       </template>
