@@ -17,6 +17,15 @@ const formater = new Intl.NumberFormat("ru-RU");
     <template #item-countSms="{ countSms }">
       {{ formater.format(countSms) }}
     </template>
+    <template #item-creator.name="{ creator }">
+      <a
+        v-if="creator"
+        :href="`https://vk.com/id${creator.id}`"
+        target="_blank"
+      >
+        {{ creator.name }}
+      </a>
+    </template>
     <template #item-name="{ name, link, __index }">
       <ACellCrownWrapper :index="__index">
         <a :href="link" target="_blank">{{ name }}</a>

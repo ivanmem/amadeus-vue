@@ -155,6 +155,7 @@
   --navigation-bottom-color: #9aa2ad;
   --nth-child-1-color: rgb(49, 134, 212);
   --nth-child-2-color: rgb(56, 199, 175);
+  --a-color: rgb(0, 0, 238);
   --accent-color: var(--dark-color-600);
   --border-color: var(--light-color-600);
   --dark-color: #141414;
@@ -176,6 +177,7 @@
   --navigation-bottom-color: #77787a;
   --nth-child-1-color: rgb(49, 134, 212);
   --nth-child-2-color: rgb(56, 199, 175);
+  --a-color: rgb(158, 158, 255);
   --accent-color: var(--light-color-600);
   --border-color: var(--dark-color-600);
   --norder-separator-color: #1d1d1d;
@@ -188,11 +190,12 @@
   --easy-table-border: black;
   --easy-table-header-background-color: #505050;
   --easy-table-header-font-color: white;
-  --easy-table-row-border: 0.5px solid #77787a;
 
-  --easy-table-scrollbar-track-color: transparent;
+  --easy-table-row-border: 0.5px solid #77787a;
   --easy-table-scrollbar-color: transparent;
   --easy-table-scrollbar-thumb-color: #454545;
+
+  --easy-table-scrollbar-track-color: transparent;
 }
 
 :root {

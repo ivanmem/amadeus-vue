@@ -15,4 +15,10 @@ export const conversationHeaders: ATableHeader[] = [
     sortable: true,
     width: 60,
   },
+  {
+    value: "creator.name",
+    text: "Создатель",
+    sortable: true,
+    width: 100,
+  },
 ];

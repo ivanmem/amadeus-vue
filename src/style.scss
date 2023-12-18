@@ -67,7 +67,7 @@ h6 {
 }
 
 a {
-  color: revert;
+  color: var(--a-color);
   text-decoration: revert;
 }
 
