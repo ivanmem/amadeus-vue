@@ -12,6 +12,7 @@ import { setEruda } from "../../helpers/setEruda";
 import { useVk } from "../vk/vk";
 import { imageUrlToBase64 } from "../../helpers/imageUrlToBase64";
 import { router } from "../../router";
+import { FiltersType, useCommands } from "../commands/commands";
 
 interface AppState {
   caption: string;
@@ -63,6 +64,8 @@ export const useApp = defineStore("app", {
   actions: {
     async init() {
       const appStore = useApp();
+      const commandsStore = useCommands();
+      const vkStore = useVk();
       bridge.subscribe((e) => {
         if (e.detail.type === "VKWebAppUpdateConfig") {
           appStore.webAppConfig = e.detail.data;
@@ -88,7 +91,14 @@ export const useApp = defineStore("app", {
       });
 
       try {
-        await this.updateConfig();
+        const { filters, config, favorite } = await vkStore.getVkStorageDict({
+          filters: {} as FiltersType,
+          config: {} as IAppConfig,
+          favorite: [] as number[],
+        });
+        await appStore.updateConfig(config);
+        await commandsStore.updateFilters(filters);
+        await commandsStore.updateFavorite(favorite);
         await bridge.send("VKWebAppInit", {});
         this.urlParams = Object.fromEntries(
           new URLSearchParams(location.search),
@@ -109,6 +119,22 @@ export const useApp = defineStore("app", {
         this.config,
         () => {
           return this.saveCurrentConfig();
+        },
+        { deep: true },
+      );
+
+      watch(
+        commandsStore.filters,
+        () => {
+          return commandsStore.saveCurrentFilters();
+        },
+        { deep: true },
+      );
+
+      watch(
+        commandsStore.favorite,
+        () => {
+          return commandsStore.saveCurrentFavorite();
         },
         { deep: true },
       );
@@ -136,16 +162,14 @@ export const useApp = defineStore("app", {
         }
       };
     },
-    async saveCurrentConfig() {
-      await useVk().setVkStorageDict({
+    saveCurrentConfig() {
+      return useVk().setVkStorageDict({
         config: this.config,
       });
     },
-    async updateConfig() {
+    async updateConfig(config?: IAppConfig) {
       try {
-        const { config } = await useVk().getVkStorageDict<IAppConfig>([
-          "config",
-        ]);
+        config ??= await useVk().getVkStorageObject<IAppConfig>("config");
         // таким нехитрым образом мы убедимся в правильности формата сохранённого конфига
         if (config && config.eruda !== undefined) {
           this.config = config;

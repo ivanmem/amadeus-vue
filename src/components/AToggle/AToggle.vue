@@ -11,7 +11,7 @@ const emit = defineEmits<{
   <label class="inline-flex items-center cursor-pointer">
     <input
       :checked="props.modelValue"
-      class="sr-only peer"
+      class="sr-only peer left-0"
       type="checkbox"
       @change="emit('update:model-value', !props.modelValue)"
     />

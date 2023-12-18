@@ -11,6 +11,8 @@ import { icons } from "../../common/consts";
 import { useApp } from "../../store/app/app";
 import AModal from "../../components/AModal/AModal.vue";
 import { reactive } from "vue";
+import AToggle from "../../components/AToggle/AToggle.vue";
+import ACaption from "../../components/ACaption.vue";
 
 const commandsStore = useCommands();
 const appStore = useApp();
@@ -42,6 +44,10 @@ const show = reactive({
             :options="CREATOR_COMMANDS_OPTIONS"
             label="Команда только для создателя бота"
           />
+          <div>
+            <ACaption> Избранное</ACaption>
+            <AToggle v-model="commandsStore.filters.favorite" />
+          </div>
         </div>
       </template>
     </AModal>

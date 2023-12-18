@@ -2,6 +2,7 @@
 import uniqueId from "lodash/uniqueId";
 import { PropType } from "vue";
 import { ASelectOption } from "./types";
+import ACaption from "../ACaption.vue";
 
 const props = defineProps({
   label: String,
@@ -25,11 +26,7 @@ const id = uniqueId("a-select__select");
 </script>
 <template>
   <div class="a-select">
-    <label
-      :for="id"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >{{ label }}
-    </label>
+    <ACaption :for="id"> {{ label }}</ACaption>
     <select
       :id="id"
       class="a-select__element text-sm focus:ring-blue-500 block w-full p-2.5"

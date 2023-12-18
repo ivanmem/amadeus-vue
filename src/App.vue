@@ -16,8 +16,8 @@ const appStore = useApp();
 const vkService = useVk();
 useColorScheme();
 
-onMounted(() => {
-  return appStore.init();
+onMounted(async () => {
+  await appStore.init();
 });
 
 watch(

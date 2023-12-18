@@ -3,6 +3,7 @@ import { UseCommandSearch } from "./useCommandSearch";
 import ACommandsFilters from "./ACommandsFilters.vue";
 import { icons } from "../../common/consts";
 import { computed } from "vue";
+import AMessage from "../../components/AMessage/AMessage.vue";
 
 const props = defineProps<{
   commandSearch: UseCommandSearch;
@@ -37,9 +38,7 @@ const IconSearch = computed(() =>
     v-if="props.commandSearch.searchDebounce.value.length > 0"
     class="a-command-search__types box-border"
   >
-    <ul
-      class="items-center text-sm font-medium select-none text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-    >
+    <AMessage is="ul">
       <li
         v-for="type of props.commandSearch.searchTypes"
         :key="type.value"
@@ -62,7 +61,7 @@ const IconSearch = computed(() =>
           </label>
         </div>
       </li>
-    </ul>
+    </AMessage>
   </div>
 </template>
 <style lang="scss">

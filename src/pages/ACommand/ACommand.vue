@@ -18,11 +18,14 @@ import ACommandArgument from "./ACommandArgument.vue";
 import ACommandBreadcrumbs from "./ACommandBreadcrumbs.vue";
 import { useApp } from "../../store/app/app";
 import { useVk } from "../../store/vk/vk";
+import AToggle from "../../components/AToggle/AToggle.vue";
+import { useCommands } from "../../store/commands/commands";
 
 const props = defineProps<ACommandProps>();
 const router = useRouter();
 const appStore = useApp();
 const vkStore = useVk();
+const commandsStore = useCommands();
 const { nameCommand, command, parentCommand, aliases, store, relatedCommands } =
   useCommandInfo(props);
 
@@ -46,6 +49,7 @@ const {
   Icon12Cards,
   Icon16WrenchOutline,
   Icon16KeyOutline,
+  Icon12Favorite,
 } = icons;
 </script>
 
@@ -313,6 +317,22 @@ const {
       <ACommandSection v-if="command.onlyPrivateMessages">
         <div class="command-boolean">
           🚦 Можно использовать только в личных сообщениях бота.
+        </div>
+      </ACommandSection>
+
+      <ACommandSection>
+        <template #label>
+          <span><Icon12Favorite style="color: #ffb230" /> Избранное </span>
+        </template>
+        <div>
+          <AToggle
+            :model-value="commandsStore.favorite.has(command.id)"
+            @update:model-value="
+              $event
+                ? commandsStore.favorite.add(command.id)
+                : commandsStore.favorite.delete(command.id)
+            "
+          />
         </div>
       </ACommandSection>
     </template>

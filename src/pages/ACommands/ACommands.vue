@@ -2,13 +2,16 @@
 import { useCommandSearch } from "./useCommandSearch";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import ACommandsSearch from "./ACommandsSearch.vue";
+import AButton from "../../components/AButton/AButton.vue";
 import { computed, ref } from "vue";
 import ACommandsDynamicScroller from "./ACommandsDynamicScroller.vue";
 import AMessage from "../../components/AMessage/AMessage.vue";
 import { icons } from "../../common/consts";
+import { useCommands } from "../../store/commands/commands";
 
 useAppCaption("Команды");
 
+const commandsStore = useCommands();
 const commandSearch = useCommandSearch();
 const {
   searchDescriptions,
@@ -39,17 +42,27 @@ const { Icon16WarningTriangle } = icons;
       :commands="currentCommands.value"
       :lang="commandSearch.searchLang.value"
     />
-    <AMessage
+    <div
       v-if="currentCommands.value.length === 0"
-      style="
-        padding-top: 10px;
-        padding-inline: var(--page-padding-inline);
-        gap: 5px;
-      "
+      class="page-padding-inline pt-2.5 flex gap-2.5 flex-col"
     >
-      <Icon16WarningTriangle />
-      Подходящие команды отсутствуют.
-    </AMessage>
+      <AMessage class="pl-3 py-2 gap-1">
+        <Icon16WarningTriangle />
+        <span></span>
+        Подходящие команды отсутствуют.
+      </AMessage>
+      <AButton
+        class="justify-start pl-3 py-2 gap-1"
+        icon="Icon16Cancel"
+        @click="
+          commandsStore.resetFilters();
+          commandSearch.search.value = '';
+          commandSearch.searchType.value = 'name';
+        "
+      >
+        Сбросить фильтры
+      </AButton>
+    </div>
   </div>
 </template>
 

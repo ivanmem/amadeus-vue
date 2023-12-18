@@ -42,7 +42,15 @@ class CommandHelper {
       return commands;
     }
 
+    const commandsStore = useCommands();
     return commands.where((command) => {
+      if (
+        filters.favorite === true &&
+        !commandsStore.favorite.has(command.id)
+      ) {
+        return false;
+      }
+
       if (filters.isOnlyBotCreator === "hide" && command.isOnlyBotCreator) {
         return false;
       }

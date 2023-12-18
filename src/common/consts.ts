@@ -50,11 +50,11 @@ import Icon12Star from "@vkontakte/icons/src/svg/12/star_12.svg?component";
 import Icon12StarCircle from "@vkontakte/icons/src/svg/12/star_circle_12.svg?component";
 import Icon12StarCircleFillYellow from "@vkontakte/icons/src/svg/12/star_circle_fill_yellow_12.svg?component";
 import Icon12Crown from "@vkontakte/icons/src/svg/12/crown_12.svg?component";
+import Icon12Favorite from "@vkontakte/icons/src/svg/12/favorite_12.svg?component";
 import { ref } from "vue";
 
 export const icons = {
   Icon28ChatsOutline,
-
   Icon24Back,
   Icon24MenuOutline,
   Icon24Linked,
@@ -105,6 +105,7 @@ export const icons = {
   Icon12StarCircle,
   Icon12StarCircleFillYellow,
   Icon12Crown,
+  Icon12Favorite,
 };
 
 export const darkColorScheme = ref(false);

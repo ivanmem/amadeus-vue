@@ -1,11 +1,17 @@
+<script lang="ts" setup>
+const props = withDefaults(defineProps<{ is: string }>(), {
+  is: "div",
+});
+</script>
 <template>
-  <div class="a-message">
+  <component
+    :is="is"
+    class="a-message items-center text-sm font-medium select-none text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+  >
     <slot />
-  </div>
+  </component>
 </template>
 <style lang="scss">
 .a-message {
-  align-items: center;
-  display: inline-flex;
 }
 </style>

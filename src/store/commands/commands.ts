@@ -4,11 +4,13 @@ import CommandsService from "../../services/CommandsService";
 import CommandHelper from "../../helpers/CommandHelper";
 import { from, IEnumerable } from "linq-to-typescript";
 import { ILang } from "../../types/ILang";
+import { useVk } from "../vk/vk";
 
 export interface FiltersType {
   type: TypeCommandEnum;
   /** @description '' - не фильтровать, hide - показывать только false, only - показывать только true */
   isOnlyBotCreator: "" | "hide" | "only";
+  favorite?: boolean;
 }
 
 interface CommandAllVariantsNames {
@@ -19,13 +21,20 @@ interface CommandAllVariantsNames {
 interface CommandsState {
   docs?: Docs;
   filters: FiltersType;
+  favorite: Set<number>;
 }
+
+const initFilters: FiltersType = {
+  type: TypeCommandEnum.Unselected,
+  isOnlyBotCreator: "hide",
+};
 
 export const useCommands = defineStore("commands", {
   state: (): CommandsState => {
     return {
       docs: undefined,
-      filters: { type: TypeCommandEnum.Unselected, isOnlyBotCreator: "hide" },
+      filters: structuredClone(initFilters),
+      favorite: new Set(),
     };
   },
   actions: {
@@ -105,6 +114,39 @@ export const useCommands = defineStore("commands", {
         x.helpExtended.toLowerCase().includes(search),
       );
       return CommandHelper.getFiltered(searchCommands, filters).toArray();
+    },
+    saveCurrentFilters() {
+      return useVk().setVkStorageDict({
+        filters: this.filters,
+      });
+    },
+    saveCurrentFavorite() {
+      return useVk().setVkStorageDict({
+        favorite: this.favorite,
+      });
+    },
+    async updateFilters(filters?: FiltersType) {
+      try {
+        filters ??= await useVk().getVkStorageObject<FiltersType>("filters");
+        if (filters && typeof filters === "object") {
+          this.filters = filters;
+        }
+      } catch (ex) {
+        console.error(ex);
+      }
+    },
+    async updateFavorite(favorite?: number[]) {
+      try {
+        favorite ??= await useVk().getVkStorageObject<number[]>("favorite");
+        if (favorite && Array.isArray(favorite)) {
+          this.favorite = new Set(favorite);
+        }
+      } catch (ex) {
+        console.error(ex);
+      }
+    },
+    resetFilters() {
+      this.filters = structuredClone(initFilters);
     },
   },
   getters: {
