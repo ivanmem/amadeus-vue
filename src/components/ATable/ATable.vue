@@ -7,7 +7,7 @@ import ASearch from "../ASearch.vue";
 interface Props {
   items: object[];
   headers: ATableHeader[];
-  searchField?: string;
+  searchField?: string | string[];
 }
 
 const searchValue = ref("");
@@ -37,7 +37,7 @@ const props = defineProps<Props>();
       <template v-for="(_, slot) of $slots" #[slot]="scope">
         <slot :name="slot" v-bind="scope" />
       </template>
-      <template #empty-message> Нет доступных данных </template>
+      <template #empty-message> Нет доступных данных</template>
     </EasyDataTable>
   </div>
 </template>
