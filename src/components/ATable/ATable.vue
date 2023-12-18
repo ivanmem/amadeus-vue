@@ -32,13 +32,12 @@ const props = defineProps<Props>();
       fixed-index
       header-text-direction="center"
       hide-footer
-      show-index
       @touchstart.stop
     >
       <template v-for="(_, slot) of $slots" #[slot]="scope">
         <slot :name="slot" v-bind="scope" />
       </template>
-      <template #empty-message> Нет доступных данных</template>
+      <template #empty-message> Нет доступных данных </template>
     </EasyDataTable>
   </div>
 </template>

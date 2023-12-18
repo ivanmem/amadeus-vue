@@ -9,8 +9,10 @@ import ATopError from "./ATopError.vue";
 import { TopService } from "../../services/TopService";
 import ATopBreadcrumbs from "./ATopBreadcrumbs.vue";
 import ACellCrownWrapper from "./ACellCrownWrapper.vue";
+import { indexTableHeader } from "./consts";
 
 const headers: ATableHeader[] = [
+  indexTableHeader,
   { value: "commandId", text: "Название", sortable: true, width: 100 },
   {
     value: "countExecute",
@@ -29,7 +31,7 @@ const formater = new Intl.NumberFormat("ru-RU");
     <ATopError v-if="typeof items === 'string'">{{ items }}</ATopError>
     <ATable v-else :headers="headers" :items="items">
       <template #item-commandId="{ commandId, __index }">
-        <ACellCrownWrapper :index="__index">
+        <ACellCrownWrapper :index="__index - 1">
           <div class="flex flex-grow justify-center">
             <AButton
               class="opacity whitespace-pre-wrap"

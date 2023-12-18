@@ -6,8 +6,10 @@ import ATopError from "./ATopError.vue";
 import { TopService } from "../../services/TopService";
 import ATopBreadcrumbs from "./ATopBreadcrumbs.vue";
 import ACellCrownWrapper from "./ACellCrownWrapper.vue";
+import { indexTableHeader } from "./consts";
 
 const headers: ATableHeader[] = [
+  indexTableHeader,
   { value: "name", text: "Название", sortable: true },
   {
     value: "countSms",
@@ -27,7 +29,7 @@ const formater = new Intl.NumberFormat("ru-RU");
         {{ formater.format(countSms) }}
       </template>
       <template #item-name="{ name, __index }">
-        <ACellCrownWrapper :index="__index">
+        <ACellCrownWrapper :index="__index - 1">
           {{ name }}
         </ACellCrownWrapper>
       </template>

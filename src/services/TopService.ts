@@ -5,7 +5,7 @@ export class TopService {
       const values = (await x.json()) as Record<any, any>[];
       for (let i = 0; i < values.length; i++) {
         let value = values[i];
-        value.__index = i;
+        value.__index = i + 1;
       }
 
       return values;

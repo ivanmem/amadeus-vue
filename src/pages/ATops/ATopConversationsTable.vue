@@ -27,7 +27,7 @@ const formater = new Intl.NumberFormat("ru-RU");
       </a>
     </template>
     <template #item-name="{ name, link, __index }">
-      <ACellCrownWrapper :index="__index">
+      <ACellCrownWrapper :index="__index - 1">
         <a :href="link" target="_blank">{{ name }}</a>
       </ACellCrownWrapper>
     </template>
