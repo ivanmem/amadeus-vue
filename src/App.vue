@@ -67,7 +67,7 @@ watch(
       <div class="navigation-header__buttons">
         <div id="navigation-header__right"></div>
         <AButton
-          v-show="route.path !== '/command/' && route.path !== '/'"
+          v-show="route.path !== '/'"
           @click="
             vkService.copyText('vk.com/app51547376#' + route.path);
             LinkIcon = Icon24CopyOutline;
