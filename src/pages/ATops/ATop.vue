@@ -32,7 +32,7 @@ const { Icon24CupOutline } = icons;
     <br />
     <span class="top-header"> <Icon24CupOutline /> Пользователи </span>
     <div class="flex gap-3 flex-wrap">
-      <AButton icon="Icon24Users3Outline" to="/top/users"> Общий </AButton>
+      <AButton icon="Icon24Users3Outline" to="/top/users"> Общий</AButton>
       <AButton icon="Icon24Users3Outline" to="/top/users/today">
         Сегодня
       </AButton>
@@ -54,7 +54,7 @@ const { Icon24CupOutline } = icons;
 
   .top-header {
     display: inline-flex;
-    gap: 5px;
+    gap: 4px;
     margin-left: 4px;
   }
 }

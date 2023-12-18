@@ -6,7 +6,7 @@ const props = withDefaults(defineProps<{ is: string }>(), {
 <template>
   <component
     :is="is"
-    class="a-message items-center text-sm font-medium select-none text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+    class="a-message items-center text-sm font-medium select-none text-gray-900 bg-white border border-gray-200 rounded-lg flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
   >
     <slot />
   </component>

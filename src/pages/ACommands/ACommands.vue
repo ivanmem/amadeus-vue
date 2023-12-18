@@ -47,12 +47,11 @@ const { Icon16WarningTriangle } = icons;
       class="page-padding-inline pt-2.5 flex gap-2.5 flex-col"
     >
       <AMessage class="pl-3 py-2 gap-1">
-        <Icon16WarningTriangle />
-        <span></span>
-        Подходящие команды отсутствуют.
+        <Icon16WarningTriangle style="display: inline" />
+        <span>Подходящие команды отсутствуют</span>
       </AMessage>
       <AButton
-        class="justify-start pl-3 py-2 gap-1"
+        class="justify-start pl-3 py-2"
         icon="Icon16Cancel"
         @click="
           commandsStore.resetFilters();
