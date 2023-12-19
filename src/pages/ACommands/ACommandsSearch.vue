@@ -40,7 +40,7 @@ const IconSearch = computed(() =>
       <li
         v-for="type of props.commandSearch.searchTypes"
         :key="type.value"
-        class="w-full border-b border-gray-200 sm:border-b-0 last:border-b-0 sm:border-r last:border-r-0 dark:border-gray-600"
+        class="w-full border-r border-gray-200 last:border-b-0 sm:border-r last:border-r-0 dark:border-gray-600"
       >
         <div class="flex items-center pl-3">
           <input
