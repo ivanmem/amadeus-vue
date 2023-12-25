@@ -5,12 +5,14 @@ import CommandHelper from "../../helpers/CommandHelper";
 import { from, IEnumerable } from "linq-to-typescript";
 import { ILang } from "../../types/ILang";
 import { useVk } from "../vk/vk";
+import { keys } from "../../helpers/keys";
 
 export interface FiltersType {
   type: TypeCommandEnum;
   /** @description '' - не фильтровать, hide - показывать только false, only - показывать только true */
   isOnlyBotCreator: "" | "hide" | "only";
   favorite?: boolean;
+  disabled?: boolean;
 }
 
 interface CommandAllVariantsNames {
@@ -24,10 +26,11 @@ interface CommandsState {
   favorite: Set<number>;
 }
 
-const initFilters: FiltersType = {
+const initFilters = {
   type: TypeCommandEnum.Unselected,
   isOnlyBotCreator: "hide",
-};
+  disabled: false,
+} satisfies FiltersType;
 
 export const useCommands = defineStore("commands", {
   state: (): CommandsState => {
@@ -129,6 +132,15 @@ export const useCommands = defineStore("commands", {
       try {
         filters ??= await useVk().getVkStorageObject<FiltersType>("filters");
         if (filters && typeof filters === "object") {
+          for (const key of keys(initFilters)) {
+            if (filters[key] === undefined) {
+              continue;
+            }
+
+            // задаём значения по умолчанию для тех свойств, которые не заполнены значением
+            filters[key] = initFilters[key] as never;
+          }
+
           this.filters = filters;
         }
       } catch (ex) {

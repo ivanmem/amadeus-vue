@@ -44,9 +44,15 @@ const show = reactive({
             :options="CREATOR_COMMANDS_OPTIONS"
             label="Команда только для создателя бота"
           />
-          <div>
-            <ACaption> Избранное</ACaption>
-            <AToggle v-model="commandsStore.filters.favorite" />
+          <div class="flex gap-3">
+            <div>
+              <ACaption> Избранное </ACaption>
+              <AToggle v-model="commandsStore.filters.favorite" />
+            </div>
+            <div>
+              <ACaption> Отключённые </ACaption>
+              <AToggle v-model="commandsStore.filters.disabled" />
+            </div>
           </div>
         </div>
       </template>
