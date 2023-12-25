@@ -13,6 +13,7 @@ import { useVk } from "../vk/vk";
 import { imageUrlToBase64 } from "../../helpers/imageUrlToBase64";
 import { router } from "../../router";
 import { FiltersType, useCommands } from "../commands/commands";
+import { toStr } from "../../helpers/toStr";
 
 interface AppState {
   caption: string;
@@ -116,19 +117,17 @@ export const useApp = defineStore("app", {
       );
 
       watch(
-        () => this.config,
+        () => toStr(this.config),
         () => {
           return this.saveCurrentConfig();
         },
-        { deep: true },
       );
 
       watch(
-        () => commandsStore.filters,
+        () => toStr(commandsStore.filters),
         () => {
           return commandsStore.saveCurrentFilters();
         },
-        { deep: true },
       );
 
       watch(
