@@ -61,6 +61,9 @@ const {
       :parent-command="parentCommand"
     />
     <template v-if="command">
+      <ACommandSection v-if="command.disabled">
+        <div class="command-boolean">🚫 Команда отключена (принудительно).</div>
+      </ACommandSection>
       <ACommandSection>
         <template #label>
           <span>
@@ -304,7 +307,7 @@ const {
             PermissionPrivateMessagesTypeEnum.YesImportant
               ? " (принудительно)"
               : ""
-          }}
+          }}.
         </div>
       </ACommandSection>
 

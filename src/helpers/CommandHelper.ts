@@ -44,6 +44,10 @@ class CommandHelper {
 
     const commandsStore = useCommands();
     return commands.where((command) => {
+      if (command.disabled) {
+        return false;
+      }
+
       if (
         filters.favorite === true &&
         !commandsStore.favorite.has(command.id)

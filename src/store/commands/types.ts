@@ -14,6 +14,7 @@ export interface Command {
   commandImplicit?: CommandImplicit[];
   gameMode?: boolean;
   ignoreFilter?: boolean;
+  disabled?: boolean;
   privateMessages?: PermissionPrivateMessagesTypeEnum;
   onlyPrivateMessages?: boolean;
   notPrivateMessages?: boolean;
