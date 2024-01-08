@@ -31,8 +31,7 @@ pre {
 body {
   background: var(--vkui--color_background_content);
   margin: 0;
-  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
-    env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 }
 
 pre {
@@ -69,6 +68,10 @@ h6 {
 a {
   color: var(--a-color);
   text-decoration: revert;
+}
+
+a[href=""], a[href="#"], a:not([href]) {
+  color: inherit;
 }
 
 svg {
