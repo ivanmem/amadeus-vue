@@ -87,9 +87,9 @@ class CommandHelper {
   static getNameLevel(accessLevel: number): string {
     switch (accessLevel) {
       case 11:
-        return "Создатель";
+        return "Владелец";
       case 10:
-        return "Помощник создателя";
+        return "Помощник владельца";
       case 9:
         return "Старший администратор";
       case 8:

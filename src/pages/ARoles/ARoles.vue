@@ -37,8 +37,8 @@ const roles: {
     caption: "Старший администратор",
     emoji: "f09f91b2",
   },
-  { smile: "🤴", level: 10, caption: "Помощник создателя", emoji: "f09fa4b4" },
-  { smile: "👑", level: 11, caption: "Создатель", emoji: "f09f9191" },
+  { smile: "🤴", level: 10, caption: "Помощник владельца", emoji: "f09fa4b4" },
+  { smile: "👑", level: 11, caption: "Владелец", emoji: "f09f9191" },
 ];
 </script>
 

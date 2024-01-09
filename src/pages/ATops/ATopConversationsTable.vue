@@ -10,7 +10,7 @@ const formater = new Intl.NumberFormat("ru-RU");
   <ATable
     :headers="conversationHeaders"
     :items="items"
-    :search-field="['name', 'creator.name']"
+    :search-field="['name', 'owner.name']"
   >
     <template #item-percentBot="{ percentBot }">
       {{ percentBot ?? 0 }}%
@@ -21,13 +21,13 @@ const formater = new Intl.NumberFormat("ru-RU");
     <template #item-countSms="{ countSms }">
       {{ formater.format(countSms) }}
     </template>
-    <template #item-creator.name="{ creator }">
+    <template #item-owner.name="{ owner }">
       <a
-        v-if="creator"
-        :href="`https://vk.com/id${creator.id}`"
+        v-if="owner"
+        :href="`https://vk.com/id${owner.id}`"
         target="_blank"
       >
-        {{ creator.name }}
+        {{ owner.name }}
       </a>
     </template>
     <template #item-name="{ name, link, __index }">
