@@ -44,7 +44,7 @@ class CommandHelper {
 
     const commandsStore = useCommands();
     return commands.where((command) => {
-      if (filters.disabled && !command.disabled) {
+      if (Boolean(filters.disabled) != Boolean(command.disabled)) {
         return false;
       }
 
