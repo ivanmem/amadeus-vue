@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@vueform/slider/tailwind")],
   darkMode: "class",
   important: true,
 };

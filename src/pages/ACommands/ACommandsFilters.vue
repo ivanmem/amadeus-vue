@@ -13,6 +13,7 @@ import AModal from "../../components/AModal/AModal.vue";
 import { reactive } from "vue";
 import AToggle from "../../components/AToggle/AToggle.vue";
 import ACaption from "../../components/ACaption.vue";
+import ACommandLevelFilter from "./ACommandLevelFilter.vue";
 
 const commandsStore = useCommands();
 const appStore = useApp();
@@ -44,13 +45,14 @@ const show = reactive({
             :options="CREATOR_COMMANDS_OPTIONS"
             label="Команда только для создателя бота"
           />
+          <ACommandLevelFilter />
           <div class="flex gap-3">
             <div>
-              <ACaption> Избранное </ACaption>
+              <ACaption> Избранное</ACaption>
               <AToggle v-model="commandsStore.filters.favorite" />
             </div>
             <div>
-              <ACaption> Отключённые </ACaption>
+              <ACaption> Отключённые</ACaption>
               <AToggle v-model="commandsStore.filters.disabled" />
             </div>
           </div>

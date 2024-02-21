@@ -8,7 +8,7 @@ export interface Command {
   id: number;
   idOriginal?: number;
   alias: string[];
-  accessLevel: number;
+  accessLevel?: number; // если не указано, то 0
   argumentsListString: string;
   helpExtended: string;
   commandImplicit?: CommandImplicit[];

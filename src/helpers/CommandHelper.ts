@@ -43,6 +43,9 @@ class CommandHelper {
     }
 
     const commandsStore = useCommands();
+
+    const accessLevels =
+      filters.levels ? commandsStore.getFiltersLevels(filters.levels) : null;
     return commands.where((command) => {
       if (Boolean(filters.disabled) != Boolean(command.disabled)) {
         return false;
@@ -68,6 +71,13 @@ class CommandHelper {
         command.type != filters.type
       ) {
         return false;
+      }
+
+      if (accessLevels?.length == 2) {
+        const accessLevel = command.accessLevel ?? 0;
+        if (accessLevel < accessLevels[0] || accessLevel > accessLevels[1]) {
+          return false;
+        }
       }
 
       return true;

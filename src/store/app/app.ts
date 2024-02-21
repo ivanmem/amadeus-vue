@@ -14,6 +14,7 @@ import { imageUrlToBase64 } from "../../helpers/imageUrlToBase64";
 import { router } from "../../router";
 import { FiltersType, useCommands } from "../commands/commands";
 import { toStr } from "../../helpers/toStr";
+import { watchDebounced } from "@vueuse/core";
 
 interface AppState {
   caption: string;
@@ -116,26 +117,28 @@ export const useApp = defineStore("app", {
         { immediate: this.config.eruda },
       );
 
-      watch(
+      watchDebounced(
         () => toStr(this.config),
         () => {
           return this.saveCurrentConfig();
         },
+        { debounce: 500 },
       );
 
-      watch(
+      watchDebounced(
         () => toStr(commandsStore.filters),
         () => {
           return commandsStore.saveCurrentFilters();
         },
+        { debounce: 500 },
       );
 
-      watch(
+      watchDebounced(
         () => commandsStore.favorite,
         () => {
           return commandsStore.saveCurrentFavorite();
         },
-        { deep: true },
+        { debounce: 500, deep: true },
       );
 
       if (this.config.slides) {

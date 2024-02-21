@@ -13,6 +13,7 @@ export interface FiltersType {
   isOnlyBotCreator: "" | "hide" | "only";
   favorite?: boolean;
   disabled?: boolean;
+  levels?: string;
 }
 
 interface CommandAllVariantsNames {
@@ -160,8 +161,17 @@ export const useCommands = defineStore("commands", {
     resetFilters() {
       this.filters = structuredClone(initFilters);
     },
+    setFilterLevels(value: [number, number]) {
+      this.filters.levels = value.join(" ");
+    },
+    getFiltersLevels(value: string): [number, number] {
+      return value.split(" ").map(Number) as never;
+    },
   },
   getters: {
+    filterLevels(): [number, number] {
+      return useCommands().getFiltersLevels(this.filters.levels ?? "0 11");
+    },
     commands(): Record<string | number, Command> {
       return this.docs?.commands ?? {};
     },

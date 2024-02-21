@@ -48,6 +48,7 @@ watch(
 const { Icon24Linked, Icon24CopyOutline, Icon24QuestionOutline } = icons;
 
 const LinkIcon = shallowRef(Icon24Linked);
+
 watch(
   () => route.path,
   () => {
