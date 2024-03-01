@@ -23,7 +23,7 @@ const headers: ATableHeader[] = [
 ];
 const commands = useCommands();
 const items = await TopService.get("/top/commands");
-const formater = new Intl.NumberFormat("ru-RU");
+const formatter = new Intl.NumberFormat("ru-RU");
 </script>
 <template>
   <ATopBreadcrumbs caption="Общий топ команд" />
@@ -43,7 +43,7 @@ const formater = new Intl.NumberFormat("ru-RU");
         </ACellCrownWrapper>
       </template>
       <template #item-countExecute="{ countExecute }">
-        {{ formater.format(countExecute) }}
+        {{ formatter.format(countExecute) }}
       </template>
     </ATable>
   </APageContainer>

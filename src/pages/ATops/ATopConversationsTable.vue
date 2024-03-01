@@ -4,7 +4,7 @@ import { conversationHeaders } from "./consts";
 import ACellCrownWrapper from "./ACellCrownWrapper.vue";
 
 const props = defineProps<{ items: object[] }>();
-const formater = new Intl.NumberFormat("ru-RU");
+const formatter = new Intl.NumberFormat("ru-RU");
 </script>
 <template>
   <ATable
@@ -19,7 +19,7 @@ const formater = new Intl.NumberFormat("ru-RU");
       {{ peerId - 2000000000 }}
     </template>
     <template #item-countSms="{ countSms }">
-      {{ formater.format(countSms) }}
+      {{ formatter.format(countSms) }}
     </template>
     <template #item-owner.name="{ owner }">
       <a

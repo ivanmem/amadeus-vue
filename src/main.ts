@@ -15,6 +15,19 @@ import { useCommands } from "./store/commands/commands";
 
 document.documentElement.style.setProperty("background", "black");
 
+function listenOnDevicePixelRatio() {
+  document.documentElement.style.setProperty(
+    "--device-pixel-ratio",
+    `${window.devicePixelRatio}`,
+  );
+
+  matchMedia(
+    `(resolution: ${window.devicePixelRatio}dppx)`
+  ).addEventListener("change", listenOnDevicePixelRatio, { once: true });
+}
+
+listenOnDevicePixelRatio();
+
 const app = createApp(App).use(createPinia()).use(router);
 
 app.component("EasyDataTable", Vue3EasyDataTable);

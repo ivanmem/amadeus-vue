@@ -71,6 +71,10 @@ const roles: {
     align-items: center;
     column-gap: 5px;
     display: flex;
+
+    img {
+      zoom: calc(1 / var(--device-pixel-ratio));
+    }
   }
 }
 </style>
