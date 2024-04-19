@@ -49,7 +49,9 @@ export const useCommands = defineStore("commands", {
 
       try {
         this.docs = (await (
-          await fetch("https://xeleos.ddns.net/api/commands/doc")
+          await fetch("https://xeleos.ddns.net/api/commands/doc", {
+            signal: AbortSignal.timeout(5000),
+          })
         ).json()) as Docs;
       } catch {
         this.docs = (await (await fetch("/doc.json")).json()) as Docs;
