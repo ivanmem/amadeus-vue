@@ -4,6 +4,8 @@ import "vue3-easy-data-table/dist/style.css";
 import "@vkontakte/vkui/dist/vkui.css";
 import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
 import "./style.scss";
+import "./styles/variables.scss";
+import "./styles/animations.scss";
 import "./styles/icons.scss";
 import "./styles/inputs.scss";
 import "./styles/buttons.scss";

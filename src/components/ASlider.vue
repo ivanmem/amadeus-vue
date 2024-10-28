@@ -17,7 +17,7 @@ const emit = defineEmits<{
 </template>
 
 <style lang="scss">
-@import "../../node_modules/@vueform/slider/themes/tailwind.scss";
+@use "../../node_modules/@vueform/slider/themes/tailwind.scss";
 
 .slider-base {
   @apply bg-gray-300;

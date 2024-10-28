@@ -25,3 +25,7 @@ dist-ssr
 
 build.zip
 public/doc.json
+/tsconfig.node.tsbuildinfo
+/tsconfig.tsbuildinfo
+/vite.config.d.ts
+/vite.config.js

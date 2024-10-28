@@ -9,4 +9,11 @@ export default defineConfig({
     minify: false,
     target: "ES2019",
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler'
+      }
+    }
+  }
 });

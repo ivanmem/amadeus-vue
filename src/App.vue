@@ -93,15 +93,14 @@ watch(
 
 <style lang="scss">
 @use "styles/mixins";
-@use "styles/helpers";
 
 .app {
   padding-top: var(--page-padding-top);
-  @extend .overflow-block;
+  @include mixins.overflow-block;
 }
 
 .route-view {
-  @extend .overflow-block;
+  @include mixins.overflow-block;
 }
 
 .navigation-header {

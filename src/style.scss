@@ -3,9 +3,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "styles/variables";
-@import "styles/helpers";
-@import "styles/animations";
 
 :root {
   background: var(--vkui--color_background_content);
@@ -42,7 +39,7 @@ pre {
 
 html,
 body {
-  @extend .overflow-block;
+  @include mixins.overflow-block;
   background: var(--vkui--color_background_content);
   font-family: var(--vkui--font_text--font_family--regular);
   height: 100vh;
@@ -52,7 +49,7 @@ body {
 }
 
 #app {
-  @extend .overflow-block;
+  @include mixins.overflow-block;
 }
 
 h1,
