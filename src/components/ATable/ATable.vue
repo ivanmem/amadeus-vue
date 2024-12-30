@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import EasyDataTable from "vue3-easy-data-table";
+import * as Vue3EasyDataTable from "vue3-easy-data-table";
 import { ATableHeader } from "./types";
 import { ref } from "vue";
 import ASearch from "../ASearch.vue";
@@ -18,7 +18,7 @@ const props = defineProps<Props>();
     <div v-if="searchField" class="page-padding-inline">
       <ASearch v-model="searchValue" />
     </div>
-    <EasyDataTable
+    <Vue3EasyDataTable
       :headers="headers"
       :index-column-width="30"
       :items="items"
@@ -38,7 +38,7 @@ const props = defineProps<Props>();
         <slot :name="slot" v-bind="scope" />
       </template>
       <template #empty-message> Нет доступных данных</template>
-    </EasyDataTable>
+    </Vue3EasyDataTable>
   </div>
 </template>
 <style lang="scss">
