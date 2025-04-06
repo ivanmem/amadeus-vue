@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import * as Vue3EasyDataTable from "vue3-easy-data-table";
+import Vue3EasyDataTable from "vue3-easy-data-table";
 import { ATableHeader } from "./types";
 import { ref } from "vue";
 import ASearch from "../ASearch.vue";

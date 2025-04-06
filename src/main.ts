@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import * as Vue3EasyDataTable from "vue3-easy-data-table";
+import Vue3EasyDataTable from "vue3-easy-data-table";
 import "vue3-easy-data-table/dist/style.css";
 import "@vkontakte/vkui/dist/vkui.css";
 import "vue-virtual-scroller/dist/vue-virtual-scroller.css";

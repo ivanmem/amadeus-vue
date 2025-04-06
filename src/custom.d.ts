@@ -24,3 +24,10 @@ declare module "linkify-html" {
 
   export = linkifyHtml;
 }
+
+declare module "vue3-easy-data-table" {
+  const Vue3EasyDataTable: DefineComponent;
+  export default Vue3EasyDataTable;
+}
+
+export * from 'vue3-easy-data-table';
