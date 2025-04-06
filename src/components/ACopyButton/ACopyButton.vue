@@ -1,16 +1,15 @@
 <script lang="ts" setup>
 import AButton from "../../components/AButton/AButton.vue";
 import { computed, h, shallowRef } from "vue";
-import { icons } from "../../common/consts";
+import { Icon16CopyOutline, Icon16DoneCircle } from "vue-vkontakte-icons";
 
 const props = defineProps({
   tag: { type: String },
   size: { type: Number, default: 16 },
 });
 
-const initialCopyIcon = icons.Icon16CopyOutline;
-const clickedCopyIcon = icons.Icon16DoneCircle;
-
+const initialCopyIcon = Icon16CopyOutline;
+const clickedCopyIcon = Icon16DoneCircle;
 const currentCopyIcon = shallowRef(initialCopyIcon);
 
 const CopyIcon = computed(() =>

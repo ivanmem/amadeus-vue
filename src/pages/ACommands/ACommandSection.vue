@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { icons } from "../../common/consts";
+import { Icon24ChevronDown, Icon24ChevronUp } from "vue-vkontakte-icons";
 
 const props = defineProps({
   defaultOpen: { type: Boolean, default: true },
 });
-
-const { Icon24ChevronDown, Icon24ChevronUp } = icons;
 </script>
 <template>
   <section>

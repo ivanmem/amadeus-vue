@@ -7,7 +7,7 @@ import AButton from "../../components/AButton/AButton.vue";
 import { useCommands } from "../../store/commands/commands";
 import ASelect from "../../components/ASelect/ASelect.vue";
 import FixedTeleport from "../../components/FixedTeleport.vue";
-import { icons } from "../../common/consts";
+import { Icon24QuestionOutline, Icon24Filter } from "vue-vkontakte-icons";
 import { useApp } from "../../store/app/app";
 import AModal from "../../components/AModal/AModal.vue";
 import { reactive } from "vue";
@@ -17,7 +17,6 @@ import ACommandLevelFilter from "./ACommandLevelFilter.vue";
 
 const commandsStore = useCommands();
 const appStore = useApp();
-const { Icon24QuestionOutline } = icons;
 const show = reactive({
   filters: false,
 });
@@ -28,7 +27,7 @@ const show = reactive({
       <template #button>
         <AButton
           class="a-button__opacity"
-          icon="Icon24Filter"
+          :icon="Icon24Filter"
           @click="show.filters = !show.filters"
         />
       </template>

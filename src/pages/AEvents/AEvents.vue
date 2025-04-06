@@ -7,6 +7,7 @@ import ALinkify from "../../components/ALinkify/ALinkify.vue";
 import ACopyButton from "../../components/ACopyButton/ACopyButton.vue";
 import AButton from "../../components/AButton/AButton.vue";
 import { useVk } from "../../store/vk/vk";
+import { Icon16Link } from "vue-vkontakte-icons";
 
 useAppCaption("События чата");
 const vkService = useVk();
@@ -20,7 +21,7 @@ const fontSize = 14;
     <AButton
       class="self-start"
       data-type="accent"
-      icon="Icon16Link"
+      :icon="Icon16Link"
       to="https://vk.com/@animecm-template-events"
     >
       Примеры событий

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { computed, useSlots } from "vue";
-import { icons } from "../../common/consts";
 import { useLink } from "vue-router";
 import { AButtonProps } from "./types";
 
@@ -18,12 +17,12 @@ const isExternalLink = computed(
 );
 
 const link = useLink({
-  to: computed(() => (isExternalLink.value ? "/" : props.to ?? "/")),
+  to: computed(() => (isExternalLink.value ? "/" : (props.to ?? "/"))),
   replace: computed(() => props.replace),
 });
 
 const tag = computed(() =>
-  props.tag ?? props.to
+  (props.tag ?? props.to)
     ? isExternalLink.value
       ? "a"
       : "router-link"
@@ -31,7 +30,7 @@ const tag = computed(() =>
 );
 
 const target = computed(() =>
-  props.target ?? isExternalLink.value ? "_blank" : "_self",
+  (props.target ?? isExternalLink.value) ? "_blank" : "_self",
 );
 
 const onClick = (e: MouseEvent) => {
@@ -105,16 +104,7 @@ const componentProps = computed(() => {
     :data-type="dataType"
     @click="onClick"
   >
-    <template v-if="props.icon">
-      <component
-        :is="
-          typeof props.icon === 'string'
-            ? icons[props.icon] ?? props.icon
-            : props.icon
-        "
-        v-bind="iconProps"
-      />
-    </template>
+    <component v-if="props.icon" :is="props.icon" v-bind="iconProps" />
     <slot name="icon" v-bind="iconProps" />
     <slot v-if="!hideContent" />
   </component>

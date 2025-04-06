@@ -77,7 +77,7 @@ export const useApp = defineStore("app", {
 
       watchEffect(async () => {
         const webAppConfig = this.webAppConfig;
-        if (!webAppConfig || !bridge.supports("VKWebAppResizeWindow")) {
+        if (!webAppConfig || !(await bridge.supportsAsync("VKWebAppResizeWindow"))) {
           return;
         }
 

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { UseCommandSearch } from "./useCommandSearch";
 import ACommandsFilters from "./ACommandsFilters.vue";
-import { icons } from "../../common/consts";
+import { Icon16Cancel, Icon16SearchOutline } from "vue-vkontakte-icons";
 import { computed } from "vue";
 import AMessage from "../../components/AMessage/AMessage.vue";
 import ASearch from "../../components/ASearch.vue";
@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const { search } = props.commandSearch;
 const IconSearch = computed(() =>
-  search.value.length ? icons.Icon16Cancel : icons.Icon16SearchOutline,
+  search.value.length ? Icon16Cancel : Icon16SearchOutline,
 );
 </script>
 

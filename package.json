@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@headlessui/vue": "1.7.23",
-    "@vkontakte/icons": "2.160.0",
     "@vkontakte/vk-bridge": "2.15.3",
     "@vkontakte/vkui": "5.10.2",
     "@vueform/slider": "2.1.10",
@@ -33,6 +32,7 @@
     "vue": "3.5.13",
     "vue-router": "4.5.0",
     "vue-virtual-scroller": "2.0.0-beta.8",
+    "vue-vkontakte-icons": "3.0.0-beta.9",
     "vue3-easy-data-table": "1.5.47"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useVModel } from "@vueuse/core";
 import { computed } from "vue";
-import { icons } from "../common/consts";
+import { Icon16Cancel, Icon16SearchOutline } from "vue-vkontakte-icons";
 
 const props = defineProps<{ modelValue: string }>();
 const emit = defineEmits<{ "update:model-value": [string] }>();
@@ -9,7 +9,7 @@ const emit = defineEmits<{ "update:model-value": [string] }>();
 const search = useVModel(props, "modelValue", emit);
 
 const IconSearch = computed(() =>
-  search.value.length ? icons.Icon16Cancel : icons.Icon16SearchOutline,
+  search.value.length ? Icon16Cancel : Icon16SearchOutline,
 );
 </script>
 <template>

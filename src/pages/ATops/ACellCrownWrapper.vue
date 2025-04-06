@@ -5,13 +5,12 @@ const params = {
   padding: [0, 1, 2],
   color: ["#b1b100", "#bababa", "e27305"],
 };
-import { icons } from "../../common/consts";
+import { Icon12Crown } from "vue-vkontakte-icons";
 </script>
 <template>
   <slot v-if="index >= params.size.length" />
   <div v-else class="a-cell-crown-wrapper">
-    <component
-      :is="icons.Icon12Crown"
+    <Icon12Crown
       :height="params.size[index]"
       :style="{
         color: params.color[index],

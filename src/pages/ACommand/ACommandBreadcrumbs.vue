@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Command } from "../../store/commands/types";
-import { icons } from "../../common/consts";
+import { Icon24ArticleBoxOutline } from "vue-vkontakte-icons";
 import ABreadcrumbs from "../../components/ABreadcrumbs/ABreadcrumbs.vue";
 import ABreadcrumbItem from "../../components/ABreadcrumbs/ABreadcrumbItem.vue";
 
@@ -9,7 +9,6 @@ const props = defineProps<{
   parentCommand?: Command;
   nameCommand: string;
 }>();
-const { Icon24ArticleBoxOutline } = icons;
 </script>
 <template>
   <ABreadcrumbs :icon="Icon24ArticleBoxOutline" to="/">

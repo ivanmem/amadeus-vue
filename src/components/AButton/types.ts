@@ -1,11 +1,10 @@
 import { StyleValue, VueElement } from "vue";
-import { icons } from "../../common/consts";
 import { RouteLocationRaw } from "vue-router";
 
 export interface AButtonProps {
   class?: string;
   defaultClass?: string;
-  icon?: VueElement | keyof typeof icons;
+  icon?: VueElement;
   iconStyle?: StyleValue;
   iconClass?: any;
   to?: RouteLocationRaw;

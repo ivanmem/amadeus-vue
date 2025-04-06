@@ -4,6 +4,7 @@ import AButton from "../../components/AButton/AButton.vue";
 import { darkColorScheme } from "../../common/consts";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import { useApp } from "../../store/app/app";
+import { Icon16Link } from "vue-vkontakte-icons";
 
 useAppCaption("Дон Статус");
 const appService = useApp();
@@ -31,7 +32,7 @@ const products = [
     <template v-else>
       <AButton
         data-type="accent"
-        icon="Icon16Link"
+        :icon="Icon16Link"
         style="max-width: 300px"
         to="https://vk.com/@animecm-don"
       >
@@ -47,7 +48,7 @@ const products = [
             :to="product.to"
             class="a-button__left-content"
             data-type="accent"
-            icon="Icon16Link"
+            :icon="Icon16Link"
           >
             {{ product.caption }}
           </AButton>
@@ -61,7 +62,7 @@ const products = [
 
       <AButton
         data-type="accent"
-        icon="Icon16Link"
+        :icon="Icon16Link"
         style="max-width: 300px"
         to="https://vk.com/@animecm-terms-of-use"
       >

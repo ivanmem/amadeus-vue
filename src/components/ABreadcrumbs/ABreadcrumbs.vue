@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import FixedTeleport from "../FixedTeleport.vue";
 import { VueElement } from "vue";
-import { icons } from "../../common/consts";
 import { RouteLocationRaw } from "vue-router";
 import { useAppCaption } from "../../hooks/useAppCaption";
 
 const props = defineProps<{
-  icon: VueElement | keyof typeof icons;
+  icon: VueElement;
   iconProps?: any;
   to: RouteLocationRaw;
 }>();
@@ -22,14 +21,10 @@ useAppCaption("");
             class="inline-flex items-center text-sm font-medium hover:text-blue-600 dark:hover:text-amber-200"
           >
             <component
-              :is="
-                typeof props.icon === 'string'
-                  ? icons[props.icon] ?? props.icon
-                  : props.icon
-              "
+              :is="props.icon"
               height="20"
-              v-bind="iconProps"
               width="20"
+              v-bind="iconProps"
             />
           </RouterLink>
         </li>

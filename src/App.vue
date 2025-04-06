@@ -5,7 +5,7 @@ import { useCommands } from "./store/commands/commands";
 import AButton from "./components/AButton/AButton.vue";
 import { useColorScheme } from "./useColorScheme";
 import { useApp } from "./store/app/app";
-import { icons } from "./common/consts";
+import { Icon24Linked, Icon24CopyOutline } from "vue-vkontakte-icons";
 import ANavigationMenu from "./components/ANavigationMenu.vue";
 import { useVk } from "./store/vk/vk";
 
@@ -44,8 +44,6 @@ watch(
   },
   { immediate: true },
 );
-
-const { Icon24Linked, Icon24CopyOutline, Icon24QuestionOutline } = icons;
 
 const LinkIcon = shallowRef(Icon24Linked);
 

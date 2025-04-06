@@ -2,45 +2,44 @@
 import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import AButton from "../../components/AButton/AButton.vue";
-import { icons } from "../../common/consts";
+import { Icon24CupOutline, Icon28ChatsOutline, Icon24Chats, Icon24Users3Outline, Icon24Squareshape4HorizontalOutline } from "vue-vkontakte-icons";
 
 useAppCaption("Топы");
-const { Icon24CupOutline } = icons;
 </script>
 <template>
   <APageContainer class="a-tops">
     <span class="top-header"> <Icon24CupOutline /> Чаты </span>
     <div class="flex gap-3 flex-wrap">
       <AButton
-        icon="Icon28ChatsOutline"
+        :icon="Icon28ChatsOutline"
         icon-style="width: 24px; height: 24px;"
         to="/top/conversations"
       >
         Общий
       </AButton>
       <AButton
-        icon="Icon28ChatsOutline"
+        :icon="Icon28ChatsOutline"
         icon-style="width: 24px; height: 24px;"
         to="/top/conversations/today"
       >
         Сегодня
       </AButton>
-      <AButton icon="Icon24Chats" to="/top/conversations/catalog">
+      <AButton :icon="Icon24Chats" to="/top/conversations/catalog">
         Каталог
       </AButton>
     </div>
     <br />
     <span class="top-header"> <Icon24CupOutline /> Пользователи </span>
     <div class="flex gap-3 flex-wrap">
-      <AButton icon="Icon24Users3Outline" to="/top/users"> Общий</AButton>
-      <AButton icon="Icon24Users3Outline" to="/top/users/today">
+      <AButton :icon="Icon24Users3Outline" to="/top/users"> Общий</AButton>
+      <AButton :icon="Icon24Users3Outline" to="/top/users/today">
         Сегодня
       </AButton>
     </div>
     <br />
     <span class="top-header"> <Icon24CupOutline /> Команды </span>
     <div class="flex gap-3 flex-wrap">
-      <AButton icon="Icon24Squareshape4HorizontalOutline" to="/top/commands">
+      <AButton :icon="Icon24Squareshape4HorizontalOutline" to="/top/commands">
         Общий
       </AButton>
     </div>

@@ -6,7 +6,7 @@ import AButton from "../../components/AButton/AButton.vue";
 import { computed, ref } from "vue";
 import ACommandsDynamicScroller from "./ACommandsDynamicScroller.vue";
 import AMessage from "../../components/AMessage/AMessage.vue";
-import { icons } from "../../common/consts";
+import { Icon16WarningTriangle, Icon16Cancel } from "vue-vkontakte-icons";
 import { useCommands } from "../../store/commands/commands";
 
 useAppCaption("Команды");
@@ -30,8 +30,6 @@ const currentCommands = computed(() => {
 
   return searchType.value == "name" ? searchCommands : searchDescriptions;
 });
-
-const { Icon16WarningTriangle } = icons;
 </script>
 
 <template>
@@ -52,7 +50,7 @@ const { Icon16WarningTriangle } = icons;
       </AMessage>
       <AButton
         class="justify-start pl-3 py-2"
-        icon="Icon16Cancel"
+        :icon="Icon16Cancel"
         @click="
           commandsStore.resetFilters();
           commandSearch.search.value = '';

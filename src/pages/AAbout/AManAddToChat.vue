@@ -4,7 +4,7 @@ import APageContainer from "../../components/APageContainer/APageContainer.vue";
 import { useAppCaption } from "../../hooks/useAppCaption";
 import { useApp } from "../../store/app/app";
 import { useVk } from "../../store/vk/vk";
-import { icons } from "../../common/consts";
+import { Icon24LightbulbStarOutline, Icon24Picture, Icon24Add, Icon24BookSpreadOutline, Icon24Chats } from "vue-vkontakte-icons";
 import ABreadcrumbs from "../../components/ABreadcrumbs/ABreadcrumbs.vue";
 import ABreadcrumbItem from "../../components/ABreadcrumbs/ABreadcrumbItem.vue";
 
@@ -12,7 +12,6 @@ useAppCaption("");
 
 const appStore = useApp();
 const vkService = useVk();
-const { Icon24LightbulbStarOutline } = icons;
 </script>
 
 <template>
@@ -27,7 +26,7 @@ const { Icon24LightbulbStarOutline } = icons;
     </span>
     <AButton
       class="self-start"
-      icon="Icon24Picture"
+      :icon="Icon24Picture"
       @click="vkService.showImages(['/slides/add-administrator.jpg'])"
     >
       Назначение администратора
@@ -39,7 +38,7 @@ const { Icon24LightbulbStarOutline } = icons;
     </span>
     <AButton
       class="self-start"
-      icon="Icon24Add"
+      :icon="Icon24Add"
       to="https://vk.com/app6441755_-178374368"
     >
       Пригласить в чат
@@ -66,13 +65,13 @@ const { Icon24LightbulbStarOutline } = icons;
     </span>
     <div class="flex flex-wrap gap-3">
       <AButton
-        icon="Icon24BookSpreadOutline"
+        :icon="Icon24BookSpreadOutline"
         to="https://vk.com/@animecm-articles"
       >
         Оглавление
       </AButton>
       <AButton
-        icon="Icon24Chats"
+        :icon="Icon24Chats"
         to="https://vk.me/join/PE73yGJH2zM8cfMRom7ASQjmbgaqHWw_Ivo="
       >
         Официальный чат

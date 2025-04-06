@@ -11,7 +11,22 @@ import AButton from "../../components/AButton/AButton.vue";
 import { watch } from "vue";
 import { isNullOrUndefined } from "../../helpers/isNullOrUndefined";
 import { isNullOrUndefinedOrWhiteSpace } from "../../helpers/isNullOrUndefinedOrWhiteSpace";
-import { icons } from "../../common/consts";
+import {
+  Icon12Tag,
+  Icon12Articles,
+  Icon16Attach,
+  Icon16Pen,
+  Icon16WarningTriangle,
+  Icon12Flash,
+  Icon12Question,
+  Icon12View,
+  Icon12Cards2,
+  Icon16WrenchOutline,
+  Icon16KeyOutline,
+  Icon12Favorite,
+  Icon24InfoCircleOutline,
+  Icon24DollarCircleOutline
+} from "vue-vkontakte-icons";
 import ALinkify from "../../components/ALinkify/ALinkify.vue";
 import ACommandSection from "../ACommands/ACommandSection.vue";
 import ACommandArgument from "./ACommandArgument.vue";
@@ -37,20 +52,6 @@ watch(
   },
   { flush: "post", immediate: true },
 );
-const {
-  Icon12Tag,
-  Icon12Articles,
-  Icon16Attach,
-  Icon16Pen,
-  Icon16WarningTriangle,
-  Icon12Flash,
-  Icon12Question,
-  Icon12View,
-  Icon12Cards,
-  Icon16WrenchOutline,
-  Icon16KeyOutline,
-  Icon12Favorite,
-} = icons;
 </script>
 
 <template>
@@ -92,7 +93,7 @@ const {
         <template #label-right>
           <AButton
             class="a-button__opacity zoom75"
-            icon="Icon24InfoCircleOutline"
+            :icon="Icon24InfoCircleOutline"
             target="_blank"
             to="https://vk.com/@animecm-arguments"
             @click.stop
@@ -211,7 +212,7 @@ const {
 
       <ACommandSection v-if="relatedCommands">
         <template #label>
-          <span><Icon12Cards style="color: #226451" /> Связанные команды</span>
+          <span><Icon12Cards2 style="color: #226451" /> Связанные команды</span>
         </template>
         <div class="a-command__buttons">
           <AButton
@@ -244,7 +245,7 @@ const {
           <AButton
             v-if="keyIndex === 0"
             class="a-button__opacity zoom75"
-            icon="Icon24InfoCircleOutline"
+            :icon="Icon24InfoCircleOutline"
             target="_blank"
             to="https://vk.com/@animecm-man?anchor=klyuchi"
           >
@@ -254,7 +255,7 @@ const {
         <div v-if="key.isDon" class="flex flex-col">
           <AButton
             class="bg-transparent pl-0 font-medium text-blue-600 dark:text-blue-500 hover:underline self-start"
-            icon="Icon24DollarCircleOutline"
+            :icon="Icon24DollarCircleOutline"
             to="/don"
           >
             Требуется статус дона

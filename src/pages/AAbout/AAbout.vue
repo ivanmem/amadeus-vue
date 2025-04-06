@@ -6,6 +6,7 @@ import { useApp } from "../../store/app/app";
 import AToggle from "../../components/AToggle/AToggle.vue";
 import { useVk } from "../../store/vk/vk";
 import ACopyButton from "../../components/ACopyButton/ACopyButton.vue";
+import { Icon24ArticleBoxOutline, Icon16Pen } from "vue-vkontakte-icons";
 
 useAppCaption("Справка");
 
@@ -31,10 +32,10 @@ const fontSize = 16;
 <template>
   <APageContainer class="a-about">
     <div class="flex flex-wrap gap-3">
-      <AButton icon="Icon24ArticleBoxOutline" to="/about/man-add-to-chat">
+      <AButton :icon="Icon24ArticleBoxOutline" to="/about/man-add-to-chat">
         Добавить бота в чат
       </AButton>
-      <AButton icon="Icon16Pen" @click="onAllowMessages">
+      <AButton :icon="Icon16Pen" @click="onAllowMessages">
         Разрешить боту писать в диалог со мной
       </AButton>
       <AButton

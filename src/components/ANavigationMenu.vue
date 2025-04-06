@@ -2,6 +2,14 @@
 import AButton from "./AButton/AButton.vue";
 import { useRoute } from "vue-router";
 import { useApp } from "../store/app/app";
+import {
+  Icon24ArticleBoxOutline,
+  Icon24CrownOutline,
+  Icon24CupOutline,
+  Icon24DollarCircleOutline,
+  Icon24FlashOutline,
+  Icon24LightbulbStarOutline,
+} from "vue-vkontakte-icons";
 
 const route = useRoute();
 const appService = useApp();
@@ -11,34 +19,34 @@ const appService = useApp();
     <div class="navigation-bottom-buttons">
       <AButton
         :data-type="route.path.startsWith('/command/') ? 'accent' : undefined"
-        icon="Icon24ArticleBoxOutline"
+        :icon="Icon24ArticleBoxOutline"
         to="/command/"
       >
         <span> Команды </span>
       </AButton>
       <AButton
         :data-type="route.path.startsWith('/top/') ? 'accent' : undefined"
-        icon="Icon24CupOutline"
+        :icon="Icon24CupOutline"
         to="/top"
       >
         <span>Топы</span>
       </AButton>
-      <AButton icon="Icon24FlashOutline" to="/events">
+      <AButton :icon="Icon24FlashOutline" to="/events">
         <span>События</span>
       </AButton>
-      <AButton icon="Icon24CrownOutline" to="/roles">
+      <AButton :icon="Icon24CrownOutline" to="/roles">
         <span> О ролях </span>
       </AButton>
       <AButton
         v-if="!appService.isApp"
-        icon="Icon24DollarCircleOutline"
+        :icon="Icon24DollarCircleOutline"
         to="/don"
       >
         <span>Дон статус</span>
       </AButton>
       <AButton
         :data-type="route.path.startsWith('/about/') ? 'accent' : undefined"
-        icon="Icon24LightbulbStarOutline"
+        :icon="Icon24LightbulbStarOutline"
         to="/about/"
       >
         <span>Справка</span>
