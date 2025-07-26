@@ -30,77 +30,58 @@ const products = [
       Эта страница недоступна с приложения.
     </template>
     <template v-else>
-      <AButton
-        data-type="accent"
-        :icon="Icon16Link"
-        style="max-width: 300px"
-        to="https://vk.com/@animecm-don"
-      >
-        Подробно про статус дона
-      </AButton>
+      <span>
+        Внимание! Дон статус больше недоступен к покупке, так как бот будет отключен 1 января 2026 года (или передан в другие руки).
+      </span>
+      <del>
+        <AButton
+          data-type="accent"
+          :icon="Icon16Link"
+          style="max-width: 300px"
+          to="https://vk.com/@animecm-don"
+        >
+          Подробно про статус дона
+        </AButton>
 
-      <div>
-        <h3 style="padding: 10px 0">Товар «<b>Дон статус</b>»</h3>
-        <div class="a-button__left-content-block">
-          <AButton
-            v-for="product of products"
-            :key="product.caption"
-            :to="product.to"
-            class="a-button__left-content"
-            data-type="accent"
-            :icon="Icon16Link"
-          >
-            {{ product.caption }}
-          </AButton>
+        <div>
+          <h3 style="padding: 10px 0">Товар «<b>Дон статус</b>»</h3>
+          <div class="a-button__left-content-block">
+            <AButton
+              v-for="product of products"
+              :key="product.caption"
+              :to="product.to"
+              class="a-button__left-content"
+              data-type="accent"
+              :icon="Icon16Link"
+            >
+              {{ product.caption }}
+            </AButton>
+          </div>
         </div>
-        <div style="padding: 10px 0">
-          Все денежные средства, переведённые в счёт оплаты "Статуса дона", идут
-          на развитие проекта и рассматриваются как добровольные пожертвования.
-          Возврат не предусмотрен.
-        </div>
-      </div>
 
-      <AButton
-        data-type="accent"
-        :icon="Icon16Link"
-        style="max-width: 300px"
-        to="https://vk.com/@animecm-terms-of-use"
-      >
-        Пользовательское соглашение
-      </AButton>
-
-      <div>
-        <h2>Контактные данные</h2>
-        Мелентьев Иван Андреевич, Почта: animecm@mail.ru, ИНН: 500178253300
-      </div>
-
-      <a
-        class="self-start"
-        href="https://yookassa.ru/protection?utm_campaign=kassa_protection&utm_source=merchants"
-        rel="noopener"
-        target="_blank"
-      >
-        <picture>
-          <source
-            v-if="darkColorScheme"
-            srcset="
-              https://yoomoney.ru/i/html-letters/safe-kassa-logo-white.svg
-            "
-          />
-          <img
-            alt="Платежи под защитой ЮKassa."
-            height="60"
-            src="https://yoomoney.ru/i/html-letters/safe-kassa-logo-black.svg"
-            width="173"
-          />
-        </picture>
-      </a>
+        <AButton
+          data-type="accent"
+          :icon="Icon16Link"
+          style="max-width: 300px"
+          to="https://vk.com/@animecm-terms-of-use"
+        >
+          Пользовательское соглашение
+        </AButton>
+      </del>
     </template>
   </APageContainer>
 </template>
 <style lang="scss">
 .a-don {
   gap: 20px;
+
+  del {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 20px;
+    overflow: auto;
+  }
 }
 
 .a-don__products__list {
