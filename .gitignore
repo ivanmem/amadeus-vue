@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 build.zip
-public/doc.json
+src/assets/doc.json
 /tsconfig.node.tsbuildinfo
 /tsconfig.tsbuildinfo
 /vite.config.d.ts

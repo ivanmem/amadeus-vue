@@ -6,6 +6,7 @@ import { from, IEnumerable } from "linq-to-typescript";
 import { ILang } from "../../types/ILang";
 import { useVk } from "../vk/vk";
 import { keys } from "../../helpers/keys";
+import docUrl from '../../assets/doc.json?url';
 
 export interface FiltersType {
   type: TypeCommandEnum;
@@ -54,7 +55,11 @@ export const useCommands = defineStore("commands", {
           })
         ).json()) as Docs;
       } catch {
-        this.docs = (await (await fetch("/doc.json")).json()) as Docs;
+        try {
+          this.docs = (await (await fetch(docUrl)).json()) as Docs;
+        } catch (ex) {
+          console.error("Amadeus: doc.json не был загружен", ex);
+        }
       }
     },
     getCommandById(id: string | number): Command {
